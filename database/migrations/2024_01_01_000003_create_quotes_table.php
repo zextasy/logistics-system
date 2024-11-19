@@ -4,9 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateQuotesTable extends Migration
+return new class extends Migration
 {
-        public function up()
+    public function up()
     {
         Schema::create('quotes', function (Blueprint $table) {
             $table->id();
@@ -86,7 +86,6 @@ class CreateQuotesTable extends Migration
             $table->timestamp('processed_at')->nullable();
             $table->timestamp('valid_until')->nullable();
 
-            // System Fields
             $table->timestamps();
             $table->softDeletes();
 
@@ -94,42 +93,13 @@ class CreateQuotesTable extends Migration
             $table->index('status');
             $table->index('service_type');
             $table->index('expected_ship_date');
-            $table->index('created_at');
             $table->index(['origin_country', 'destination_country']);
             $table->index('assigned_to');
         });
-
-        Schema::create('quote_attachments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('quote_id')->constrained()->cascadeOnDelete();
-            $table->string('file_name');
-            $table->string('file_path');
-            $table->string('file_type');
-            $table->integer('file_size');
-            $table->text('description')->nullable();
-            $table->timestamps();
-
-            $table->index('quote_id');
-        });
-
-        Schema::create('quote_audits', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('quote_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
-            $table->string('action');
-            $table->json('old_values')->nullable();
-            $table->json('new_values')->nullable();
-            $table->text('notes')->nullable();
-            $table->timestamps();
-
-            $table->index(['quote_id', 'created_at']);
-        });
     }
 
-        public function down()
+    public function down()
     {
-        Schema::dropIfExists('quote_audits');
-        Schema::dropIfExists('quote_attachments');
         Schema::dropIfExists('quotes');
     }
-}
+};

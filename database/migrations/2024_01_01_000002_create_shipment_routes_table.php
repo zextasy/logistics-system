@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateShipmentRoutesTable extends Migration
+return new class extends Migration
 {
     public function up()
     {
@@ -12,7 +12,7 @@ class CreateShipmentRoutesTable extends Migration
             $table->id();
             $table->foreignId('shipment_id')->constrained()->cascadeOnDelete();
             $table->string('location');
-            $table->string('location_type')->nullable(); // airport, seaport, warehouse, etc.
+            $table->string('location_type')->nullable();
             $table->dateTime('arrival_date');
             $table->dateTime('departure_date')->nullable();
             $table->dateTime('actual_arrival_date')->nullable();
@@ -26,6 +26,7 @@ class CreateShipmentRoutesTable extends Migration
             $table->json('metadata')->nullable();
             $table->timestamps();
 
+            // Indexes
             $table->index(['shipment_id', 'order']);
             $table->index('status');
         });
@@ -35,4 +36,4 @@ class CreateShipmentRoutesTable extends Migration
     {
         Schema::dropIfExists('shipment_routes');
     }
-}
+};

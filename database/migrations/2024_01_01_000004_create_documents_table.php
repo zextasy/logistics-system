@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDocumentsTable extends Migration
+return new class extends Migration
 {
     public function up()
     {
@@ -31,6 +31,7 @@ class CreateDocumentsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
+            // Indexes
             $table->index('reference_number');
             $table->index('status');
             $table->index(['shipment_id', 'type']);
@@ -41,4 +42,4 @@ class CreateDocumentsTable extends Migration
     {
         Schema::dropIfExists('documents');
     }
-}
+};

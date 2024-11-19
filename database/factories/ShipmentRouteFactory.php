@@ -16,17 +16,19 @@ class ShipmentRouteFactory extends Factory
         $departureDate = $departureDate->modify('+1 day');
 
         return [
-            'shipment_id' => null, // To be set when creating
             'location' => $this->faker->city(),
+            'location_type' => $this->faker->randomElement(['airport', 'seaport', 'warehouse', 'customs', 'distribution_center']),
             'arrival_date' => $arrivalDate,
             'departure_date' => $departureDate,
-            'status' => $this->faker->randomElement(['pending', 'arrived', 'departed']),
-            'order' => 0, // To be set when creating
-            'notes' => $this->faker->optional()->sentence(),
             'actual_arrival_date' => null,
             'actual_departure_date' => null,
-            'created_at' => now(),
-            'updated_at' => now(),
+            'status' => 'pending',
+            'order' => 0,
+            'carrier' => $this->faker->company(),
+            'vessel_number' => $this->faker->bothify('??###'),
+            'container_number' => $this->faker->bothify('CONT####???'),
+            'notes' => $this->faker->optional()->sentence(),
+            'metadata' => null
         ];
     }
 
@@ -36,7 +38,7 @@ class ShipmentRouteFactory extends Factory
             return [
                 'status' => 'departed',
                 'actual_arrival_date' => $attributes['arrival_date'],
-                'actual_departure_date' => $attributes['departure_date'],
+                'actual_departure_date' => $attributes['departure_date']
             ];
         });
     }
