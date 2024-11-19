@@ -12,7 +12,7 @@ class QuoteFactory extends Factory
     public function definition()
     {
         return [
-            'reference_number' => 'TRK' . strtoupper($this->faker->unique()->bothify('##???####')),
+            'reference_number' => 'QT-R' . strtoupper($this->faker->unique()->bothify('##???####')),
             'name' => $this->faker->name(),
             'company' => $this->faker->company(),
             'country' => $this->faker->country(),
