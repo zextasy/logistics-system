@@ -13,23 +13,45 @@ class ShipmentSeeder extends Seeder
         Shipment::factory()
             ->count(20)
             ->inTransit()
-            ->has(
-                ShipmentRoute::factory()
-                    ->count(4)
-                    ->sequence(fn ($sequence) => ['order' => $sequence->index + 1])
-            )
-            ->create();
+            ->create()
+            ->each(function ($shipment) {
+                // Create 3-5 routes for each shipment
+                $routeCount = rand(3, 5);
+                for ($i = 0; $i < $routeCount; $i++) {
+                    ShipmentRoute::factory()->create([
+                        'shipment_id' => $shipment->id,
+                        'order' => $i + 1,
+                    ]);
+                }
+
+                // Create 1-3 documents for each shipment
+//                Document::factory()
+//                    ->count(rand(1, 3))
+//                    ->create(['shipment_id' => $shipment->id]);
+            });
 
         // Create delivered shipments
         Shipment::factory()
             ->count(10)
             ->delivered()
-            ->has(
-                ShipmentRoute::factory()
-                    ->count(4)
-                    ->completed()
-                    ->sequence(fn ($sequence) => ['order' => $sequence->index + 1])
-            )
-            ->create();
+            ->create()
+            ->each(function ($shipment) {
+                // Create completed routes
+                $routeCount = rand(3, 5);
+                for ($i = 0; $i < $routeCount; $i++) {
+                    ShipmentRoute::factory()
+                        ->completed()
+                        ->create([
+                            'shipment_id' => $shipment->id,
+                            'order' => $i + 1,
+                        ]);
+                }
+
+                // Create active documents
+//                Document::factory()
+//                    ->active()
+//                    ->count(rand(1, 3))
+//                    ->create(['shipment_id' => $shipment->id]);
+            });
     }
 }

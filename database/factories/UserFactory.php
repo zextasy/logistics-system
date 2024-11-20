@@ -34,8 +34,8 @@ class UserFactory extends Factory
             'address' => $this->faker->address(),
             'is_admin' => false,
             'preferences' => [
-                'notifications_email' => true,
-                'notifications_sms' => false,
+                'notifications_email' => $this->faker->boolean,
+                'notifications_sms' => $this->faker->boolean,
                 'language' => 'en',
                 'timezone' => $this->faker->timezone,
             ],

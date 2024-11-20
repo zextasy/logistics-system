@@ -15,10 +15,12 @@ class DatabaseSeeder extends Seeder
     {
 //         User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'is_admin' => true,
-        ]);
+        if(User::where('email' , 'test@example.com')->doesntExist()){
+            User::factory()->admin()->create([
+                'name' => 'Test Admin User',
+                'email' => 'test@example.com',
+                'password' => bcrypt('password'),
+            ]);
+        }
     }
 }
