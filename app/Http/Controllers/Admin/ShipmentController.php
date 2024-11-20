@@ -1,19 +1,25 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ShipmentRequest;
+use App\Http\Requests\Admin\ShipmentRequest;
 use App\Models\Shipment;
-use App\Services\NotificationService;
+use App\Services\{ShipmentService, DocumentGenerationService, NotificationService};
 use Illuminate\Http\Request;
 
 class ShipmentController extends Controller
 {
+    protected $shipmentService;
+    protected $documentService;
     protected $notificationService;
 
-    public function __construct(NotificationService $notificationService)
-    {
+    public function __construct(
+        ShipmentService $shipmentService,
+        DocumentGenerationService $documentService,
+        NotificationService $notificationService
+    ) {
+        $this->shipmentService = $shipmentService;
+        $this->documentService = $documentService;
         $this->notificationService = $notificationService;
     }
 
@@ -49,17 +55,16 @@ class ShipmentController extends Controller
 
     public function create()
     {
-        return view('admin.shipments.create');
+        $countries = $this->shipmentService->getCountries();
+        return view('admin.shipments.create', compact('countries'));
     }
 
     public function store(ShipmentRequest $request)
     {
-        $shipment = Shipment::create($request->validated());
+        $shipment = $this->shipmentService->createShipment($request->validated());
 
-        if ($request->has('routes')) {
-            foreach ($request->routes as $route) {
-                $shipment->routes()->create($route);
-            }
+        if ($request->generate_documents) {
+            $this->documentService->generateInitialDocuments($shipment);
         }
 
         $this->notificationService->sendShipmentCreatedNotification($shipment);
@@ -69,23 +74,19 @@ class ShipmentController extends Controller
             ->with('success', 'Shipment created successfully');
     }
 
-    public function show(Shipment $shipment)
-    {
-        $shipment->load(['routes', 'documents', 'user']);
-        return view('admin.shipments.show', compact('shipment'));
-    }
-
     public function edit(Shipment $shipment)
     {
         $shipment->load(['routes', 'documents']);
-        return view('admin.shipments.edit', compact('shipment'));
+        $countries = $this->shipmentService->getCountries();
+
+        return view('admin.shipments.edit', compact('shipment', 'countries'));
     }
 
     public function update(ShipmentRequest $request, Shipment $shipment)
     {
         $oldStatus = $shipment->status;
 
-        $shipment->update($request->validated());
+        $this->shipmentService->updateShipment($shipment, $request->validated());
 
         if ($oldStatus !== $shipment->status) {
             $this->notificationService->sendShipmentStatusNotification($shipment, $oldStatus);
@@ -96,11 +97,26 @@ class ShipmentController extends Controller
             ->with('success', 'Shipment updated successfully');
     }
 
+    public function updateRoute(Request $request, Shipment $shipment, $routeId)
+    {
+        $request->validate([
+            'status' => 'required|in:pending,arrived,departed,skipped',
+            'actual_arrival_date' => 'nullable|date',
+            'actual_departure_date' => 'nullable|date|after:actual_arrival_date',
+            'notes' => 'nullable|string'
+        ]);
+
+        $this->shipmentService->updateRoute($shipment, $routeId, $request->all());
+
+        return back()->with('success', 'Route updated successfully');
+    }
+
     public function destroy(Shipment $shipment)
     {
-        $shipment->delete();
+        $this->shipmentService->deleteShipment($shipment);
         return redirect()
             ->route('admin.shipments.index')
             ->with('success', 'Shipment deleted successfully');
     }
+
 }

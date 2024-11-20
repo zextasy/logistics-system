@@ -1,20 +1,62 @@
 <?php
 
+// app/Services/ReportingService.php
 namespace App\Services;
 
 use App\Models\{Shipment, Quote, User};
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Excel;
 
 class ReportingService
 {
-    /**
-     * Generate shipments report
-     */
-    public function getShipmentsReport($startDate, $endDate = null)
+    public function generateReport(string $type, string $dateRange)
     {
-        $endDate = $endDate ?? now();
+        $startDate = $this->getStartDate($dateRange);
 
+        return match($type) {
+            'shipments' => $this->getShipmentsReport($startDate),
+            'revenue' => $this->getRevenueReport($startDate),
+            'customers' => $this->getCustomerReport($startDate),
+            default => throw new \InvalidArgumentException("Invalid report type: {$type}")
+        };
+    }
+
+    public function exportReport(string $type, string $dateRange)
+    {
+        $data = $this->generateReport($type, $dateRange);
+
+        return Excel::download(
+            new ReportExport($data, $type),
+            "{$type}_report_{$dateRange}.xlsx"
+        );
+    }
+
+    public function generateCustomReport(string $startDate, string $endDate, array $metrics)
+    {
+        $data = [];
+
+        foreach ($metrics as $metric) {
+            $data[$metric] = match($metric) {
+                'shipments_count' => $this->getShipmentsCount($startDate, $endDate),
+                'revenue' => $this->getRevenue($startDate, $endDate),
+                'average_delivery_time' => $this->getAverageDeliveryTime($startDate, $endDate),
+                'customer_satisfaction' => $this->getCustomerSatisfaction($startDate, $endDate),
+                default => null
+            };
+        }
+
+        return $data;
+    }
+
+    public function calculateMonthlyRevenue(): float
+    {
+        return Shipment::whereMonth('created_at', Carbon::now()->month)
+            ->sum('declared_value');
+    }
+
+    protected function getShipmentsReport($startDate)
+    {
         return Shipment::select(
             DB::raw('DATE(created_at) as date'),
             DB::raw('COUNT(*) as total'),
@@ -24,38 +66,26 @@ class ReportingService
                 THEN TIMESTAMPDIFF(HOUR, created_at, actual_delivery)
                 END) as avg_delivery_time')
         )
-            ->whereBetween('created_at', [$startDate, $endDate])
+            ->where('created_at', '>=', $startDate)
             ->groupBy('date')
-            ->orderBy('date')
             ->get();
     }
 
-    /**
-     * Generate revenue report
-     */
-    public function getRevenueReport($startDate, $endDate = null)
+    protected function getRevenueReport($startDate)
     {
-        $endDate = $endDate ?? now();
-
         return Shipment::select(
             DB::raw('DATE(created_at) as date'),
             DB::raw('SUM(declared_value) as total_value'),
             DB::raw('COUNT(*) as shipment_count'),
             DB::raw('AVG(declared_value) as average_value')
         )
-            ->whereBetween('created_at', [$startDate, $endDate])
+            ->where('created_at', '>=', $startDate)
             ->groupBy('date')
-            ->orderBy('date')
             ->get();
     }
 
-    /**
-     * Generate customer report
-     */
-    public function getCustomerReport($startDate, $endDate = null)
+    protected function getCustomerReport($startDate)
     {
-        $endDate = $endDate ?? now();
-
         return User::select(
             'users.id',
             'users.name',
@@ -66,68 +96,21 @@ class ReportingService
         )
             ->leftJoin('shipments', 'users.id', '=', 'shipments.user_id')
             ->leftJoin('quotes', 'users.id', '=', 'quotes.user_id')
-            ->whereBetween('users.created_at', [$startDate, $endDate])
+            ->where('users.created_at', '>=', $startDate)
             ->groupBy('users.id', 'users.name', 'users.email')
             ->having('shipment_count', '>', 0)
-            ->orderByDesc('total_value')
             ->get();
     }
 
-    /**
-     * Generate performance metrics
-     */
-    public function getPerformanceMetrics($startDate, $endDate = null)
+    protected function getStartDate(string $range): Carbon
     {
-        $endDate = $endDate ?? now();
-
-        return [
-            'shipments' => $this->getShipmentMetrics($startDate, $endDate),
-            'quotes' => $this->getQuoteMetrics($startDate, $endDate),
-            'revenue' => $this->getRevenueMetrics($startDate, $endDate),
-            'customers' => $this->getCustomerMetrics($startDate, $endDate)
-        ];
-    }
-
-    /**
-     * Get shipment metrics
-     */
-    private function getShipmentMetrics($startDate, $endDate)
-    {
-        return [
-            'total' => Shipment::whereBetween('created_at', [$startDate, $endDate])->count(),
-            'delivered' => Shipment::where('status', 'delivered')
-                ->whereBetween('created_at', [$startDate, $endDate])
-                ->count(),
-            'on_time_delivery_rate' => $this->calculateOnTimeDeliveryRate($startDate, $endDate),
-            'average_delivery_time' => $this->calculateAverageDeliveryTime($startDate, $endDate)
-        ];
-    }
-
-    /**
-     * Calculate on-time delivery rate
-     */
-    private function calculateOnTimeDeliveryRate($startDate, $endDate)
-    {
-        $delivered = Shipment::where('status', 'delivered')
-            ->whereBetween('created_at', [$startDate, $endDate]);
-
-        $total = $delivered->count();
-        if ($total === 0) return 0;
-
-        $onTime = $delivered->where('actual_delivery', '<=', DB::raw('estimated_delivery'))
-            ->count();
-
-        return ($onTime / $total) * 100;
-    }
-
-    /**
-     * Calculate average delivery time
-     */
-    private function calculateAverageDeliveryTime($startDate, $endDate)
-    {
-        return Shipment::where('status', 'delivered')
-            ->whereBetween('created_at', [$startDate, $endDate])
-            ->whereNotNull('actual_delivery')
-            ->avg(DB::raw('TIMESTAMPDIFF(HOUR, created_at, actual_delivery)'));
+        return match($range) {
+            'today' => Carbon::today(),
+            'week' => Carbon::now()->subWeek(),
+            'month' => Carbon::now()->subMonth(),
+            'quarter' => Carbon::now()->subQuarter(),
+            'year' => Carbon::now()->subYear(),
+            default => Carbon::now()->subMonth()
+        };
     }
 }

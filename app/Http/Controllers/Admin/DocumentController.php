@@ -3,18 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\DocumentRequest;
+use App\Http\Requests\Admin\DocumentRequest;
 use App\Models\Document;
-use App\Services\DocumentGenerationService;
+use App\Services\{DocumentGenerationService, NotificationService};
 use Illuminate\Http\Request;
 
 class DocumentController extends Controller
 {
     protected $documentService;
+    protected $notificationService;
 
-    public function __construct(DocumentGenerationService $documentService)
-    {
+    public function __construct(
+        DocumentGenerationService $documentService,
+        NotificationService $notificationService
+    ) {
         $this->documentService = $documentService;
+        $this->notificationService = $notificationService;
     }
 
     public function index(Request $request)
@@ -45,6 +49,10 @@ class DocumentController extends Controller
             $request->metadata ?? []
         );
 
+        if ($request->notify_customer) {
+            $this->notificationService->sendDocumentGeneratedNotification($document);
+        }
+
         return redirect()
             ->route('admin.documents.show', $document)
             ->with('success', 'Document generated successfully');
@@ -56,10 +64,23 @@ class DocumentController extends Controller
         return view('admin.documents.show', compact('document'));
     }
 
-    public function revoke(Document $document)
+    public function revoke(Request $request, Document $document)
     {
-        $this->documentService->revoke($document);
+        $request->validate(['reason' => 'required|string']);
+
+        $this->documentService->revoke($document, $request->reason);
+        $this->notificationService->sendDocumentRevokedNotification($document, $request->reason);
 
         return back()->with('success', 'Document revoked successfully');
+    }
+
+    public function regenerate(Document $document)
+    {
+        $newDocument = $this->documentService->regenerate($document);
+        $this->notificationService->sendDocumentRegeneratedNotification($newDocument);
+
+        return redirect()
+            ->route('admin.documents.show', $newDocument)
+            ->with('success', 'Document regenerated successfully');
     }
 }
