@@ -14,16 +14,16 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
     <body class="antialiased">
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
         <!-- Header/Navigation -->
         <header class="relative bg-white">
             <livewire:welcome.navigation />
         </header>
         <!-- Page Content -->
-        <main>
             {{ $slot }}
-        </main>
+    </div>
         <!-- Footer -->
-        <footer class="bg-gray-50" aria-labelledby="footer-heading">
+        <footer class="bg-gray-50 dark:bg-gray-950" aria-labelledby="footer-heading">
     <h2 id="footer-heading" class="sr-only">Footer</h2>
     <div class="mx-auto max-w-7xl px-4 pt-16 pb-8 sm:px-6 lg:px-8 lg:pt-24">
         <div class="xl:grid xl:grid-cols-3 xl:gap-8">
