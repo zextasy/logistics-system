@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web;
+namespace App\Http\Controllers\Unsure;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ShipmentRequest;
@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class ShipmentController extends Controller
 {
+    //TODO check usage and delete
     protected $shipmentService;
     protected $notificationService;
 
@@ -40,11 +41,16 @@ class ShipmentController extends Controller
 
     public function show(Shipment $shipment)
     {
-        $this->authorize('view', $shipment);
+//        $this->authorize('view', $shipment);
 
         $shipment->load(['routes', 'documents']);
 
         return view('shipments.show', compact('shipment'));
+    }
+
+    public function showTrackingForm()
+    {
+        return view('tracking.form');
     }
 
     public function track(Request $request)
@@ -62,7 +68,7 @@ class ShipmentController extends Controller
 
     public function documents(Shipment $shipment)
     {
-        $this->authorize('view', $shipment);
+//        $this->authorize('view', $shipment);
 
         $documents = $shipment->documents()
             ->where('status', 'active')
@@ -73,7 +79,7 @@ class ShipmentController extends Controller
 
     public function downloadDocument(Shipment $shipment, $documentId)
     {
-        $this->authorize('view', $shipment);
+//        $this->authorize('view', $shipment);
 
         $document = $shipment->documents()->findOrFail($documentId);
 

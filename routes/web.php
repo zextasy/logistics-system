@@ -1,10 +1,11 @@
 <?php
 
 
+use App\Http\Controllers\Admin\ShipmentController;
 use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\ProfileController;
 use App\Http\Controllers\Web\QuoteController;
-use App\Http\Controllers\Web\ShipmentController;
+use App\Http\Controllers\Web\TrackingController;
 use Illuminate\Support\Facades\Route;
 
 // Public Routes
@@ -12,8 +13,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/track', [ShipmentController::class, 'trackForm'])->name('track.form');
-Route::post('/track', [ShipmentController::class, 'track'])->name('track.show');
+Route::get('/track', [TrackingController::class, 'showForm'])->name('tracking.form');
+Route::post('/track', [TrackingController::class, 'track'])->name('tracking.track');
+Route::get('/track/{trackingNumber}', [TrackingController::class, 'show'])->name('tracking.show');
+//TODO add other methods from controller
 Route::get('/quote', [QuoteController::class, 'create'])->name('quote.create');
 Route::post('/quote', [QuoteController::class, 'store'])->name('quote.store');
 
@@ -45,6 +48,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     // Profile
+    //Breeze
+    Route::get('/my-profile', function () {
+        return view('profile');
+    })->name('profile');
+    //Claude
+    //TODO - check usage and delete
     Route::prefix('profile')->group(function () {
         Route::get('/', [ProfileController::class, 'show'])->name('profile.show');
         Route::put('/', [ProfileController::class, 'update'])->name('profile.update');

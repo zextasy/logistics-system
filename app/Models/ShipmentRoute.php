@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class ShipmentRoute extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+//    use SoftDeletes;
     protected $fillable = [
         'shipment_id',
         'location',

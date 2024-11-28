@@ -75,7 +75,7 @@ class ShipmentService
     public function deleteShipment(Shipment $shipment)
     {
         foreach ($shipment->documents as $document) {
-            $this->documentService->revokeDocument($document, 'Shipment deleted');
+            $this->documentService->revoke($document, 'Shipment deleted');
         }
 
         $shipment->delete();
@@ -120,7 +120,7 @@ class ShipmentService
             'CN' => 'China',
             'JP' => 'Japan',
             'DE' => 'Germany',
-            // Add more countries as needed
+            // TODO  Use Country Model
         ];
     }
 
