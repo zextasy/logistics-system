@@ -1,16 +1,18 @@
 {{-- resources/views/admin/quotes/index.blade.php --}}
 <x-app-layout>
-    <div class="py-12">
+    <x-slot name="header">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-6 flex justify-between items-center">
                 <h2 class="text-2xl font-bold text-gray-900">Quote Requests</h2>
                 <div class="flex space-x-3">
-{{--                    <a href="{{ route('admin.quotes.export') }}" class="inline-flex items-center px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-md">--}}
-{{--                        <x-icon name="download" class="w-5 h-5 mr-2" />--}}
-{{--                        Export--}}
-{{--                    </a>--}}
+                    {{--                    <a href="{{ route('admin.quotes.export') }}" class="inline-flex items-center px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-md">--}}
+                    {{--                        <x-icon name="download" class="w-5 h-5 mr-2" />--}}
+                    {{--                        Export--}}
+                    {{--                    </a>--}}
                 </div>
             </div>
+    </x-slot>
+    <div class="py-12">
 
             <!-- Status Cards -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
@@ -131,15 +133,15 @@
 {{--                                <a href="{{ route('admin.quotes.edit', $quote) }}" class="text-green-600 hover:text-green-900 mr-3">--}}
 {{--                                    Process--}}
 {{--                                </a>--}}
-                                <form action="{{ route('admin.quotes.destroy', $quote) }}" method="POST" class="inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                            class="text-red-600 hover:text-red-900"
-                                            onclick="return confirm('Are you sure you want to delete this quote?')">
-                                        Delete
-                                    </button>
-                                </form>
+{{--                                <form action="{{ route('admin.quotes.destroy', $quote) }}" method="POST" class="inline-block">--}}
+{{--                                    @csrf--}}
+{{--                                    @method('DELETE')--}}
+{{--                                    <button type="submit"--}}
+{{--                                            class="text-red-600 hover:text-red-900"--}}
+{{--                                            onclick="return confirm('Are you sure you want to delete this quote?')">--}}
+{{--                                        Delete--}}
+{{--                                    </button>--}}
+{{--                                </form>--}}
                             </td>
                         </tr>
                     @empty

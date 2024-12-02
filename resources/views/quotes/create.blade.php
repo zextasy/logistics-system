@@ -140,6 +140,7 @@
                                     <select name="container_size" id="container_size"
                                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                         <option value="">Not Applicable</option>
+                                        <option value="LCL">LCL</option>
                                         <option value="20ft">20ft Container</option>
                                         <option value="40ft">40ft Container</option>
                                         <option value="40ft_hc">40ft High Cube</option>

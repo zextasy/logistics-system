@@ -83,4 +83,10 @@ class QuoteController extends Controller
         $quotes = $this->quoteService->getQuotesForExport($request->all());
         return $this->quoteService->generateExport($quotes);
     }
+
+    public function destroy(Quote $quote)
+    {
+        $quote->delete();
+        return $this->reject('admin.quotes.index');
+    }
 }

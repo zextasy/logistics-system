@@ -1,19 +1,20 @@
 {{-- resources/views/admin/shipments/index.blade.php --}}
 <x-app-layout>
+    <x-slot name="header">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-gray-900">Shipments Management</h2>
+            <a href="{{ route('admin.shipments.create') }}"
+               class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+                New Shipment
+            </a>
+        </div>
+    </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <!-- Header -->
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-gray-900">Shipments Management</h2>
-                <a href="{{ route('admin.shipments.create') }}"
-                   class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                    </svg>
-                    New Shipment
-                </a>
-            </div>
-
             <!-- Stats Overview -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
                 <div class="bg-white rounded-lg shadow p-6">
@@ -187,20 +188,20 @@
                                            class="text-indigo-600 hover:text-indigo-900">
                                             View
                                         </a>
-                                        <a href="{{ route('admin.shipments.edit', $shipment) }}"
-                                           class="text-green-600 hover:text-green-900">
-                                            Edit
-                                        </a>
-                                        <form action="{{ route('admin.shipments.destroy', $shipment) }}"
-                                              method="POST"
-                                              class="inline-block"
-                                              onsubmit="return confirm('Are you sure you want to delete this shipment?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:text-red-900">
-                                                Delete
-                                            </button>
-                                        </form>
+{{--                                        <a href="{{ route('admin.shipments.edit', $shipment) }}"--}}
+{{--                                           class="text-green-600 hover:text-green-900">--}}
+{{--                                            Edit--}}
+{{--                                        </a>--}}
+{{--                                        <form action="{{ route('admin.shipments.destroy', $shipment) }}"--}}
+{{--                                              method="POST"--}}
+{{--                                              class="inline-block"--}}
+{{--                                              onsubmit="return confirm('Are you sure you want to delete this shipment?');">--}}
+{{--                                            @csrf--}}
+{{--                                            @method('DELETE')--}}
+{{--                                            <button type="submit" class="text-red-600 hover:text-red-900">--}}
+{{--                                                Delete--}}
+{{--                                            </button>--}}
+{{--                                        </form>--}}
                                     </div>
                                 </td>
                             </tr>

@@ -113,4 +113,38 @@ class ReportingService
             default => Carbon::now()->subMonth()
         };
     }
+
+    /**
+     * Get Shipment Chart Data
+     */
+    public function getShipmentChartData()
+    {
+        return Shipment::selectRaw('DATE(created_at) as date, COUNT(*) as total')
+            ->whereBetween('created_at', [Carbon::now()->subDays(30), Carbon::now()])
+            ->groupBy('date')
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'date' => $item->date,
+                    'total' => $item->total,
+                ];
+            });
+    }
+
+    /**
+     * Get Revenue Chart Data
+     */
+    public function getRevenueChartData()
+    {
+        return Shipment::selectRaw('DATE(created_at) as date, SUM(declared_value) as total')
+            ->whereBetween('created_at', [Carbon::now()->subDays(30), Carbon::now()])
+            ->groupBy('date')
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'date' => $item->date,
+                    'total' => $item->total,
+                ];
+            });
+    }
 }

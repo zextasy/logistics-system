@@ -74,6 +74,14 @@ class ShipmentController extends Controller
             ->with('success', 'Shipment created successfully');
     }
 
+    public function show(Shipment $shipment)
+    {
+        $shipment->load(['routes', 'documents']);
+        $countries = $this->shipmentService->getCountries();
+
+        return view('admin.shipments.show', compact('shipment', 'countries'));
+    }
+
     public function edit(Shipment $shipment)
     {
         $shipment->load(['routes', 'documents']);
@@ -81,7 +89,6 @@ class ShipmentController extends Controller
 
         return view('admin.shipments.edit', compact('shipment', 'countries'));
     }
-
     public function update(ShipmentRequest $request, Shipment $shipment)
     {
         $oldStatus = $shipment->status;

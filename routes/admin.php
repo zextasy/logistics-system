@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
+    AdminController,
     DashboardController as AdminDashboardController,
     ShipmentController as AdminShipmentController,
     QuoteController as AdminQuoteController,
@@ -18,8 +19,9 @@ use App\Http\Controllers\Admin\{
 */
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    // Dashboard
-    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+    // Dashboards
+    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');//TODO check usage and modify/delete
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard.index');
 
     // Shipments Management
     Route::prefix('shipments')->group(function () {
@@ -41,6 +43,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::post('/{quote}/process', [AdminQuoteController::class, 'process'])->name('quotes.process');
         Route::post('/{quote}/reject', [AdminQuoteController::class, 'reject'])->name('quotes.reject');
         Route::get('/export', [AdminQuoteController::class, 'export'])->name('quotes.export');
+        Route::delete('/{quote}', [AdminQuoteController::class, 'destroy'])->name('quotes.destroy');
     });
 
     // Documents Management
