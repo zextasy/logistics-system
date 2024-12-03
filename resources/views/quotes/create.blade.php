@@ -5,7 +5,13 @@
             <div class="bg-white overflow-hidden shadow-xl rounded-lg">
                 <form action="{{ route('quote.store') }}" method="POST" enctype="multipart/form-data" class="p-6">
                     @csrf
-
+                    @if ($errors->any())
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li class="text-red-600">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
                     {{-- Contact Information --}}
                     <div class="border-b border-gray-200 pb-6 mb-6">
                         <h3 class="text-lg font-medium text-gray-900 mb-4">Contact Information</h3>
@@ -44,6 +50,15 @@
                                 @error('phone')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
+                            </div>
+                            <div>
+                                <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+                                <select name="country" id="country" required
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    @foreach($countries as $code => $name)
+                                        <option value="{{ $code }}">{{ $name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
