@@ -54,7 +54,7 @@ class QuoteRequest extends FormRequest
             ],
             'container_size' => [
                 'nullable',
-                Rule::in(['20ft', '40ft', '40ft HC'])
+                Rule::in(['LCL', '20ft', '40ft', '40ft HC'])
             ],
             'incoterm' => [
                 'nullable',

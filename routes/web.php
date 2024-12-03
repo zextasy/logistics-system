@@ -41,10 +41,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Quotes
     Route::prefix('quotes')->group(function () {
-        Route::get('/', [QuoteController::class, 'index'])->name('quotes.index');
-        Route::get('/{quote}', [QuoteController::class, 'show'])->name('quotes.show');
+        Route::get('/', [QuoteController::class, 'index'])->name('my-quotes.index');
+        Route::get('/{quote}', [QuoteController::class, 'show'])->name('my-quotes.show');
         Route::post('/{quote}/attachments', [QuoteController::class, 'attachments'])
-            ->name('quotes.attachments');
+            ->name('my-quotes.attachments');
     });
 
     // Profile

@@ -25,8 +25,8 @@ class QuoteService
         $data['reference_number'] = $this->generateReferenceNumber();
         $quote = Quote::create($data);
 
-        $this->notificationService->sendQuoteReceivedNotification($quote);
-
+//        $this->notificationService->sendQuoteReceivedNotification($quote);
+        //TODO - send emial notification
         return $quote;
     }
 

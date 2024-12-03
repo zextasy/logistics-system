@@ -27,7 +27,7 @@ class QuoteController extends Controller
 
         Quote::create($validated);
 
-        return redirect()->route('quote.create')
+        return redirect()->route('home')
             ->with('success', 'Quote request submitted successfully. We will contact you soon.');
     }
 

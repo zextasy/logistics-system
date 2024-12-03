@@ -1,11 +1,8 @@
 <x-app-layout>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold">Shipment Details</h2>
-                        <span class="px-4 py-2 rounded-full text-sm
+    <x-slot name="header">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold">Shipment Details</h2>
+            <span class="px-4 py-2 rounded-full text-sm
                             @if($shipment->status === 'delivered')
                                 bg-green-100 text-green-800
                             @elseif($shipment->status === 'in_transit')
@@ -18,8 +15,12 @@
                         ">
                             {{ ucfirst($shipment->status) }}
                         </span>
-                    </div>
-
+        </div>
+    </x-slot>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="p-6">
                     {{-- Shipment Overview --}}
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                         <div>
