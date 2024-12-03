@@ -11,6 +11,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
+        @filamentStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
     <body class="antialiased">
@@ -48,5 +49,6 @@
         </div>
     </div>
 </footer>
+    @filamentScripts
 </body>
 </html>

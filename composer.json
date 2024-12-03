@@ -7,6 +7,9 @@
     "require": {
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.0",
+        "filament/actions": "^3.2",
+        "filament/forms": "^3.2",
+        "filament/tables": "^3.2",
         "laravel/breeze": "^2.2",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
@@ -40,7 +43,8 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
