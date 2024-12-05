@@ -11,7 +11,7 @@ class ShipmentFactory extends Factory
 
     public function definition()
     {
-        $type = $this->faker->randomElement(['air', 'sea', 'road', 'rail']);
+        $type = $this->faker->randomElement(['air', 'sea']);//, 'road', 'rail'
         $status = $this->faker->randomElement([
             'pending',
             'picked_up',

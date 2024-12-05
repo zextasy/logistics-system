@@ -22,6 +22,7 @@
         </header>
         <!-- Page Content -->
             {{ $slot }}
+        @livewire('notifications')
     </div>
         <!-- Footer -->
         <footer class="bg-gray-50 dark:bg-gray-950" aria-labelledby="footer-heading">

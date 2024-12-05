@@ -31,6 +31,7 @@
             <!-- Page Content -->
             <main>
                 {{ $slot }}
+                @livewire('notifications')
             </main>
         </div>
         @filamentScripts

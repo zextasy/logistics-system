@@ -5,25 +5,30 @@ namespace App\Services;
 
 use App\Models\{Document, Shipment};
 use Illuminate\Support\Str;
-use PDF;
-use Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 
 class DocumentGenerationService
 {
     public function generate(Shipment $shipment, string $type, array $metadata = [])
     {
+        if ($shipment->documents()->where('type', $type)->exists()){
+            return $shipment->documents()->where('type', $type)->first();
+        }
         $template = $this->getTemplate($type);
         $referenceNumber = $this->generateReferenceNumber($type);
 
-        $pdf = PDF::loadView($template, [
+        $data = [
             'shipment' => $shipment,
             'reference' => $referenceNumber,
             'metadata' => $metadata
-        ]);
+        ];
+
+        $pdf = PDF::loadView($template, $data);
 
         $filePath = "documents/{$shipment->tracking_number}/{$referenceNumber}.pdf";
-        Storage::put("public/{$filePath}", $pdf->output());
+        Storage::disk('public')->put("{$filePath}", $pdf->output());
 
         return Document::create([
             'shipment_id' => $shipment->id,
@@ -51,10 +56,10 @@ class DocumentGenerationService
         );
 
         // Generate Commercial Invoice
-        $documents[] = $this->generate($shipment, 'commercial_invoice');
+//        $documents[] = $this->generate($shipment, 'commercial_invoice');
 
         // Generate Packing List
-        $documents[] = $this->generate($shipment, 'packing_list');
+//        $documents[] = $this->generate($shipment, 'packing_list');
 
         return $documents;
     }

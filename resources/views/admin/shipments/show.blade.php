@@ -1,8 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold">Shipment Details</h2>
-            <span class="px-4 py-2 rounded-full text-sm
+            <div class="flex">
+                <h2 class="text-2xl font-bold">Shipment Details</h2>
+                <span class="px-4 py-2 mx-3 rounded-full text-sm
                             @if($shipment->status === 'delivered')
                                 bg-green-100 text-green-800
                             @elseif($shipment->status === 'in_transit')
@@ -15,6 +16,12 @@
                         ">
                             {{ ucfirst($shipment->status) }}
                         </span>
+            </div>
+            <div class="flex space-x-3">
+                <x-filament::link :href="route('bvdh.documents.preview', $shipment->documents()->first())"> Preview (B)</x-filament::link>
+                <x-filament::link :href="route('spatie.documents.preview', $shipment->documents()->first())"> Preview (S)</x-filament::link>
+                <x-filament::link :href="route('spatie.documents.preview-pdf', $shipment->documents()->first())"> Download (S)</x-filament::link>
+            </div>
         </div>
     </x-slot>
     <div class="py-12">

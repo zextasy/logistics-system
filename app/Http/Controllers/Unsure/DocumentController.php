@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Unsure;
 
 use App\Models\Document;
 use App\Models\Shipment;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use PDF;
+
 use Carbon\Carbon;
 
 class DocumentController extends Controller
