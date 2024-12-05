@@ -14,7 +14,7 @@
 
     <!-- Styles -->
     <script src="https://cdn.tailwindcss.com"></script>
-    @vite('resources/css/document.css', 'resources/css/app.css')
+{{--    @vite('resources/css/document.css', 'resources/css/app.css')--}}
     <!-- Header Scripts -->
 
 </head>
