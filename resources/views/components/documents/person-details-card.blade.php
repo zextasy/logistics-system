@@ -16,9 +16,9 @@
 <div class="px-4">
     <div class="flex flex-col items-start justify-between">
         <span class="text-sm font-medium text-gray-800">{{ $name }}</span>
-        <span class="text-sm font-medium text-gray-800">{{ $address }}</span>
-        <span class="text-sm font-medium text-gray-800">{{ $phone }}</span>
-        <span class="text-sm font-medium text-gray-800">{{ $email }}</span>
+        <span class="text-sm font-medium text-gray-800">{{ $address }}</span><br>
+        <span class="text-sm font-medium text-gray-800">{{ $phone }}</span><br>
+        <span class="text-sm font-medium text-gray-800">{{ $email }}</span><br>
     </div>
 </div>
 </div>

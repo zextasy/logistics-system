@@ -1,66 +1,152 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Bill of Lading - {{ $reference }}</title>
-    <style>
-        /* Add your PDF styling here */
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .section {
-            margin-bottom: 15px;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-    </style>
-</head>
-<body>
-<div class="header">
-    <h1>BILL OF LADING</h1>
-    <h2>{{ $reference }}</h2>
-</div>
+<x-bvdh-document-layout>
+    <div class="invoice-box">
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td><strong>BILL OF LADEN</strong></td>
+                            <td><img src="{{asset('logo.jpeg')}}" alt="logo" width="120px" style="float: right"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <x-documents.person-details-card
+                                    title='SHIPPER'
+                                    :name="$shipment->shipper_name"
+                                    :address="$shipment->shipper_address"
+                                    :phone="$shipment->shipper_phone"
+                                    :email="$shipment->shipper_email"
+                                />
+                                <x-documents.person-details-card
+                                    title='CONSIGNEE'
+                                    :name="$shipment->receiver_name"
+                                    :address="$shipment->receiver_address"
+                                    :phone="$shipment->receiver_phone"
+                                    :email="$shipment->receiver_email"
+                                />
+                                <x-documents.person-details-card
+                                    title='NOTIFY PARTY'
+                                    title-hint="Carrier not to be responsible for failure to notify"
+                                    :name="$shipment->receiver_name"
+                                    :address="$shipment->receiver_address"
+                                    :phone="$shipment->receiver_phone"
+                                    :email="$shipment->receiver_email"
+                                />
+                            </td>
+                            <td>
+                                <span>
+                                    <div>
+                                        <x-documents.single-detail-card
+                                            title="TRACKING NUMBER"
+                                            :text="$shipment->tracking_number"
+                                        />
+                                        <x-documents.single-detail-card
+                                            title="BILL OF LADING NUMBER"
+                                            :text="$reference"
+                                        />
+                                    </div>
+                                </span>
+                                <div>
+                                    <x-documents.detail-card-with-image
+                                        title='EXPORT REFERENCES'
+                                        text-heading="CARRIER: "
+                                        text='lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
+                                    />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
 
-<div class="section">
-    <h3>Shipper</h3>
-    <p>{{ $shipment->shipper_name }}</p>
-    <p>Phone: {{ $shipment->shipper_phone }}</p>
-    <p>Email: {{ $shipment->shipper_email }}</p>
-</div>
+            <tr class="information">
+                <td colspan="6">
+                    <table>
+                        <tr>
+                            <td>
+                                <x-documents.single-detail-card
+                                    title="PRE CARRIAGE BY"
+                                    text="Text"
+                                />
+                            </td>
 
-<div class="section">
-    <h3>Consignee</h3>
-    <p>{{ $shipment->receiver_name }}</p>
-    <p>Phone: {{ $shipment->receiver_phone }}</p>
-    <p>Email: {{ $shipment->receiver_email }}</p>
-</div>
+                            <td>
+                                <x-documents.single-detail-card
+                                    title="PLACE OF RECEIPT"
+                                    text="Text"
+                                />
+                            </td>
+                                                        <td>
+                                <x-documents.single-detail-card
+                                    title="FREIGHT TO BE PAID AT"
+                                    text="Text"
+                                />
+                            </td>
+                                                        <td>
+                                <x-documents.single-detail-card
+                                    title="NO. OF ORIGINAL BILLS OF LANDING"
+                                    text="Text"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <x-documents.single-detail-card
+                                    title="VESSEL"
+                                    text="Text"
+                                />
+                            </td>
 
-{{--<div class="section">--}}
-{{--    <h3>Vessel Details</h3>--}}
-{{--    <p>Vessel Name: {{ $data['vessel_name'] }}</p>--}}
-{{--    <p>Voyage Number: {{ $data['voyage_number'] }}</p>--}}
-{{--    <p>Port of Loading: {{ $data['port_of_loading'] }}</p>--}}
-{{--    <p>Port of Discharge: {{ $data['port_of_discharge'] }}</p>--}}
-{{--</div>--}}
+                            <td>
+                                <x-documents.single-detail-card
+                                    title="PORT OF LOADING"
+                                    text="Text"
+                                />
+                            </td>
+                                                        <td>
+                                <x-documents.single-detail-card
+                                    title="PORT OF DISCHARGE"
+                                    text="Text"
+                                />
+                            </td>
+                                                        <td>
+                                <x-documents.single-detail-card
+                                    title="FINAL PLACE FOR DELIVERY"
+                                    text="Text"
+                                />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <table>
 
-{{--<div class="section">--}}
-{{--    <h3>Container Details</h3>--}}
-{{--    <p>Container Numbers: {{ $data['container_numbers'] }}</p>--}}
-{{--    <p>Seal Numbers: {{ $data['seal_numbers'] }}</p>--}}
-{{--</div>--}}
+                    <tr class="heading">
+                        <td>MARKS AND NOS CONTAINER AND SEALS</td>
+                        <td>NO AND KIND OF PACKAGES</td>
+                        <td>DESCRIPTION OF PACKAGES</td>
+                        <td>GROSS CARGO WEIGHT</td>
+                        <td>TARE</td>
+                        <td>MEASUREMENT</td>
+                    </tr>
 
-<div class="section">
-    <h3>Cargo Details</h3>
-    <p>Description: {{ $shipment->description }}</p>
-    <p>Weight: {{ $shipment->weight .' '. $shipment->weight_unit}}</p>
-</div>
-</body>
-</html>
+                    <tr class="details">
+                        <td>Text</td>
+                        <td>Text</td>
+                        <td>Long Text</td>
+                        <td>10</td>
+                        <td>100</td>
+                        <td>20</td>
+                    </tr>
+                </table>
+            </tr>
+            <tr>
+                <x-documents.single-detail-card
+                    title="ADDITIONAL CLAUSES"
+                    text="Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum "
+                />
+            </tr>
+        </table>
+    </div>
+</x-bvdh-document-layout>

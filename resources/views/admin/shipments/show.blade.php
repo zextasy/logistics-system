@@ -19,8 +19,11 @@
             </div>
             <div class="flex space-x-3">
                 <x-filament::link :href="route('bvdh.documents.preview', $shipment->documents()->first())"> Preview (B)</x-filament::link>
-                <x-filament::link :href="route('spatie.documents.preview', $shipment->documents()->first())"> Preview (S)</x-filament::link>
-{{--                <x-filament::link :href="route('spatie.documents.preview-pdf', $shipment->documents()->first())"> Download (S)</x-filament::link>--}}
+                <x-filament::link :href="route('bvdh.documents.preview-pdf', $shipment->documents()->first())"> Preview PDF (B)</x-filament::link>
+                <x-filament::link :href="route('bvdh.documents.download', $shipment->documents()->first())"> Download PDF (B)</x-filament::link>
+{{--                <x-filament::link :href="route('spatie.documents.preview', $shipment->documents()->first())"> Preview (S)</x-filament::link>--}}
+{{--                <x-filament::link :href="route('spatie.documents.preview-pdf', $shipment->documents()->first())"> Preview PDF (S)</x-filament::link>--}}
+{{--                <x-filament::link :href="route('spatie.documents.download', $shipment->documents()->first())"> Download (S)</x-filament::link>--}}
             </div>
         </div>
     </x-slot>
