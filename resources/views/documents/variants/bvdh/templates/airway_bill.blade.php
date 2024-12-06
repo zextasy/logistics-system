@@ -69,26 +69,26 @@
                         <tr>
                             <td>
                                 <x-documents.single-detail-card
-                                    title="PORT OF LOADING"
+                                    title="PLACE OF DEPARTURE"
                                     :text="$shipment->loading_port"
                                 />
                             </td>
                             <td>
                                 <x-documents.single-detail-card
-                                    title="PORT OF DISCHARGE"
+                                    title="DATE OF DEPARTURE"
+                                    :text="$shipment->date_of_shipment"
+                                />
+                            </td>
+                            <td>
+                                <x-documents.single-detail-card
+                                    title="PLACE OF DESTINATION"
                                     :text="$shipment->discharge_port"
                                 />
                             </td>
                             <td>
                                 <x-documents.single-detail-card
-                                    title="FINAL PLACE FOR DELIVERY"
-                                    :text="$shipment->destination_city"
-                                />
-                            </td>
-                            <td>
-                                <x-documents.single-detail-card
-                                    title="VESSEL"
-                                    :text="$shipment->vessel"
+                                    title="ESTIMATED TIME OF ARRIVAL"
+                                    :text="$shipment->estimated_delivery"
                                 />
                             </td>
                         </tr>
