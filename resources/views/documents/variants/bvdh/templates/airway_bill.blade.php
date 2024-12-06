@@ -1,38 +1,122 @@
 <x-bvdh-document-layout>
-    <div class="header">
-        <h1>AIRWAY BILL</h1>
-        <h2>{{ $reference }}</h2>
+    <div class="invoice-box">
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td><strong>AIRWAY BILL</strong></td>
+                            <td> <img class="document-logo" src="{{request()->route()->named('bvdh.documents.preview') ? asset('logo.jpeg') :public_path('logo.jpeg')}}" alt="logo"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <x-documents.person-details-card
+                                    title='SHIPPER'
+                                    :name="$shipment->shipper_name"
+                                    :address="$shipment->shipper_address"
+                                    :phone="$shipment->shipper_phone"
+                                    :email="$shipment->shipper_email"
+                                />
+                                <x-documents.person-details-card
+                                    title='CONSIGNEE'
+                                    :name="$shipment->consignee_name"
+                                    :address="$shipment->consignee_address"
+                                    :phone="$shipment->consignee_phone"
+                                    :email="$shipment->consignee_email"
+                                />
+                                <x-documents.person-details-card
+                                    title='NOTIFY PARTY'
+                                    title-hint="Carrier not to be responsible for failure to notify"
+                                    :name="$shipment->receiver_name"
+                                    :address="$shipment->receiver_address"
+                                    :phone="$shipment->receiver_phone"
+                                    :email="$shipment->receiver_email"
+                                />
+                            </td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <x-documents.single-detail-card
+                                                title="TRACKING NUMBER"
+                                                :text="$shipment->tracking_number"
+                                            />
+                                        </td>
+                                        <td>
+                                            <x-documents.single-detail-card
+                                                title="AIRWAY BILL NUMBER"
+                                                :text="$reference"
+                                            />
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div>
+                                    <x-documents.detail-card-with-image
+                                        title='EXPORT REFERENCES'
+                                        text-heading="CARRIER: "
+                                        text='lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
+                                    />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr class="information">
+                <td colspan="6">
+                    <table>
+                        <tr>
+                            <td>
+                                <x-documents.single-detail-card
+                                    title="PORT OF LOADING"
+                                    :text="$shipment->loading_port"
+                                />
+                            </td>
+                            <td>
+                                <x-documents.single-detail-card
+                                    title="PORT OF DISCHARGE"
+                                    :text="$shipment->discharge_port"
+                                />
+                            </td>
+                            <td>
+                                <x-documents.single-detail-card
+                                    title="FINAL PLACE FOR DELIVERY"
+                                    :text="$shipment->destination_city"
+                                />
+                            </td>
+                            <td>
+                                <x-documents.single-detail-card
+                                    title="VESSEL"
+                                    :text="$shipment->vessel"
+                                />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <table>
+
+                    <tr class="heading">
+                        <td>DESCRIPTION OF PACKAGES</td>
+                        <td>GROSS CARGO WEIGHT</td>
+                        <td>MEASUREMENT</td>
+                    </tr>
+
+                    <tr class="details">
+                        <td>{{$shipment->cargo_description}}</td>
+                        <td>{{$shipment->cargo_weight}} {{$shipment->cargo_weight_unit}}</td>
+                        <td>{{implode($shipment->cargo_dimensions)}}</td>
+                    </tr>
+                </table>
+            </tr>
+            <tr>
+                <x-documents.single-detail-card
+                    title="ADDITIONAL CLAUSES"
+                    text="Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum "
+                />
+            </tr>
+        </table>
     </div>
-
-    <div class="section">
-        <h3>Shipper</h3>
-        <p>{{ $shipment->shipper_name }}</p>
-        <p>Phone: {{ $shipment->shipper_phone }}</p>
-        <p>Email: {{ $shipment->shipper_email }}</p>
-    </div>
-
-    <div class="section">
-        <h3>Consignee</h3>
-        <p>{{ $shipment->receiver_name }}</p>
-        <p>Phone: {{ $shipment->receiver_phone }}</p>
-        <p>Email: {{ $shipment->receiver_email }}</p>
-    </div>
-
-    {{--<div class="section">--}}
-    {{--    <h3>Flight Details</h3>--}}
-    {{--    <p>Flight Number: {{ $data['flight_number'] }}</p>--}}
-    {{--    <p>From: {{ $data['airport_of_departure'] }}</p>--}}
-    {{--    <p>To: {{ $data['airport_of_destination'] }}</p>--}}
-    {{--</div>--}}
-
-    <div class="section">
-        <h3>Cargo Details</h3>
-        <p>Description: {{ $shipment->description }}</p>
-        <p>Weight: {{ $shipment->weight .' '. $shipment->weight_unit}}</p>
-    </div>
-
-    {{--<div class="section">--}}
-    {{--    <h3>Special Handling</h3>--}}
-    {{--    <p>{{ $data['special_handling'] ?? 'None' }}</p>--}}
-    {{--</div>--}}
 </x-bvdh-document-layout>

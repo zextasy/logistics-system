@@ -31,10 +31,12 @@ class ShipmentFactory extends Factory
             'origin_city' => $this->faker->city(),
             'origin_address' => $this->faker->streetAddress(),
             'origin_postal_code' => $this->faker->postcode(),
+            'loading_port' => $this->faker->city(),
             'destination_country' => $this->faker->country(),
             'destination_city' => $this->faker->city(),
             'destination_address' => $this->faker->streetAddress(),
             'destination_postal_code' => $this->faker->postcode(),
+            'discharge_port' => $this->faker->city(),
             'weight' => $this->faker->randomFloat(2, 1, 1000),
             'weight_unit' => $this->faker->randomElement(['kg', 'lbs']),
             'dimensions' => [
@@ -46,15 +48,31 @@ class ShipmentFactory extends Factory
             'description' => $this->faker->sentence(),
             'container_size' => $type === 'sea' ? $this->faker->randomElement(['20ft', '40ft', '40ft HC']) : null,
             'service_type' => $this->faker->randomElement(['express', 'standard', 'economy']),
-            'shipper_name' => $this->faker->company(),
+            'shipper_name' => $this->faker->name(),
             'shipper_phone' => $this->faker->phoneNumber(),
             'shipper_email' => $this->faker->email(),
-            'receiver_name' => $this->faker->company(),
+            'shipper_address' => $this->faker->address(),
+            'receiver_name' => $this->faker->name(),
             'receiver_phone' => $this->faker->phoneNumber(),
             'receiver_email' => $this->faker->email(),
+            'receiver_address' => $this->faker->address(),
+            'consignee_name' => $this->faker->company(),
+            'consignee_phone' => $this->faker->phoneNumber(),
+            'consignee_email' => $this->faker->email(),
+            'consignee_address' => $this->faker->address(),
+            'vessel' => $this->faker->company(),
             'current_location' => $this->faker->city(),
             'estimated_delivery' => $this->faker->dateTimeBetween('+1 week', '+3 weeks'),
             'actual_delivery' => $status === 'delivered' ? $this->faker->dateTimeBetween('-1 week', 'now') : null,
+            'cargo_description' => $this->faker->realText(),
+            'cargo_weight' => $this->faker->randomFloat(2, 10, 5000),
+            'cargo_weight_unit' => 'kg',
+            'cargo_dimensions' => [
+                'length' => $this->faker->numberBetween(10, 100),
+                'width' => $this->faker->numberBetween(10, 100),
+                'height' => $this->faker->numberBetween(10, 100),
+                'unit' => 'cm'
+            ],
             'special_instructions' => $this->faker->optional()->sentence(),
             'customs_status' => $status === 'customs' ? 'processing' : null,
             'customs_documents' => null,
@@ -80,6 +98,7 @@ class ShipmentFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
+                'date_of_shipment' => $this->faker->dateTimeBetween('-1 month', '-1 week'),
                 'status' => 'delivered',
                 'actual_delivery' => $this->faker->dateTimeBetween('-1 week', 'now')
             ];
@@ -90,6 +109,7 @@ class ShipmentFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
+                'date_of_shipment' => $this->faker->dateTimeBetween('-1 month', '-1 week'),
                 'status' => 'in_transit',
                 'actual_delivery' => null
             ];

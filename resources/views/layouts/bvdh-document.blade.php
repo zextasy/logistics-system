@@ -111,10 +111,19 @@
         .invoice-box.rtl table tr td:nth-child(2) {
             text-align: left;
         }
+        /** Zee **/
+        .document-logo{
+            display: inline-block;
+            vertical-align: top;
+            float: right;
+            margin-top: 0;
+            width: 100px;
+        }
         /** Debug **/
-        div{
+        td{
             /*border: 1px solid red;*/
         }
+
         /** Tailwind **/
         .flex{
             display: flex;
@@ -134,6 +143,7 @@
         .text-xs{
             font-size: 9px;
         }
+
     </style>
 </head>
 <body>

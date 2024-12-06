@@ -6,7 +6,7 @@
                     <table>
                         <tr>
                             <td><strong>BILL OF LADEN</strong></td>
-                            <td><img src="{{asset('logo.jpeg')}}" alt="logo" width="120px" style="float: right"></td>
+                            <td> <img class="document-logo" src="{{request()->route()->named('bvdh.documents.preview') ? asset('logo.jpeg') :public_path('logo.jpeg')}}" alt="logo"></td>
                         </tr>
                         <tr>
                             <td>
@@ -19,10 +19,10 @@
                                 />
                                 <x-documents.person-details-card
                                     title='CONSIGNEE'
-                                    :name="$shipment->receiver_name"
-                                    :address="$shipment->receiver_address"
-                                    :phone="$shipment->receiver_phone"
-                                    :email="$shipment->receiver_email"
+                                    :name="$shipment->consignee_name"
+                                    :address="$shipment->consignee_address"
+                                    :phone="$shipment->consignee_phone"
+                                    :email="$shipment->consignee_email"
                                 />
                                 <x-documents.person-details-card
                                     title='NOTIFY PARTY'
@@ -65,54 +65,27 @@
                         <tr>
                             <td>
                                 <x-documents.single-detail-card
-                                    title="PRE CARRIAGE BY"
-                                    text="Text"
-                                />
-                            </td>
-
-                            <td>
-                                <x-documents.single-detail-card
-                                    title="PLACE OF RECEIPT"
-                                    text="Text"
-                                />
-                            </td>
-                                                        <td>
-                                <x-documents.single-detail-card
-                                    title="FREIGHT TO BE PAID AT"
-                                    text="Text"
-                                />
-                            </td>
-                                                        <td>
-                                <x-documents.single-detail-card
-                                    title="NO. OF ORIGINAL BILLS OF LANDING"
-                                    text="Text"
-                                />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <x-documents.single-detail-card
                                     title="VESSEL"
-                                    text="Text"
+                                    :text="$shipment->vessel"
                                 />
                             </td>
 
                             <td>
                                 <x-documents.single-detail-card
                                     title="PORT OF LOADING"
-                                    text="Text"
+                                    :text="$shipment->loading_port"
                                 />
                             </td>
                                                         <td>
                                 <x-documents.single-detail-card
                                     title="PORT OF DISCHARGE"
-                                    text="Text"
+                                    :text="$shipment->discharge_port"
                                 />
                             </td>
                                                         <td>
                                 <x-documents.single-detail-card
                                     title="FINAL PLACE FOR DELIVERY"
-                                    text="Text"
+                                    :text="$shipment->destination_city"
                                 />
                             </td>
                         </tr>
@@ -123,21 +96,15 @@
                 <table>
 
                     <tr class="heading">
-                        <td>MARKS AND NOS CONTAINER AND SEALS</td>
-                        <td>NO AND KIND OF PACKAGES</td>
                         <td>DESCRIPTION OF PACKAGES</td>
                         <td>GROSS CARGO WEIGHT</td>
-                        <td>TARE</td>
                         <td>MEASUREMENT</td>
                     </tr>
 
                     <tr class="details">
-                        <td>Text</td>
-                        <td>Text</td>
-                        <td>Long Text</td>
-                        <td>10</td>
-                        <td>100</td>
-                        <td>20</td>
+                        <td>{{$shipment->cargo_description}}</td>
+                        <td>{{$shipment->cargo_weight}} {{$shipment->cargo_weight_unit}}</td>
+                        <td>{{implode($shipment->cargo_dimensions)}}</td>
                     </tr>
                 </table>
             </tr>

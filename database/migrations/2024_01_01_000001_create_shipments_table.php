@@ -27,10 +27,12 @@ return new class extends Migration
             // Origin and Destination
             $table->string('origin_country');
             $table->string('origin_city');
+            $table->string('loading_port')->nullable();
             $table->string('origin_address')->nullable();
             $table->string('origin_postal_code')->nullable();
             $table->string('destination_country');
             $table->string('destination_city');
+            $table->string('discharge_port')->nullable();
             $table->string('destination_address')->nullable();
             $table->string('destination_postal_code')->nullable();
 
@@ -46,15 +48,29 @@ return new class extends Migration
             $table->string('shipper_name');
             $table->string('shipper_phone')->nullable();
             $table->string('shipper_email')->nullable();
+            $table->string('shipper_address',1000)->nullable();
             $table->string('receiver_name');
             $table->string('receiver_phone')->nullable();
             $table->string('receiver_email')->nullable();
+            $table->string('receiver_address',1000)->nullable();
+            $table->string('consignee_name');
+            $table->string('consignee_phone')->nullable();
+            $table->string('consignee_email')->nullable();
+            $table->string('consignee_address',1000)->nullable();
 
             // Tracking Information
+            $table->string('vessel')->nullable();
             $table->string('current_location')->nullable();
             $table->dateTime('estimated_delivery');
             $table->dateTime('actual_delivery')->nullable();
+            $table->dateTime('date_of_shipment')->nullable();
             $table->text('special_instructions')->nullable();
+
+            // Cargo Information
+            $table->string('cargo_description',1000)->nullable();
+            $table->decimal('cargo_weight', 10, 2)->nullable();
+            $table->enum('cargo_weight_unit', ['kg', 'lbs'])->default('kg');
+            $table->json('cargo_dimensions')->nullable();
 
             // Customs Information
             $table->string('customs_status')->nullable();
