@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\ShipmentRequest;
+use App\Http\Requests\ShipmentRequest;
 use App\Models\Shipment;
 use App\Services\{ShipmentService, DocumentGenerationService, NotificationService};
 use Illuminate\Http\Request;
@@ -67,7 +67,7 @@ class ShipmentController extends Controller
             $this->documentService->generateInitialDocuments($shipment);
         }
 
-        $this->notificationService->sendShipmentCreatedNotification($shipment);
+//        $this->notificationService->sendShipmentCreatedNotification($shipment);
 
         return redirect()
             ->route('admin.shipments.show', $shipment)
@@ -96,7 +96,7 @@ class ShipmentController extends Controller
         $this->shipmentService->updateShipment($shipment, $request->validated());
 
         if ($oldStatus !== $shipment->status) {
-            $this->notificationService->sendShipmentStatusNotification($shipment, $oldStatus);
+//            $this->notificationService->sendShipmentStatusNotification($shipment, $oldStatus);
         }
 
         return redirect()

@@ -5,6 +5,7 @@
 namespace App\Services;
 
 use App\Models\Shipment;
+use App\Enums\ShipmentRouteStatusEnum;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
@@ -31,10 +32,13 @@ class ShipmentService
             foreach ($data['routes'] as $index => $route) {
                 $shipment->routes()->create([
                     ...$route,
-                    'order' => $index + 1
+                    'order' => $index + 1,
+                    'status' => ShipmentRouteStatusEnum::PENDING
                 ]);
             }
         }
+
+        $this->documentService->generateInitialDocuments($shipment);
 
         return $shipment;
     }
@@ -153,5 +157,3 @@ class ShipmentService
         return $distances[$key] ?? 5000; // Default distance if not found
     }
 }
-
-// app/Services/NotificationService.php

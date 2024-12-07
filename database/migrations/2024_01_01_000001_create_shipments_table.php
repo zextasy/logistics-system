@@ -66,12 +66,6 @@ return new class extends Migration
             $table->dateTime('date_of_shipment')->nullable();
             $table->text('special_instructions')->nullable();
 
-            // Cargo Information
-            $table->string('cargo_description',1000)->nullable();
-            $table->decimal('cargo_weight', 10, 2)->nullable();
-            $table->enum('cargo_weight_unit', ['kg', 'lbs'])->default('kg');
-            $table->json('cargo_dimensions')->nullable();
-
             // Customs Information
             $table->string('customs_status')->nullable();
             $table->json('customs_documents')->nullable();

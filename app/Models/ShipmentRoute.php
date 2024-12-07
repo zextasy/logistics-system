@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ShipmentRouteStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -32,7 +33,8 @@ class ShipmentRoute extends Model
         'departure_date' => 'datetime',
         'actual_arrival_date' => 'datetime',
         'actual_departure_date' => 'datetime',
-        'metadata' => 'array'
+        'metadata' => 'array',
+        'status' => ShipmentRouteStatusEnum::class
     ];
 
     public function shipment()

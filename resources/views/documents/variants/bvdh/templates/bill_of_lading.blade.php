@@ -117,9 +117,9 @@
                     </tr>
 
                     <tr class="details">
-                        <td>{{$shipment->cargo_description}}</td>
-                        <td>{{$shipment->cargo_weight}} {{$shipment->cargo_weight_unit}}</td>
-                        <td>{{implode($shipment->cargo_dimensions)}}</td>
+                        <td>{{$shipment->description}}</td>
+                        <td>{{$shipment->weight}} {{$shipment->weight_unit}}</td>
+                        <td>{{json_encode($shipment->dimensions)}}</td>
                     </tr>
                 </table>
             </tr>

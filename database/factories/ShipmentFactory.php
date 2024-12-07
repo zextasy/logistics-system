@@ -64,15 +64,6 @@ class ShipmentFactory extends Factory
             'current_location' => $this->faker->city(),
             'estimated_delivery' => $this->faker->dateTimeBetween('+1 week', '+3 weeks'),
             'actual_delivery' => $status === 'delivered' ? $this->faker->dateTimeBetween('-1 week', 'now') : null,
-            'cargo_description' => $this->faker->realText(),
-            'cargo_weight' => $this->faker->randomFloat(2, 10, 5000),
-            'cargo_weight_unit' => 'kg',
-            'cargo_dimensions' => [
-                'length' => $this->faker->numberBetween(10, 100),
-                'width' => $this->faker->numberBetween(10, 100),
-                'height' => $this->faker->numberBetween(10, 100),
-                'unit' => 'cm'
-            ],
             'special_instructions' => $this->faker->optional()->sentence(),
             'customs_status' => $status === 'customs' ? 'processing' : null,
             'customs_documents' => null,

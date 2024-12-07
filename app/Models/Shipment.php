@@ -2,10 +2,16 @@
 
 namespace App\Models;
 
+use App\Observers\ShipmentObserver;
+use App\Enums\ShipmentServiceTypeEnum;
+use App\Enums\ShipmentStatusEnum;
+use App\Enums\ShipmentTypeEnum;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+#[ObservedBy([ShipmentObserver::class])]
 class Shipment extends Model
 {
     use HasFactory;
@@ -74,6 +80,9 @@ class Shipment extends Model
         'actual_delivery' => 'datetime',
         'insurance_required' => 'boolean',
         'customs_cleared' => 'boolean',
+        'type' => ShipmentTypeEnum::class,
+        'status' => ShipmentStatusEnum::class,
+        'service_type' => ShipmentServiceTypeEnum::class,
     ];
 
     public function user()

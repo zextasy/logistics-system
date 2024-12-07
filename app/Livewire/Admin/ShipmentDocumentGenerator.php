@@ -33,17 +33,17 @@ class ShipmentDocumentGenerator extends Component implements HasForms, HasAction
 
     public function getDocumentAction(): Action
     {
-        return Action::make('viewDocument')
-            ->requiresConfirmation()
+        return Action::make('getDocument')
+            ->link()
             ->action(function () {
                 try {
                     $generator = new DocumentGenerationService();
-                    $documents = $generator->generateInitialDocuments($this->shipment);
+                    $generator->generateInitialDocuments($this->shipment);
                     Notification::make()
                         ->title('Success!')
                         ->success()
                         ->send();
-                    redirect()->route('admin.documents.show', $documents[0]);
+                    redirect()->route('admin.shipments.show', $this->shipment);
                 } catch (\Exception $e){
                     Log::error($e->getMessage());
                     Notification::make()

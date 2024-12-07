@@ -4,26 +4,30 @@
             <div class="flex">
                 <h2 class="text-2xl font-bold">Shipment Details</h2>
                 <span class="px-4 py-2 mx-3 rounded-full text-sm
-                            @if($shipment->status === 'delivered')
+                            @if($shipment->status->value === 'delivered')
                                 bg-green-100 text-green-800
-                            @elseif($shipment->status === 'in_transit')
+                            @elseif($shipment->status->value === 'in_transit')
                                 bg-blue-100 text-blue-800
-                            @elseif($shipment->status === 'pending')
+                            @elseif($shipment->status->value === 'pending')
                                 bg-yellow-100 text-yellow-800
                             @else
                                 bg-gray-100 text-gray-800
                             @endif
                         ">
-                            {{ ucfirst($shipment->status) }}
+                            {{ ucfirst($shipment->status->value) }}
                         </span>
             </div>
             <div class="flex space-x-3">
-                <x-filament::link :href="route('bvdh.documents.preview', $shipment->documents()->first())"> Preview (B)</x-filament::link>
-                <x-filament::link :href="route('bvdh.documents.preview-pdf', $shipment->documents()->first())"> Preview PDF (B)</x-filament::link>
-                <x-filament::link :href="route('bvdh.documents.download', $shipment->documents()->first())"> Download PDF (B)</x-filament::link>
-{{--                <x-filament::link :href="route('spatie.documents.preview', $shipment->documents()->first())"> Preview (S)</x-filament::link>--}}
-{{--                <x-filament::link :href="route('spatie.documents.preview-pdf', $shipment->documents()->first())"> Preview PDF (S)</x-filament::link>--}}
-{{--                <x-filament::link :href="route('spatie.documents.download', $shipment->documents()->first())"> Download (S)</x-filament::link>--}}
+                @if($shipment->documents()->exists())
+                    <x-filament::link :href="route('bvdh.documents.preview', $shipment->documents()->first())"> Preview (B)</x-filament::link>
+                    <x-filament::link :href="route('bvdh.documents.preview-pdf', $shipment->documents()->first())"> Preview PDF (B)</x-filament::link>
+                    <x-filament::link :href="route('bvdh.documents.download', $shipment->documents()->first())"> Download PDF (B)</x-filament::link>
+                    {{--                <x-filament::link :href="route('spatie.documents.preview', $shipment->documents()->first())"> Preview (S)</x-filament::link>--}}
+                    {{--                <x-filament::link :href="route('spatie.documents.preview-pdf', $shipment->documents()->first())"> Preview PDF (S)</x-filament::link>--}}
+                    {{--                <x-filament::link :href="route('spatie.documents.download', $shipment->documents()->first())"> Download (S)</x-filament::link>--}}
+                @else
+                    <livewire:admin.shipment-document-generator :shipment="$shipment" />
+                @endif
             </div>
         </div>
     </x-slot>
@@ -42,7 +46,7 @@
                                 </div>
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Service Type</dt>
-                                    <dd class="mt-1 text-sm text-gray-900">{{ ucfirst($shipment->service_type) }}</dd>
+                                    <dd class="mt-1 text-sm text-gray-900">{{ ucfirst($shipment->service_type->value) }}</dd>
                                 </div>
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Current Location</dt>
