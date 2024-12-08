@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\City;
 use App\Models\Quote;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -10,21 +11,25 @@ class QuoteFactory extends Factory
 {
     protected $model = Quote::class;
 
+
+
     public function definition()
     {
+        $originCity = City::inRandomOrder()->first();
+        $destinationCity = City::inRandomOrder()->first();
         return [
             'reference_number' => 'QT-' . strtoupper(Str::random(8)),
             'name' => $this->faker->name(),
             'company' => $this->faker->company(),
             'email' => $this->faker->companyEmail(),
             'phone' => $this->faker->phoneNumber(),
-            'country' => $this->faker->country(),
+            'country_id' => $originCity->country_id,
 
-            'origin_country' => $this->faker->country(),
-            'origin_city' => $this->faker->city(),
+            'origin_country_id' => $originCity->country_id,
+            'origin_city_id' => $originCity->id,
             'origin_postal_code' => $this->faker->postcode(),
-            'destination_country' => $this->faker->country(),
-            'destination_city' => $this->faker->city(),
+            'destination_country_id' => $destinationCity->country_id,
+            'destination_city_id' => $destinationCity->id,
             'destination_postal_code' => $this->faker->postcode(),
 
             'description' => $this->faker->paragraph(),

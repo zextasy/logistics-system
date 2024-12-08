@@ -25,13 +25,13 @@ return new class extends Migration
             ]);
 
             // Origin and Destination
-            $table->string('origin_country');
-            $table->string('origin_city');
+            $table->unsignedInteger('origin_country_id');
+            $table->unsignedInteger('origin_city_id');
             $table->string('loading_port')->nullable();
             $table->string('origin_address')->nullable();
             $table->string('origin_postal_code')->nullable();
-            $table->string('destination_country');
-            $table->string('destination_city');
+            $table->unsignedInteger('destination_country_id');
+            $table->unsignedInteger('destination_city_id');
             $table->string('discharge_port')->nullable();
             $table->string('destination_address')->nullable();
             $table->string('destination_postal_code')->nullable();
@@ -73,7 +73,7 @@ return new class extends Migration
 
             // Commercial Information
             $table->decimal('declared_value', 12, 2)->nullable();
-            $table->string('currency', 3)->default('USD');
+            $table->string('currency', 3)->nullable();
             $table->json('charges')->nullable();
             $table->boolean('insurance_required')->default(false);
             $table->decimal('insurance_amount', 12, 2)->nullable();

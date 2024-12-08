@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\City;
 use App\Models\Shipment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,21 +23,23 @@ class ShipmentFactory extends Factory
             'cancelled',
             'on_hold'
         ]);
+        $originCity = City::inRandomOrder()->first();
+        $destinationCity = City::inRandomOrder()->first();
 
         return [
             'tracking_number' => 'TRK-' . strtoupper($this->faker->unique()->bothify('##???###')),
             'type' => $type,
             'status' => $status,
-            'origin_country' => $this->faker->country(),
-            'origin_city' => $this->faker->city(),
+            'origin_country_id' => $originCity->country_id,
+            'origin_city_id' => $originCity->id,
             'origin_address' => $this->faker->streetAddress(),
             'origin_postal_code' => $this->faker->postcode(),
-            'loading_port' => $this->faker->city(),
-            'destination_country' => $this->faker->country(),
-            'destination_city' => $this->faker->city(),
+            'loading_port' => $originCity->name,
+            'destination_country_id' => $destinationCity->country_id,
+            'destination_city_id' => $destinationCity->id,
             'destination_address' => $this->faker->streetAddress(),
             'destination_postal_code' => $this->faker->postcode(),
-            'discharge_port' => $this->faker->city(),
+            'discharge_port' => $destinationCity->name,
             'weight' => $this->faker->randomFloat(2, 1, 1000),
             'weight_unit' => $this->faker->randomElement(['kg', 'lbs']),
             'dimensions' => [

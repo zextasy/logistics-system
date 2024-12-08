@@ -54,11 +54,11 @@
                         <dl class="grid grid-cols-1 gap-x-4 gap-y-4">
                             <div>
                                 <x-description-list-title>Origin</x-description-list-title>
-                                <x-description-list-text>{{ $quote->origin_country }}</x-description-list-text>
+                                <x-description-list-text>{{ $quote->origin_country_name }}</x-description-list-text>
                             </div>
                             <div>
                                 <x-description-list-title>Destination</x-description-list-title>
-                                <x-description-list-text>{{ $quote->destination_country }}</x-description-list-text>
+                                <x-description-list-text>{{ $quote->destination_country_name }}</x-description-list-text>
                             </div>
                             <div>
                                 <x-description-list-title>Service Type</x-description-list-title>

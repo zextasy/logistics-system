@@ -18,14 +18,14 @@ return new class extends Migration
             $table->string('company');
             $table->string('email');
             $table->string('phone')->nullable();
-            $table->string('country');
+            $table->unsignedInteger('country_id');
 
             // Shipment Details
-            $table->string('origin_country');
-            $table->string('origin_city')->nullable();
+            $table->unsignedInteger('origin_country_id');
+            $table->unsignedInteger('origin_city_id')->nullable();
             $table->string('origin_postal_code')->nullable();
-            $table->string('destination_country');
-            $table->string('destination_city')->nullable();
+            $table->unsignedInteger('destination_country_id');
+            $table->unsignedInteger('destination_city_id')->nullable();
             $table->string('destination_postal_code')->nullable();
 
             // Cargo Information

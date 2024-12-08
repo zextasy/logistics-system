@@ -23,7 +23,7 @@ class QuoteController extends Controller
 
     public function index(Request $request)
     {
-        $quotes = Quote::with('user')
+        $quotes = Quote::with(['user','country','originCountry','originCity','destinationCountry','destinationCity'])
             ->when($request->status, function ($query, $status) {
                 $query->where('status', $status);
             })

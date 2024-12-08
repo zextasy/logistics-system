@@ -162,10 +162,10 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-gray-900">
-                                        {{ $shipment->origin_city }}, {{ $shipment->origin_country }}
+                                        {{ $shipment->origin_city_name }}, {{ $shipment->origin_country_name }}
                                     </div>
                                     <div class="text-sm text-gray-500">
-                                        → {{ $shipment->destination_city }}, {{ $shipment->destination_country }}
+                                        → {{ $shipment->destination_city_name }}, {{ $shipment->destination_country_name }}
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">

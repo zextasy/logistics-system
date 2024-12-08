@@ -25,7 +25,7 @@ class ShipmentController extends Controller
 
     public function index(Request $request)
     {
-        $shipments = Shipment::with(['user', 'routes', 'documents'])
+        $shipments = Shipment::with(['user', 'routes', 'documents','originCountry','originCity','destinationCountry','destinationCity'])
             ->when($request->search, function($query, $search) {
                 $query->where('tracking_number', 'like', "%{$search}%")
                     ->orWhere('shipper_name', 'like', "%{$search}%")

@@ -87,14 +87,16 @@ class CreateShipment extends Component implements HasForms
                         ->schema([
                             Fieldset::make('Origin')
                                 ->schema([
-                                    Select::make('origin_country')
+                                    Select::make('origin_country_id')
+                                        ->label('Origin Country')
                                         ->options(Country::all()->pluck('name','id'))
                                         ->searchable()
                                         ->required()
                                         ->live(),
-                                    Select::make('origin_city')
+                                    Select::make('origin_city_id')
+                                        ->label('Origin City')
                                         ->options(fn (Get $get) => City::query()
-                                            ->where('country_id', $get('origin_country'))
+                                            ->where('country_id', $get('origin_country_id'))
                                             ->pluck('name', 'id'))
                                         ->searchable()
                                         ->required(),
@@ -104,14 +106,16 @@ class CreateShipment extends Component implements HasForms
                                 ]),
                             Fieldset::make('Destination')
                                 ->schema([
-                                    Select::make('destination_country')
+                                    Select::make('destination_country_id')
+                                        ->label('Destination Country')
                                         ->options(Country::all()->pluck('name','id'))
                                         ->searchable()
                                         ->required()
                                         ->live(),
-                                    Select::make('destination_city')
+                                    Select::make('destination_city_id')
+                                        ->label('Destination City')
                                         ->options(fn (Get $get) => City::query()
-                                            ->where('country_id', $get('destination_country'))
+                                            ->where('country_id', $get('destination_country_id'))
                                             ->pluck('name', 'id'))
                                         ->searchable()
                                         ->required(),

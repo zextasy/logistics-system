@@ -7,6 +7,7 @@ use App\Enums\ShipmentServiceTypeEnum;
 use App\Enums\ShipmentStatusEnum;
 use App\Enums\ShipmentTypeEnum;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,13 +23,13 @@ class Shipment extends Model
         'tracking_number',
         'type',
         'status',
-        'origin_country',
-        'origin_city',
+        'origin_country_id',
+        'origin_city_id',
         'loading_port',
         'origin_address',
         'origin_postal_code',
-        'destination_country',
-        'destination_city',
+        'destination_country_id',
+        'destination_city_id',
         'discharge_port',
         'destination_address',
         'destination_postal_code',
@@ -100,11 +101,58 @@ class Shipment extends Model
         return $this->hasMany(Document::class);
     }
 
+    public function originCountry()
+    {
+        return $this->belongsTo(Country::class, 'origin_country_id');
+    }
+
+    public function originCity()
+    {
+        return $this->belongsTo(City::class, 'origin_city_id');
+    }
+
+    public function destinationCountry()
+    {
+        return $this->belongsTo(Country::class, 'destination_country_id');
+    }
+
+    public function destinationCity()
+    {
+        return $this->belongsTo(City::class, 'destination_city_id');
+    }
     public function getCurrentRouteAttribute()
     {
         return $this->routes()
             ->where('arrival_date', '<=', now())
             ->orderBy('order', 'desc')
             ->first();
+    }
+
+    protected function originCountryName(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->originCountry->name,
+        );
+    }
+
+    protected function originCityName(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->originCity->name,
+        );
+    }
+
+    protected function destinationCountryName(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->destinationCountry->name,
+        );
+    }
+
+    protected function destinationCityName(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->destinationCity->name,
+        );
     }
 }
