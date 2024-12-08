@@ -1,5 +1,5 @@
 <?php
-namespace App\Livewire\Admin;
+namespace App\Livewire\Actions;
 
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
@@ -55,6 +55,6 @@ class ShipmentDocumentGenerator extends Component implements HasForms, HasAction
     }
     public function render()
     {
-        return view('livewire.admin.shipment-document-generator');
+        return view('livewire.actions.shipment-document-generator');
     }
 }

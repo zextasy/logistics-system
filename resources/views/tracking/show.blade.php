@@ -11,7 +11,7 @@
                                 <x-filament::link :href="route('bvdh.documents.preview-pdf', $shipment->initialDocument)"> Preview PDF ({{$shipment->initialDocument->type}})</x-filament::link>
                                 <x-filament::link :href="route('bvdh.documents.download', $shipment->initialDocument)"> Download PDF ({{$shipment->initialDocument->type}})</x-filament::link>
                             @else
-                                <livewire:admin.shipment-document-generator :shipment="$shipment" />
+                                <livewire:actions.shipment-document-generator :shipment="$shipment" />
                             @endif
                         </div>
                         <span class="px-4 py-2 rounded-full text-sm

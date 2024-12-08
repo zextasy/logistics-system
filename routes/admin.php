@@ -1,16 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\{
-    AdminController,
+use App\Http\Controllers\Admin\{AdminController,
+    CountryController,
     DashboardController as AdminDashboardController,
     ShipmentController as AdminShipmentController,
     QuoteController as AdminQuoteController,
     DocumentController as AdminDocumentController,
     UserController as AdminUserController,
     ReportController,
-    SettingController
-};
+    SettingController};
 
 /*
 |--------------------------------------------------------------------------
@@ -62,9 +61,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::get('/', [AdminUserController::class, 'index'])->name('users.index');
         Route::get('/{user}', [AdminUserController::class, 'show'])->name('users.show');
         Route::get('/{user}/edit', [AdminUserController::class, 'edit'])->name('users.edit');
-        Route::put('/{user}', [AdminUserController::class, 'update'])->name('users.update');
-        Route::patch('/{user}/toggle-admin', [AdminUserController::class, 'toggleAdmin'])
-            ->name('users.toggle-admin');
+        Route::put('/{user}', [AdminUserController::class, 'create'])->name('users.create');
     });
 
     // Reports
@@ -73,6 +70,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::get('/export', [ReportController::class, 'export'])->name('reports.export');
         Route::post('/custom', [ReportController::class, 'customReport'])->name('reports.custom');
     });
+
+    //Countries
+    Route::prefix('countries')->group(function () {
+        Route::get('/', [CountryController::class, 'index'])->name('countries.index');
+        Route::get('/{country}', [CountryController::class, 'show'])->name('countries.show');
+    });
+
 
     // Settings
     Route::prefix('settings')->group(function () {

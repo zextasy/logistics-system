@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Forms\Shipments;
+namespace App\Livewire\Forms;
 
 use App\Enums\ContainerSizeEnum;
 use App\Enums\DistanceUnitEnum;
@@ -210,6 +210,6 @@ class CreateShipment extends Component implements HasForms
 
     public function render(): View
     {
-        return view('livewire.admin.forms.shipments.create-shipment');
+        return view('livewire.forms.create-shipment');
     }
 }

@@ -11,7 +11,7 @@
                     {{--                <x-filament::link :href="route('spatie.documents.preview-pdf', $shipment->initialDocument())"> Preview PDF (S)</x-filament::link>--}}
                     {{--                <x-filament::link :href="route('spatie.documents.download', $shipment->initialDocument())"> Download (S)</x-filament::link>--}}
                 @else
-                    <livewire:admin.shipment-document-generator :shipment="$shipment" />
+                    <livewire:actions.shipment-document-generator :shipment="$shipment" />
                 @endif
             </div>
             <span class="px-4 py-2 mx-3 rounded-full text-sm
@@ -29,7 +29,7 @@
                         </span>
         </div>
     </x-slot>
-    <div class="py-12">
+    <div class="py-12 px-14">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6">

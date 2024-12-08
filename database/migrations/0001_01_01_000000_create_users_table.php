@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\UserRoleEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,7 +21,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('company')->nullable();
             $table->text('address')->nullable();
-            $table->boolean('is_admin')->default(false);
+            $table->string('role')->default(UserRoleEnum::USER->value);
             $table->json('preferences')->nullable();
             $table->timestamp('last_login_at')->nullable();
             $table->rememberToken();

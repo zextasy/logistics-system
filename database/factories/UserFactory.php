@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\UserRoleEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -29,10 +30,10 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
             'remember_token' => Str::random(10),
+            'role' => UserRoleEnum::USER,
             'phone' => $this->faker->phoneNumber(),
             'company' => $this->faker->company(),
             'address' => $this->faker->address(),
-            'is_admin' => false,
             'preferences' => [
                 'notifications_email' => $this->faker->boolean,
                 'notifications_sms' => $this->faker->boolean,
@@ -56,7 +57,7 @@ class UserFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'is_admin' => true,
+                'role' => UserRoleEnum::ADMIN,
                 'email_verified_at' => now(),
             ];
         });

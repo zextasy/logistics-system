@@ -58,8 +58,11 @@ new class extends Component
                         </x-slot>
 
                         <x-slot name="content">
-                            <x-dropdown-link :href="route('dashboard')" >
-                                {{ __('Test Dashboard') }}
+                            <x-dropdown-link :href="route('admin.countries.index')" >
+                                {{ __('Countries') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('admin.users.index')" >
+                                {{ __('Users') }}
                             </x-dropdown-link>
                             <x-dropdown-link :href="route('profile')" >
                                 {{ __('Profile') }}
@@ -112,8 +115,11 @@ new class extends Component
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('dashboard')" >
-                    {{ __('Test Dashboard') }}
+                <x-responsive-nav-link :href="route('admin.countries.index')" >
+                    {{ __('Countries') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.users.index')" >
+                    {{ __('Users') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('profile')" >
                     {{ __('Profile') }}

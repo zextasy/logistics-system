@@ -9,12 +9,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class State extends Model
 {
-    use SoftDeletes;
+//    use SoftDeletes;
 
     protected $fillable = [
         'id', 'country_id', 'name', 'status'
     ];
 
+    public $timestamps = false;
     public function cities(): HasMany
     {
         return $this->hasMany(City::class);

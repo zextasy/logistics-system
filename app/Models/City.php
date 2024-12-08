@@ -14,6 +14,7 @@ class City extends Model
         'id','country_id', 'state_id', 'name', 'status'
     ];
 
+    public $timestamps = false;
     public function state(): BelongsTo
     {
         return $this->belongsTo(State::class);

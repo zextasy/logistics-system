@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\CountryStatusEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
@@ -14,6 +15,12 @@ class Country extends Model
     protected $fillable = [
         'id', 'name', 'status'
     ];
+
+    protected $casts = [
+        'status' => CountryStatusEnum::class,
+    ];
+
+    public $timestamps = false;
 
     public function states(): HasMany
     {

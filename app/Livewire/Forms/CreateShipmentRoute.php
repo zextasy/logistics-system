@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Forms;
+namespace App\Livewire\Forms;
 
 use App\Models\ShipmentRoute;
 use Filament\Forms;
@@ -59,6 +59,6 @@ class CreateShipmentRoute extends Component implements HasForms
 
     public function render(): View
     {
-        return view('livewire.admin.forms.create-shipment-route');
+        return view('livewire.forms.create-shipment-route');
     }
 }
