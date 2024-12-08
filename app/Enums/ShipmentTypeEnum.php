@@ -8,8 +8,8 @@ enum ShipmentTypeEnum: string implements HasLabel
 {
 case AIR = 'air';
 case SEA='sea';
-case ROAD ='road';
-case RAIL = 'rail';
+//case ROAD ='road';
+//case RAIL = 'rail';
 
     public function getLabel(): ?string
     {
