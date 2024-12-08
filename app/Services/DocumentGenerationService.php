@@ -3,6 +3,7 @@
 // app/Services/DocumentGenerationService.php
 namespace App\Services;
 
+use App\Enums\ShipmentTypeEnum;
 use App\Models\{Document, Shipment};
 use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -52,7 +53,7 @@ class DocumentGenerationService
         // Generate Airway Bill or Bill of Lading based on shipment type
         $documents[] = $this->generate(
             $shipment,
-            $shipment->type === 'air' ? 'airway_bill' : 'bill_of_lading'
+            $shipment->type === ShipmentTypeEnum::AIR ? 'airway_bill' : 'bill_of_lading'
         );
 
         // Generate Commercial Invoice

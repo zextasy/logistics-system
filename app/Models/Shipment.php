@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[ObservedBy([ShipmentObserver::class])]
@@ -86,37 +89,42 @@ class Shipment extends Model
         'service_type' => ShipmentServiceTypeEnum::class,
     ];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function routes()
+    public function routes(): HasMany
     {
         return $this->hasMany(ShipmentRoute::class);
     }
 
-    public function documents()
+    public function documents(): HasMany
     {
         return $this->hasMany(Document::class);
     }
 
-    public function originCountry()
+    public function initialDocument(): HasOne
+    {
+        return $this->documents()->one()->ofMany()->oldest();
+    }
+
+    public function originCountry(): BelongsTo
     {
         return $this->belongsTo(Country::class, 'origin_country_id');
     }
 
-    public function originCity()
+    public function originCity(): BelongsTo
     {
         return $this->belongsTo(City::class, 'origin_city_id');
     }
 
-    public function destinationCountry()
+    public function destinationCountry(): BelongsTo
     {
         return $this->belongsTo(Country::class, 'destination_country_id');
     }
 
-    public function destinationCity()
+    public function destinationCity(): BelongsTo
     {
         return $this->belongsTo(City::class, 'destination_city_id');
     }

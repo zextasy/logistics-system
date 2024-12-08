@@ -5,6 +5,15 @@
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-6">
                         <h2 class="text-2xl font-bold">Shipment Details</h2>
+                        <div class="flex space-x-3">
+                            @if($shipment->initialDocument()->exists())
+                                <x-filament::link :href="route('bvdh.documents.preview', $shipment->initialDocument)"> Preview ({{$shipment->initialDocument->type}})</x-filament::link>
+                                <x-filament::link :href="route('bvdh.documents.preview-pdf', $shipment->initialDocument)"> Preview PDF ({{$shipment->initialDocument->type}})</x-filament::link>
+                                <x-filament::link :href="route('bvdh.documents.download', $shipment->initialDocument)"> Download PDF ({{$shipment->initialDocument->type}})</x-filament::link>
+                            @else
+                                <livewire:admin.shipment-document-generator :shipment="$shipment" />
+                            @endif
+                        </div>
                         <span class="px-4 py-2 rounded-full text-sm
                             @if($shipment->status === 'delivered')
                                 bg-green-100 text-green-800
@@ -16,7 +25,7 @@
                                 bg-gray-100 text-gray-800
                             @endif
                         ">
-                            {{ ucfirst($shipment->status) }}
+                            {{ ucfirst($shipment->status->value) }}
                         </span>
                     </div>
 
@@ -31,7 +40,7 @@
                                 </div>
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Service Type</dt>
-                                    <dd class="mt-1 text-sm text-gray-900">{{ ucfirst($shipment->service_type) }}</dd>
+                                    <dd class="mt-1 text-sm text-gray-900">{{ ucfirst($shipment->service_type->value) }}</dd>
                                 </div>
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Current Location</dt>
