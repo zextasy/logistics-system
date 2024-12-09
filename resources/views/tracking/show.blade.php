@@ -5,21 +5,12 @@
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-6">
                         <h2 class="text-2xl font-bold">Shipment Details</h2>
-                        <div class="flex space-x-3">
-                            @if($shipment->initialDocument()->exists())
-                                <x-filament::link :href="route('bvdh.documents.preview', $shipment->initialDocument)"> Preview ({{$shipment->initialDocument->type}})</x-filament::link>
-                                <x-filament::link :href="route('bvdh.documents.preview-pdf', $shipment->initialDocument)"> Preview PDF ({{$shipment->initialDocument->type}})</x-filament::link>
-                                <x-filament::link :href="route('bvdh.documents.download', $shipment->initialDocument)"> Download PDF ({{$shipment->initialDocument->type}})</x-filament::link>
-                            @else
-                                <livewire:actions.shipment-document-generator :shipment="$shipment" />
-                            @endif
-                        </div>
                         <span class="px-4 py-2 rounded-full text-sm
-                            @if($shipment->status === 'delivered')
+                            @if($shipment->status->value === 'delivered')
                                 bg-green-100 text-green-800
-                            @elseif($shipment->status === 'in_transit')
+                            @elseif($shipment->status->value === 'in_transit')
                                 bg-blue-100 text-blue-800
-                            @elseif($shipment->status === 'pending')
+                            @elseif($shipment->status->value === 'pending')
                                 bg-yellow-100 text-yellow-800
                             @else
                                 bg-gray-100 text-gray-800
