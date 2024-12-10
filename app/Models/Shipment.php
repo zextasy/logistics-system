@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ContainerSizeEnum;
 use App\Observers\ShipmentObserver;
 use App\Enums\ShipmentServiceTypeEnum;
 use App\Enums\ShipmentStatusEnum;
@@ -14,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 #[ObservedBy([ShipmentObserver::class])]
 class Shipment extends Model
@@ -36,6 +38,7 @@ class Shipment extends Model
         'discharge_port',
         'destination_address',
         'destination_postal_code',
+        'final_place_for_delivery',
         'weight',
         'weight_unit',
         'dimensions',
@@ -87,6 +90,7 @@ class Shipment extends Model
         'type' => ShipmentTypeEnum::class,
         'status' => ShipmentStatusEnum::class,
         'service_type' => ShipmentServiceTypeEnum::class,
+        'container_size' => ContainerSizeEnum::class,
     ];
 
     public function user(): BelongsTo
@@ -162,5 +166,19 @@ class Shipment extends Model
         return Attribute::make(
             get: fn () => $this->destinationCity->name,
         );
+    }
+    protected function dimensionsInHTML(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => ($this->getDimensions()),
+        );
+    }
+
+    private function getDimensions()
+    {
+        $text = json_encode($this->dimensions);
+
+        return Str::of($text)->replace('{','')->replace('}','')
+            ->replace(',','<br>');
     }
 }

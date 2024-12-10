@@ -39,6 +39,7 @@ class ShipmentFactory extends Factory
             'destination_city_id' => $destinationCity->id,
             'destination_address' => $this->faker->streetAddress(),
             'destination_postal_code' => $this->faker->postcode(),
+            'final_place_for_delivery' => $destinationCity->name,
             'discharge_port' => $destinationCity->name,
             'weight' => $this->faker->randomFloat(2, 1, 1000),
             'weight_unit' => $this->faker->randomElement(['kg', 'lbs']),
@@ -49,7 +50,7 @@ class ShipmentFactory extends Factory
                 'unit' => 'cm'
             ],
             'description' => $this->faker->sentence(),
-            'container_size' => $type === 'sea' ? $this->faker->randomElement(['20ft', '40ft', '40ft HC']) : null,
+            'container_size' => $type === 'sea' ? $this->faker->randomElement(['LCL','20ft', '40ft', '40ft_HC']) : null,
             'service_type' => $this->faker->randomElement(['express', 'standard', 'economy']),
             'shipper_name' => $this->faker->name(),
             'shipper_phone' => $this->faker->phoneNumber(),

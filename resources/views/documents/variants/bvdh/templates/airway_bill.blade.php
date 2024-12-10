@@ -5,7 +5,7 @@
                 <td colspan="2">
                     <table>
                         <tr>
-                            <td><strong>AIRWAY BILL</strong></td>
+                            <td><strong> HOUSE AIRWAY BILL</strong></td>
                             <td> <img class="document-logo" src="{{request()->route()->named('bvdh.documents.preview') ? asset('logo.jpeg') :public_path('logo.jpeg')}}" alt="logo"></td>
                         </tr>
                         <tr>
@@ -53,8 +53,7 @@
                                 <div>
                                     <x-documents.detail-card-with-image
                                         title='EXPORT REFERENCES'
-                                        text-heading="CARRIER: "
-                                        text='lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
+                                        :text="$document->export_reference"
                                     />
                                 </div>
                             </td>
@@ -99,22 +98,22 @@
                 <table>
 
                     <tr class="heading">
-                        <td>DESCRIPTION OF PACKAGES</td>
+                        <td class="cell-width-half">DESCRIPTION OF PACKAGES</td>
                         <td>GROSS CARGO WEIGHT</td>
                         <td>MEASUREMENT</td>
                     </tr>
 
                     <tr class="details">
-                        <td>{{$shipment->description}}</td>
+                        <td class="cell-width-half">{{$shipment->description}}</td>
                         <td>{{$shipment->weight}} {{$shipment->weight_unit}}</td>
-                        <td>{{json_encode($shipment->dimensions)}}</td>
+                        <td>{!! $shipment->dimensions_in_html !!}</td>
                     </tr>
                 </table>
             </tr>
             <tr>
                 <x-documents.single-detail-card
                     title="ADDITIONAL CLAUSES"
-                    text="Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum "
+                    :text="$document->additional_clause"
                 />
             </tr>
         </table>

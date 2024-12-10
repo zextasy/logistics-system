@@ -6,7 +6,7 @@
     <style>
         /* Add your PDF styling here */
         body {
-            font-family: Arial, sans-serif;
+            font-family: "Courier New", monospace;
             line-height: 0.3;
         }
         .header {
@@ -29,7 +29,6 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
             font-size: 16px;
             line-height: 24px;
-            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
             color: #555;
         }
 
@@ -101,7 +100,6 @@
         /** RTL **/
         .invoice-box.rtl {
             direction: rtl;
-            font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
         }
 
         .invoice-box.rtl table {
@@ -118,6 +116,9 @@
             float: right;
             margin-top: 0;
             width: 100px;
+        }
+        .cell-width-half {
+            width: 50%;
         }
         /** Debug **/
         td{

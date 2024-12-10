@@ -3,16 +3,10 @@
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-2xl font-bold">Shipment Details</h2>
             <div class="flex space-x-3">
-                @if($shipment->initialDocument()->exists())
-                    <x-filament::link :href="route('bvdh.documents.preview', $shipment->initialDocument)"> Preview ({{$shipment->initialDocument->type}})</x-filament::link>
-                    <x-filament::link :href="route('bvdh.documents.preview-pdf', $shipment->initialDocument)"> Preview PDF ({{$shipment->initialDocument->type}})</x-filament::link>
-                    <x-filament::link :href="route('bvdh.documents.download', $shipment->initialDocument)"> Download PDF ({{$shipment->initialDocument->type}})</x-filament::link>
-                    {{--                <x-filament::link :href="route('spatie.documents.preview', $shipment->initialDocument())"> Preview (S)</x-filament::link>--}}
-                    {{--                <x-filament::link :href="route('spatie.documents.preview-pdf', $shipment->initialDocument())"> Preview PDF (S)</x-filament::link>--}}
-                    {{--                <x-filament::link :href="route('spatie.documents.download', $shipment->initialDocument())"> Download (S)</x-filament::link>--}}
-                @else
+                @if($shipment->initialDocument()->doesntExist())
                     <livewire:actions.shipment-document-generator :shipment="$shipment" />
                 @endif
+                    <livewire:actions.shipment-management-actions :shipment="$shipment" />
             </div>
             <span class="px-4 py-2 mx-3 rounded-full text-sm
                             @if($shipment->status->value === 'delivered')
@@ -60,6 +54,12 @@
                                     <dt class="text-sm font-medium text-gray-500">Expected Date</dt>
                                     <dd class="mt-1 text-sm text-gray-900">
                                         {{ $shipment->estimated_delivery }}{{-- ->format('M d, Y H:i')--}}
+                                    </dd>
+                                </div>
+                                <div>
+                                    <dt class="text-sm font-medium text-gray-500">Shipment Date</dt>
+                                    <dd class="mt-1 text-sm text-gray-900">
+                                        {{ $shipment->date_of_shipment }}{{-- ->format('M d, Y H:i')--}}
                                     </dd>
                                 </div>
                                 @if($shipment->actual_delivery)

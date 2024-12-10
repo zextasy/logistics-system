@@ -35,6 +35,7 @@ return new class extends Migration
             $table->string('discharge_port')->nullable();
             $table->string('destination_address')->nullable();
             $table->string('destination_postal_code')->nullable();
+            $table->string('final_place_for_delivery')->nullable();
 
             // Shipment Details
             $table->decimal('weight', 10, 2);

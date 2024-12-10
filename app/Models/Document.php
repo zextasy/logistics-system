@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Helpers\DocumentTextHelper;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -38,4 +40,20 @@ class Document extends Model
     {
         return $this->expires_at && $this->expires_at->isPast();
     }
+
+    protected function additionalClause(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => ((new DocumentTextHelper())->getTextForDocumentAdditionalClause($this)),
+        );
+    }
+
+    protected function exportReference(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => ((new DocumentTextHelper())->getTextForDocumentExportReference($this)),
+        );
+    }
+
+
 }

@@ -4,6 +4,7 @@ namespace App\Livewire\Forms;
 
 use App\Enums\ContainerSizeEnum;
 use App\Enums\DistanceUnitEnum;
+use App\Helpers\Filament\Forms\FilamentShipmentFormHelper;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Shipment;
@@ -47,145 +48,18 @@ class CreateShipment extends Component implements HasForms
 
     public function form(Form $form): Form
     {
+        $helper = new FilamentShipmentFormHelper();
         return $form
             ->schema([
                 Wizard::make([
                     Step::make('Shipment')
-                        ->schema([
-                            Select::make('type')
-                                ->options(ShipmentTypeEnum::class)
-                                ->required(),
-                            Select::make('service_type')
-                                ->options(ShipmentServiceTypeEnum::class)
-                                ->required(),
-                            Textarea::make('description')
-                                ->required()
-                                ->columnSpanFull(),
-                            TextInput::make('weight')
-                                ->required()
-                                ->numeric(),
-                            Select::make('weight_unit')
-                                ->options(WeightUnitEnum::class)
-                                ->required(),
-                            Fieldset::make('Dimensions')
-                                ->schema([
-                                    TextInput::make('dimensions.length')
-                                        ->numeric(),
-                                    TextInput::make('dimensions.width')
-                                        ->numeric(),
-                                    TextInput::make('dimensions.height')
-                                        ->numeric(),
-                                    Select::make('dimensions.unit')
-                                        ->options(DistanceUnitEnum::class),
-                                ]),
-                            Select::make('container_size')->options(ContainerSizeEnum::class),
-                            TextInput::make('vessel'),
-                            DateTimePicker::make('estimated_delivery')
-                                ->required(),
-                        ]),
+                        ->schema($helper->getShipmentFields()),
                     Wizard\Step::make('Origin and Destination')
-                        ->schema([
-                            Fieldset::make('Origin')
-                                ->schema([
-                                    Select::make('origin_country_id')
-                                        ->label('Origin Country')
-                                        ->options(Country::all()->pluck('name','id'))
-                                        ->searchable()
-                                        ->required()
-                                        ->live(),
-                                    Select::make('origin_city_id')
-                                        ->label('Origin City')
-                                        ->options(fn (Get $get) => City::query()
-                                            ->where('country_id', $get('origin_country_id'))
-                                            ->pluck('name', 'id'))
-                                        ->searchable()
-                                        ->required(),
-                                    TextInput::make('loading_port'),
-                                    TextInput::make('origin_address'),
-                                    TextInput::make('origin_postal_code'),
-                                ]),
-                            Fieldset::make('Destination')
-                                ->schema([
-                                    Select::make('destination_country_id')
-                                        ->label('Destination Country')
-                                        ->options(Country::all()->pluck('name','id'))
-                                        ->searchable()
-                                        ->required()
-                                        ->live(),
-                                    Select::make('destination_city_id')
-                                        ->label('Destination City')
-                                        ->options(fn (Get $get) => City::query()
-                                            ->where('country_id', $get('destination_country_id'))
-                                            ->pluck('name', 'id'))
-                                        ->searchable()
-                                        ->required(),
-                                    TextInput::make('discharge_port'),
-                                    TextInput::make('destination_address'),
-                                    TextInput::make('destination_postal_code'),
-                                ]),
-                            Repeater::make('routes')
-                                ->schema([
-                                    TextInput::make('location')
-                                        ->required(),
-                                    TextInput::make('location_type'),
-                                    DateTimePicker::make('arrival_date')
-                                        ->required(),
-                                    DateTimePicker::make('departure_date'),
-                                    TextInput::make('carrier'),
-                                    TextInput::make('vessel_number'),
-                                    TextInput::make('container_number'),
-                                    Textarea::make('notes')
-                                        ->columnSpanFull(),
-                                ])
-                                ->columns(2)
-                                ->defaultItems(0)
-                        ]),
+                        ->schema($helper->getOriginAndDestinationFields()),
                     Wizard\Step::make('Contacts')
-                        ->schema([
-                            Fieldset::make('Shipper')
-                                ->schema([
-                                    TextInput::make('shipper_name')
-                                        ->required(),
-                                    TextInput::make('shipper_phone')
-                                        ->tel(),
-                                    TextInput::make('shipper_email')
-                                        ->email(),
-                                    TextArea::make('shipper_address'),
-                                ]),
-                            Fieldset::make('Receiver')
-                                ->schema([
-                                    TextInput::make('receiver_name')
-                                        ->required(),
-                                    TextInput::make('receiver_phone')
-                                        ->tel(),
-                                    TextInput::make('receiver_email')
-                                        ->email(),
-                                    TextArea::make('receiver_address'),
-                                ]),
-                            Fieldset::make('Consignee')
-                                ->schema([
-                                    TextInput::make('consignee_name')
-                                        ->required(),
-                                    TextInput::make('consignee_phone')
-                                        ->tel(),
-                                    TextInput::make('consignee_email')
-                                        ->email(),
-                                    TextArea::make('consignee_address'),
-                                ]),
-                        ]),
+                        ->schema($helper->getContactFields()),
                     Wizard\Step::make('Extra Information')
-                        ->schema([
-                            Textarea::make('special_instructions')
-                                ->columnSpanFull(),
-                            TextInput::make('declared_value')
-                                ->numeric(),
-                            Select::make('currency')
-                                ->options(Currency::all()->pluck('symbol')),
-                            Toggle::make('insurance_required')
-                                ->required(),
-                            TextInput::make('insurance_amount')
-                                ->numeric(),
-                        ]),
+                        ->schema($helper->getExtraInformationFields()),
                 ])->columns(2)->submitAction(view('filament.wizard.submit-button'))
             ])
             ->statePath('data')
