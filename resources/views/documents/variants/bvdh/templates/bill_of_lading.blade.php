@@ -5,7 +5,7 @@
                 <td colspan="2">
                     <table>
                         <tr>
-                            <td><strong>{{$shipment->container_size == \App\Enums\ContainerSizeEnum::LCL ? 'HOUSE ' : '' }}BILL OF LADEN</strong></td>
+                            <td class="text-lg"><strong>{{$shipment->container_size == \App\Enums\ContainerSizeEnum::LCL ? 'HOUSE ' : '' }}BILL OF LADEN</strong></td>
                             <td> <img class="document-logo" src="{{request()->route()->named('bvdh.documents.preview') ? asset('logo.jpeg') :public_path('logo.jpeg')}}" alt="logo"></td>
                         </tr>
                         <tr>
@@ -107,9 +107,8 @@
                     </table>
                 </td>
             </tr>
-            <tr>
-                <table>
-
+            <tr class="w-full">
+                <table class="w-full">
                     <tr class="heading">
                         <td class="cell-width-half">DESCRIPTION OF PACKAGES</td>
                         <td>GROSS CARGO WEIGHT</td>
@@ -124,7 +123,7 @@
                 </table>
             </tr>
             <tr>
-                <x-documents.single-detail-card
+                <x-documents.single-detail-card-tiny-text
                     title="ADDITIONAL CLAUSES"
                     :text="$document->additional_clause"
                 />

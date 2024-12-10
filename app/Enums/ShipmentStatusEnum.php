@@ -19,4 +19,20 @@ enum ShipmentStatusEnum : string implements HasLabel
     {
         return $this->value;
     }
+
+    public function hasDeparted(): bool
+    {
+        return match ($this){
+            self::IN_TRANSIT, self::CUSTOMS, self::DELIVERED, self::OUT_FOR_DELIVERY, self::PICKED_UP => true,
+            default => false
+        };
+    }
+
+    public function hasArrived(): bool
+    {
+        return match ($this){
+            self::DELIVERED, self::PICKED_UP => true,
+            default => false
+        };
+    }
 }

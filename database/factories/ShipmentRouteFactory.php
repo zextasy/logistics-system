@@ -24,11 +24,6 @@ class ShipmentRouteFactory extends Factory
             'actual_departure_date' => null,
             'status' => 'pending',
             'order' => 0,
-            'carrier' => $this->faker->company(),
-            'vessel_number' => $this->faker->bothify('??###'),
-            'container_number' => $this->faker->bothify('CONT####???'),
-            'notes' => $this->faker->optional()->sentence(),
-            'metadata' => null
         ];
     }
 

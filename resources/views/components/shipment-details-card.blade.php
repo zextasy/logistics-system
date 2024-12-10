@@ -15,21 +15,21 @@
             <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">Status</dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <x-status-badge :status="$shipment->status" />
+                    <x-status-badge :status="$shipment->status->value" />
                 </dd>
             </div>
             <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">Origin</dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                     {{ $shipment->origin_address }}<br>
-                    {{ $shipment->origin_city }}, {{ $shipment->origin_country }}
+                    {{ $shipment->origin_city_name }}, {{ $shipment->origin_country_name }}
                 </dd>
             </div>
             <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">Destination</dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                     {{ $shipment->destination_address }}<br>
-                    {{ $shipment->destination_city }}, {{ $shipment->destination_country }}
+                    {{ $shipment->destination_city_name }}, {{ $shipment->destination_country_name }}
                 </dd>
             </div>
             <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -66,6 +66,7 @@
                     @if($shipment->container_size)
                         Container Size: {{ $shipment->container_size }}
                     @endif
+                    Description of Goods: {{ $shipment->description }}
                 </dd>
             </div>
         </dl>

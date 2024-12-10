@@ -81,6 +81,7 @@ class FilamentShipmentFormHelper
 
     public function getOriginAndDestinationFields(bool $creating = true, bool $editing = true): array
     {
+        $helper = new FilamentShipmentRouteFormHelper();
         return [
             Fieldset::make('Origin')
                 ->schema([
@@ -122,19 +123,7 @@ class FilamentShipmentFormHelper
                     TextInput::make('final_place_for_delivery'),
                 ]),
             Repeater::make('routes')
-                ->schema([
-                    TextInput::make('location')
-                        ->required(),
-                    TextInput::make('location_type'),
-                    DateTimePicker::make('arrival_date')
-                        ->required(),
-                    DateTimePicker::make('departure_date'),
-                    TextInput::make('carrier'),
-                    TextInput::make('vessel_number'),
-                    TextInput::make('container_number'),
-                    Textarea::make('notes')
-                        ->columnSpanFull(),
-                ])
+                ->schema($helper->getFields())
                 ->columns(2)
                 ->defaultItems(0)
                 ->visible($creating)

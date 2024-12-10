@@ -24,16 +24,16 @@
         .invoice-box {
             max-width: 800px;
             margin: auto;
-            padding: 30px;
+            padding: 3px;
             border: 1px solid #eee;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-            font-size: 16px;
-            line-height: 24px;
+            font-size: 11px;
+            line-height: 16px;
             color: #555;
         }
 
         .invoice-box table {
-            width: 100%;
+            width: 100%;!important;
             line-height: inherit;
             text-align: left;
         }
@@ -51,8 +51,8 @@
         }
 
         .invoice-box table tr.top table td.title {
-            font-size: 45px;
-            line-height: 45px;
+            /*font-size: 45px;*/
+            /*line-height: 45px;*/
             color: #333;
         }
 
@@ -121,8 +121,20 @@
             width: 50%;
         }
         /** Debug **/
-        td{
+        div{
+            /*border: 1px solid saddlebrown;*/
+        }
+
+        tr{
             /*border: 1px solid red;*/
+        }
+
+        td{
+            /*border: 1px solid green;*/
+        }
+
+        table{
+            /*border: 1px solid blue;*/
         }
 
         /** Tailwind **/
@@ -138,11 +150,17 @@
         .bg-gray-100{
             background: #eee;
         }
+        .text-lg{
+            font-size: 16px;
+        }
         .text-sm{
-            font-size: 12px;
+            font-size: 11px;
         }
         .text-xs{
-            font-size: 9px;
+            font-size: 8px;
+        }
+        .w-full {
+            width: 100%;
         }
 
     </style>

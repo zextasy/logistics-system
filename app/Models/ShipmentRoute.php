@@ -21,9 +21,6 @@ class ShipmentRoute extends Model
         'actual_departure_date',
         'status',
         'order',
-        'carrier',
-        'vessel_number',
-        'container_number',
         'notes',
         'metadata'
     ];

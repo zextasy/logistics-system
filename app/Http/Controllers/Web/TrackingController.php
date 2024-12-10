@@ -36,14 +36,12 @@ class TrackingController extends Controller
 
         $trackingNumber = strtoupper($request->tracking_number);
 
-        // Check cache first to avoid database hits
-        $shipment = Cache::remember("shipment_{$trackingNumber}", 300, function () use ($trackingNumber) {
-            return Shipment::with(['routes' => function ($query) {
-                $query->orderBy('order', 'asc');
-            }])
-                ->where('tracking_number', $trackingNumber)
-                ->first();
-        });
+
+        $shipment = Shipment::with(['routes' => function ($query) {
+            $query->orderBy('order', 'asc');
+        }])
+            ->where('tracking_number', $trackingNumber)
+            ->first();
 
         if (!$shipment) {
             return back()
@@ -59,13 +57,11 @@ class TrackingController extends Controller
      */
     public function show($trackingNumber)
     {
-        $shipment = Cache::remember("shipment_{$trackingNumber}", 300, function () use ($trackingNumber) {
-            return Shipment::with(['routes' => function ($query) {
-                $query->orderBy('order', 'asc');
-            }])
-                ->where('tracking_number', $trackingNumber)
-                ->firstOrFail();
-        });
+        $shipment = Shipment::with(['routes' => function ($query) {
+            $query->orderBy('order', 'asc');
+        }])
+            ->where('tracking_number', $trackingNumber)
+            ->firstOrFail();
 
         // Get estimated delivery information
         $estimatedDelivery = $this->trackingService->calculateEstimatedDelivery($shipment);

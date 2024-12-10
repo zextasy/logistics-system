@@ -5,7 +5,7 @@
                 <td colspan="2">
                     <table>
                         <tr>
-                            <td><strong> HOUSE AIRWAY BILL</strong></td>
+                            <td class="text-lg"><strong> HOUSE AIRWAY BILL</strong></td>
                             <td> <img class="document-logo" src="{{request()->route()->named('bvdh.documents.preview') ? asset('logo.jpeg') :public_path('logo.jpeg')}}" alt="logo"></td>
                         </tr>
                         <tr>
@@ -94,24 +94,26 @@
                     </table>
                 </td>
             </tr>
-            <tr>
-                <table>
+            <tr class="w-full">
+                <td>
+                    <table class="w-full">
+                        <tr class="heading">
+                            <td class="cell-width-half">DESCRIPTION OF PACKAGES</td>
+                            <td>GROSS CARGO WEIGHT</td>
+                            <td>MEASUREMENT</td>
+                        </tr>
 
-                    <tr class="heading">
-                        <td class="cell-width-half">DESCRIPTION OF PACKAGES</td>
-                        <td>GROSS CARGO WEIGHT</td>
-                        <td>MEASUREMENT</td>
-                    </tr>
+                        <tr class="details">
+                            <td class="cell-width-half">{{$shipment->description}}</td>
+                            <td>{{$shipment->weight}} {{$shipment->weight_unit}}</td>
+                            <td>{!! $shipment->dimensions_in_html !!}</td>
+                        </tr>
+                    </table>
+                </td>
 
-                    <tr class="details">
-                        <td class="cell-width-half">{{$shipment->description}}</td>
-                        <td>{{$shipment->weight}} {{$shipment->weight_unit}}</td>
-                        <td>{!! $shipment->dimensions_in_html !!}</td>
-                    </tr>
-                </table>
             </tr>
             <tr>
-                <x-documents.single-detail-card
+                <x-documents.single-detail-card-tiny-text
                     title="ADDITIONAL CLAUSES"
                     :text="$document->additional_clause"
                 />
