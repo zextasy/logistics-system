@@ -28,7 +28,7 @@
             padding: 3px;
             border: 1px solid #eee;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-            font-size: 11px;
+            font-size: 12px;
             line-height: 16px;
             color: #555;
         }
@@ -114,7 +114,7 @@
         .document-logo{
             display: inline-block;
             vertical-align: top;
-            float: right;
+            /*float: right;*/
             margin-top: 0;
             width: 100px;
         }
@@ -152,13 +152,13 @@
             background: #eee;
         }
         .text-lg{
-            font-size: 16px;
+            font-size: 18px;
         }
         .text-sm{
-            font-size: 11px;
+            font-size: 12px;
         }
         .text-xs{
-            font-size: 8px;
+            font-size: 9px;
         }
         .w-full {
             width: 100%;
@@ -167,6 +167,11 @@
             padding-bottom: 10px;
             margin-bottom: 20px;
         }
+        .mx-auto{
+            margin-left: auto;
+            margin-right: auto;
+        }
+
 
     </style>
 </head>

@@ -87,10 +87,10 @@
             <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">Schedule</dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    Estimated Delivery: {{ $shipment->estimated_delivery }}<br>
                     @if($shipment->date_of_shipment)
                         Date of Shipment: {{ $shipment->date_of_shipment }}<br>
                     @endif
+                        Estimated Delivery: {{ $shipment->estimated_delivery }}<br>
                     @if($shipment->actual_delivery)
                         Actual Delivery: {{ $shipment->actual_delivery }}<br>
                     @endif

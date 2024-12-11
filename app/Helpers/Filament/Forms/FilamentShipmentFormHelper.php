@@ -43,15 +43,20 @@ class FilamentShipmentFormHelper
     public function getShipmentFields(bool $creating = true, bool $editing = true): array
     {
         return [
-            Select::make('type')
-                ->options(ShipmentTypeEnum::class)
-                ->required()->visible($creating),
-            Select::make('service_type')
-                ->options(ShipmentServiceTypeEnum::class)
-                ->required(),
-            Textarea::make('description')
-                ->required()
-                ->columnSpanFull(),
+            Fieldset::make('Shipment')
+                ->schema([
+                    Select::make('type')
+                        ->options(ShipmentTypeEnum::class)
+                        ->required()->visible($creating),
+                    Select::make('service_type')
+                        ->options(ShipmentServiceTypeEnum::class)
+                        ->required(),
+                    Textarea::make('description')
+                        ->required()
+                        ->columnSpanFull(),
+                    Select::make('container_size')->options(ContainerSizeEnum::class),
+                    TextInput::make('vessel'),
+                ]),
             Fieldset::make('Weight')
                 ->schema([
                     TextInput::make('weight')
@@ -72,10 +77,13 @@ class FilamentShipmentFormHelper
                     Select::make('dimensions.unit')
                         ->options(DistanceUnitEnum::class),
                 ]),
-            Select::make('container_size')->options(ContainerSizeEnum::class),
-            TextInput::make('vessel'),
-            DateTimePicker::make('estimated_delivery')
-                ->required(),
+            Fieldset::make('Dates')
+                ->schema([
+                    DateTimePicker::make('estimated_delivery')
+                        ->required(),
+                    DateTimePicker::make('date_of_shipment'),
+                    DateTimePicker::make('actual_delivery'),
+                ])->columns(3),
         ];
     }
 

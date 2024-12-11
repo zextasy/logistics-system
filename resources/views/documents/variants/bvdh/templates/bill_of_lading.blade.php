@@ -1,12 +1,13 @@
 <x-bvdh-document-layout>
     <div class="invoice-box">
+        <div class="logo-div"><img class="document-logo" src="{{request()->route()->named('bvdh.documents.preview') ? asset('logo.jpeg') :public_path('logo.jpeg')}}" alt="logo"></div>
         <table cellpadding="0" cellspacing="0">
             <tr class="top">
                 <td >
                     <table>
                         <tr class="mb-10">
+                            <td>&nbsp;</td>
                             <td class="text-lg"><strong>{{$shipment->container_size == \App\Enums\ContainerSizeEnum::LCL ? 'HOUSE ' : '' }}BILL OF LADEN</strong></td>
-                            <td> <img class="document-logo" src="{{request()->route()->named('bvdh.documents.preview') ? asset('logo.jpeg') :public_path('logo.jpeg')}}" alt="logo"></td>
                         </tr>
                         <tr>
                             <td>
