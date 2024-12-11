@@ -1,4 +1,10 @@
 <x-guest-layout>
-    <h1>Oops! The Page you're looking for isn't here.</h1>
-    <p>Maybe the page was moved or deleted, or perhaps you just typed the wrong address. Why not start from the homepage? </p>
+    <div class="bg-gray-100">
+        <div class="h-screen flex flex-col justify-center items-center">
+            <h1 class="text-8xl font-bold text-gray-800">404</h1>
+            <p class="text-4xl font-medium text-gray-800">Page Not Found</p>
+            <a href="{{route('home')}}" class="mt-4 text-xl text-blue-600 hover:underline">Go back home</a>
+        </div>
+    </div>
 </x-guest-layout>
+
