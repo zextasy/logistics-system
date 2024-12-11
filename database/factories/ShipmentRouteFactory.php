@@ -23,7 +23,6 @@ class ShipmentRouteFactory extends Factory
             'actual_arrival_date' => null,
             'actual_departure_date' => null,
             'status' => 'pending',
-            'order' => 0,
         ];
     }
 

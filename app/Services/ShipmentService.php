@@ -32,7 +32,6 @@ class ShipmentService
             foreach ($data['routes'] as $index => $route) {
                 $shipment->routes()->create([
                     ...$route,
-                    'order' => $index + 1,
                     'status' => ShipmentRouteStatusEnum::PENDING
                 ]);
             }
@@ -54,7 +53,6 @@ class ShipmentService
             foreach ($data['routes'] as $index => $route) {
                 $shipment->routes()->create([
                     ...$route,
-                    'order' => $index + 1
                 ]);
             }
         }
@@ -98,7 +96,7 @@ class ShipmentService
     {
         $latestRoute = $shipment->routes()
             ->where('arrival_date', '<=', now())
-            ->orderBy('order', 'desc')
+            ->orderBy('arrival_date', 'desc')
             ->first();
 
         if (!$latestRoute) {

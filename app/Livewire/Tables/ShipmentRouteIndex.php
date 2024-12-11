@@ -77,6 +77,7 @@ class ShipmentRouteIndex extends Component implements HasForms, HasTable
             ])
             ->headerActions([
                 CreateAction::make()
+                    ->label('Add Route')
                     ->model(ShipmentRoute::class)
                     ->form((new FilamentShipmentRouteFormHelper())->getCreateFormSchema())
                     ->mutateFormDataUsing(function (array $data): array {

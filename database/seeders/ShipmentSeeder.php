@@ -21,8 +21,7 @@ class ShipmentSeeder extends Seeder
                 $routeCount = rand(3, 5);
                 for ($i = 0; $i < $routeCount; $i++) {
                     ShipmentRoute::factory()->create([
-                        'shipment_id' => $shipment->id,
-                        'order' => $i + 1,
+                        'shipment_id' => $shipment->id
                     ]);
                 }
 
@@ -46,7 +45,6 @@ class ShipmentSeeder extends Seeder
                         ->completed()
                         ->create([
                             'shipment_id' => $shipment->id,
-                            'order' => $i + 1,
                         ]);
                 }
                 $this->generator->generateInitialDocuments($shipment);
