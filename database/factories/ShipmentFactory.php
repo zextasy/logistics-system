@@ -110,4 +110,15 @@ class ShipmentFactory extends Factory
             ];
         });
     }
+
+    public function pending()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'date_of_shipment' => null,
+                'status' => 'pending',
+                'actual_delivery' => null
+            ];
+        });
+    }
 }

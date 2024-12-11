@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use App\Enums\ContainerSizeEnum;
-use App\Observers\ShipmentObserver;
 use App\Enums\ShipmentServiceTypeEnum;
 use App\Enums\ShipmentStatusEnum;
 use App\Enums\ShipmentTypeEnum;
+use App\Observers\ShipmentObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -62,10 +62,6 @@ class Shipment extends Model
         'estimated_delivery',
         'actual_delivery',
         'date_of_shipment',
-        'cargo_description',
-        'cargo_weight',
-        'cargo_weight_unit',
-        'cargo_dimensions',
         'special_instructions',
         'customs_status',
         'customs_documents',
@@ -81,10 +77,10 @@ class Shipment extends Model
         'dimensions' => 'array',
         'customs_documents' => 'array',
         'charges' => 'array',
-        'cargo_dimensions' => 'array',
         'metadata' => 'array',
         'estimated_delivery' => 'datetime',
         'actual_delivery' => 'datetime',
+        'date_of_shipment' => 'datetime',
         'insurance_required' => 'boolean',
         'customs_cleared' => 'boolean',
         'type' => ShipmentTypeEnum::class,
@@ -170,15 +166,45 @@ class Shipment extends Model
     protected function dimensionsInHTML(): Attribute
     {
         return Attribute::make(
-            get: fn () => ($this->getDimensions()),
+            get: fn () => ($this->getArrayText($this->dimensions)),
         );
     }
 
-    private function getDimensions()
+    protected function chargesInHtml(): Attribute
     {
-        $text = json_encode($this->dimensions);
+        return Attribute::make(
+            get: fn () => ($this->getArrayText($this->charges)),
+        );
+    }
+
+    private function getArrayText(array $array)
+    {
+        $text = json_encode($array);
 
         return Str::of($text)->replace('{','')->replace('}','')
             ->replace(',','<br>');
+    }
+
+    public function hasBeenDelivered(): bool
+    {
+        if (isset($this->actual_delivery)){
+            return $this->actual_delivery->isPast();
+        }
+        return $this->estimated_delivery->isPast();
+    }
+
+    public function calculateStatus(): void
+    {
+        $status = ShipmentStatusEnum::PENDING;
+
+        if (isset($this->date_of_shipment) && $this->date_of_shipment->isPast()){
+            $status = ShipmentStatusEnum::IN_TRANSIT;
+        }
+
+        if ($this->hasBeenDelivered()){
+            $status = ShipmentStatusEnum::DELIVERED;
+        }
+
+        $this->status = $status;
     }
 }

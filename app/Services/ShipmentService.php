@@ -4,8 +4,10 @@
 // app/Services/ShipmentService.php
 namespace App\Services;
 
+use App\Enums\ShipmentStatusEnum;
 use App\Models\Shipment;
 use App\Enums\ShipmentRouteStatusEnum;
+use App\Models\ShipmentRoute;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
@@ -58,7 +60,7 @@ class ShipmentService
         }
 
         if ($oldStatus !== $shipment->status) {
-            $this->notificationService->sendStatusUpdateNotification($shipment, $oldStatus);
+            $this->notificationService->sendStatusUpdateNotification($shipment, $oldStatus->value);
         }
 
         return $shipment;
@@ -69,7 +71,7 @@ class ShipmentService
         $route = $shipment->routes()->findOrFail($routeId);
         $route->update($data);
 
-        $this->updateShipmentStatus($shipment);
+        $this->updateShipmentStatusViaRoutes($shipment);
 
         return $route;
     }
@@ -92,7 +94,7 @@ class ShipmentService
         return $number;
     }
 
-    protected function updateShipmentStatus(Shipment $shipment)
+    public function updateShipmentStatusViaRoutes(Shipment $shipment)
     {
         $latestRoute = $shipment->routes()
             ->where('arrival_date', '<=', now())
@@ -104,8 +106,8 @@ class ShipmentService
         }
 
         $status = match ($latestRoute->status) {
-            'arrived' => 'in_transit',
-            'departed' => $latestRoute->order === $shipment->routes()->count() ? 'delivered' : 'in_transit',
+            ShipmentRouteStatusEnum::ARRIVED => ShipmentStatusEnum::IN_TRANSIT,
+            ShipmentRouteStatusEnum::DEPARTED => $latestRoute->order === $shipment->routes()->count() ? ShipmentStatusEnum::DELIVERED : ShipmentStatusEnum::IN_TRANSIT,
             default => $shipment->status
         };
 

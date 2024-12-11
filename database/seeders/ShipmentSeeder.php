@@ -11,6 +11,15 @@ class ShipmentSeeder extends Seeder
     public function run()
     {
         $this->generator = new DocumentGenerationService();
+        // Create delivered shipments
+        Shipment::factory()
+            ->count(10)
+            ->pending()
+            ->create()
+            ->each(function ($shipment) {
+                // Create completed routes
+                $this->generator->generateInitialDocuments($shipment);
+            });
         // Create active shipments
         Shipment::factory()
             ->count(20)
@@ -20,16 +29,13 @@ class ShipmentSeeder extends Seeder
                 // Create 3-5 routes for each shipment
                 $routeCount = rand(3, 5);
                 for ($i = 0; $i < $routeCount; $i++) {
-                    ShipmentRoute::factory()->create([
+                    ShipmentRoute::factory()
+                        ->create([
                         'shipment_id' => $shipment->id
                     ]);
                 }
 
                 $this->generator->generateInitialDocuments($shipment);
-                // Create 1-3 documents for each shipment
-//                Document::factory()
-//                    ->count(rand(1, 3))
-//                    ->create(['shipment_id' => $shipment->id]);
             });
 
         // Create delivered shipments
@@ -48,11 +54,6 @@ class ShipmentSeeder extends Seeder
                         ]);
                 }
                 $this->generator->generateInitialDocuments($shipment);
-                // Create active documents
-//                Document::factory()
-//                    ->active()
-//                    ->count(rand(1, 3))
-//                    ->create(['shipment_id' => $shipment->id]);
             });
     }
 }

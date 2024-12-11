@@ -4,17 +4,18 @@ namespace App\Observers;
 
 use App\Models\Shipment;
 use App\Enums\ShipmentStatusEnum;
+use App\Services\DocumentGenerationService;
+use App\Services\NotificationService;
+use App\Services\ShipmentService;
 
 class ShipmentObserver
 {
     /**
      * Handle the Shipment "creating" event.
      */
-    public function creating(Shipment $shipment): void
+    public function saving(Shipment $shipment): void
     {
-        if (empty($shipment->status)){
-            $shipment->status = ShipmentStatusEnum::PENDING;
-        }
+        $shipment->calculateStatus();
     }
 
     /**

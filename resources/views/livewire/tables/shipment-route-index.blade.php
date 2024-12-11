@@ -1,4 +1,4 @@
-<div>
+<div class="mt-3">
     <h3 class="text-lg leading-6 font-medium text-gray-900">
         Route Details
     </h3>

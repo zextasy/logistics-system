@@ -4,10 +4,12 @@ namespace App\Models;
 
 use App\Enums\ShipmentRouteLocationTypeEnum;
 use App\Enums\ShipmentRouteStatusEnum;
+use App\Observers\ShipmentRouteObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
+#[ObservedBy([ShipmentRouteObserver::class])]
 class ShipmentRoute extends Model
 {
     use HasFactory;
@@ -38,5 +40,37 @@ class ShipmentRoute extends Model
     public function shipment()
     {
         return $this->belongsTo(Shipment::class);
+    }
+
+    public function hasArrived(): bool
+    {
+        if (isset($this->actual_arrival_date)){
+            return $this->actual_arrival_date->isPast();
+        }
+        return $this->arrival_date->isPast();
+    }
+
+    public function hasDeparted(): bool
+    {
+        if (isset($this->actual_departure_date)){
+            return $this->actual_departure_date->isPast();
+        }
+        return $this->departure_date->isPast();
+    }
+
+
+    public function calculateStatus()
+    {
+        $status = ShipmentRouteStatusEnum::PENDING;
+
+        if ($this->hasArrived()){
+            $status = ShipmentRouteStatusEnum::ARRIVED;
+        }
+
+        if ($this->hasDeparted()){
+            $status = ShipmentRouteStatusEnum::DEPARTED;
+        }
+
+        $this->status = $status;
     }
 }

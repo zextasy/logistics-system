@@ -11,7 +11,7 @@ class ShipmentRouteFactory extends Factory
 
     public function definition()
     {
-        $arrivalDate = $this->faker->dateTimeBetween('now', '+2 weeks');
+        $arrivalDate = $this->faker->dateTimeBetween('-6 weeks', '+6 weeks');
         $departureDate = clone $arrivalDate;
         $departureDate = $departureDate->modify('+1 day');
 
@@ -28,11 +28,16 @@ class ShipmentRouteFactory extends Factory
 
     public function completed()
     {
-        return $this->state(function (array $attributes) {
+        $arrivalDate = $this->faker->dateTimeBetween('-6 weeks', '-1 day');
+        $departureDate = clone $arrivalDate;
+        $departureDate = $departureDate->modify('+1 day');
+        return $this->state(function (array $attributes) use ($departureDate, $arrivalDate) {
             return [
                 'status' => 'departed',
-                'actual_arrival_date' => $attributes['arrival_date'],
-                'actual_departure_date' => $attributes['departure_date']
+                'arrival_date' => $arrivalDate,
+                'actual_arrival_date' => $arrivalDate,
+                'departure_date' => $departureDate,
+                'actual_departure_date' => $departureDate,
             ];
         });
     }

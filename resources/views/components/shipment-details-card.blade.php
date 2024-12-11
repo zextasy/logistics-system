@@ -28,6 +28,9 @@
             <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">Destination</dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    @if($shipment->final_place_for_delivery)
+                        {{ $shipment->final_place_for_delivery }}<br>
+                    @endif
                     {{ $shipment->destination_address }}<br>
                     {{ $shipment->destination_city_name }}, {{ $shipment->destination_country_name }}
                 </dd>
@@ -57,6 +60,18 @@
                 </dd>
             </div>
             <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">Consignee</dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{ $shipment->consignee_name }}<br>
+                    @if($shipment->consignee_phone)
+                        Phone: {{ $shipment->consignee_phone }}<br>
+                    @endif
+                    @if($shipment->consignee_email)
+                        Email: {{ $shipment->consignee_email }}
+                    @endif
+                </dd>
+            </div>
+            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">Package Details</dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                     Weight: {{ $shipment->weight }} {{ $shipment->weight_unit }}<br>
@@ -64,9 +79,37 @@
                         Dimensions: {{ $shipment->dimensions['length'] }}x{{ $shipment->dimensions['width'] }}x{{ $shipment->dimensions['height'] }} {{ $shipment->dimensions['unit'] }}<br>
                     @endif
                     @if($shipment->container_size)
-                        Container Size: {{ $shipment->container_size }}
+                        Container Size: {{ $shipment->container_size }}<br>
                     @endif
                     Description of Goods: {{ $shipment->description }}
+                </dd>
+            </div>
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">Schedule</dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    Estimated Delivery: {{ $shipment->estimated_delivery }}<br>
+                    @if($shipment->date_of_shipment)
+                        Date of Shipment: {{ $shipment->date_of_shipment }}<br>
+                    @endif
+                    @if($shipment->actual_delivery)
+                        Actual Delivery: {{ $shipment->actual_delivery }}<br>
+                    @endif
+                </dd>
+            </div>
+            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">Extra Information</dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    Type: {{ $shipment->type->value}}<br>
+                    Service Type: {{ $shipment->service_type->value}}<br>
+                    @if($shipment->declared_value)
+                        Declared Value: {{ $shipment->currency }} {{ $shipment->declared_value }}<br>
+                    @endif
+                    @if($shipment->charges)
+{{--                        Charges: {{ $shipment->charges_in_html }}<br>--}}
+                    @endif
+                    @if($shipment->insurance_required)
+                        Insurance: {{ $shipment->insurance_amount }}
+                    @endif
                 </dd>
             </div>
         </dl>
