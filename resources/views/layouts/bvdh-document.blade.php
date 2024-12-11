@@ -163,6 +163,10 @@
         .w-full {
             width: 100%;
         }
+        .mb-10 {
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
 
     </style>
 </head>

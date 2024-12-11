@@ -163,6 +163,13 @@ class Shipment extends Model
             get: fn () => $this->destinationCity->name,
         );
     }
+    protected function dimensionsSummarized(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => ($this->getDimensionsSummary()),
+        );
+    }
+
     protected function dimensionsInHTML(): Attribute
     {
         return Attribute::make(
@@ -183,6 +190,15 @@ class Shipment extends Model
 
         return Str::of($text)->replace('{','')->replace('}','')
             ->replace(',','<br>');
+    }
+
+    private function getDimensionsSummary(): string
+    {
+        $length = $this->dimensions['length'];
+        $width = $this->dimensions['width'];
+        $height = $this->dimensions['height'];
+        $unit = $this->dimensions['unit'];
+        return  "$length x $width x $height  $unit";
     }
 
     public function hasBeenDelivered(): bool

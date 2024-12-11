@@ -76,7 +76,7 @@
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                     Weight: {{ $shipment->weight }} {{ $shipment->weight_unit }}<br>
                     @if($shipment->dimensions)
-                        Dimensions: {{ $shipment->dimensions['length'] }}x{{ $shipment->dimensions['width'] }}x{{ $shipment->dimensions['height'] }} {{ $shipment->dimensions['unit'] }}<br>
+                        Dimensions: {{ $shipment->dimensions_summarized }}<br>
                     @endif
                     @if($shipment->container_size)
                         Container Size: {{ $shipment->container_size }}<br>

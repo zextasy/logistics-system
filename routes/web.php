@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ShipmentController;
 use App\Http\Controllers\BvdhDocumentController;
 use App\Http\Controllers\SpatieDocumentController;
 use App\Http\Controllers\Web\DashboardController;
+use App\Http\Controllers\Web\DocumentController;
 use App\Http\Controllers\Web\ProfileController;
 use App\Http\Controllers\Web\QuoteController;
 use App\Http\Controllers\Web\TrackingController;
@@ -22,6 +23,11 @@ Route::get('/track/{trackingNumber}', [TrackingController::class, 'show'])->name
 Route::get('/quote', [QuoteController::class, 'create'])->name('quote.create');
 Route::post('/quote', [QuoteController::class, 'store'])->name('quote.store');
 
+Route::prefix('documents')->name('documents.')->group(function () {
+    Route::get('/{document}/preview', [DocumentController::class, 'preview'])->name('preview');
+    Route::get('/{document}/preview-pdf', [DocumentController::class, 'previewPdf'])->name('preview-pdf');
+    Route::get('/{document}/download', [DocumentController::class, 'download'])->name('download');
+});
 Route::prefix('spatie')->name('spatie.')->group(function () {
     Route::get('/documents/{document}/preview', [SpatieDocumentController::class, 'preview'])->name('documents.preview');
     Route::get('/documents/{document}/preview-pdf', [SpatieDocumentController::class, 'previewPdf'])->name('documents.preview-pdf');

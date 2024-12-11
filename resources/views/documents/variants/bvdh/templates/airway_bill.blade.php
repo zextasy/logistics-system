@@ -2,7 +2,7 @@
     <div class="invoice-box">
         <table cellpadding="0" cellspacing="0">
             <tr class="top">
-                <td colspan="2">
+                <td >
                     <table>
                         <tr>
                             <td class="text-lg"><strong> HOUSE AIRWAY BILL</strong></td>
@@ -61,9 +61,8 @@
                     </table>
                 </td>
             </tr>
-
             <tr class="information">
-                <td colspan="6">
+                <td>
                     <table>
                         <tr>
                             <td>
@@ -94,29 +93,29 @@
                     </table>
                 </td>
             </tr>
-            <tr class="w-full">
+            <tr class="">
                 <td>
-                    <table class="w-full">
+                    <table class="">
                         <tr class="heading">
                             <td class="cell-width-half">DESCRIPTION OF PACKAGES</td>
                             <td>GROSS CARGO WEIGHT</td>
                             <td>MEASUREMENT</td>
                         </tr>
-
                         <tr class="details">
                             <td class="cell-width-half">{{$shipment->description}}</td>
                             <td>{{$shipment->weight}} {{$shipment->weight_unit}}</td>
-                            <td>{!! $shipment->dimensions_in_html !!}</td>
+                            <td>{!! $shipment->dimensions_summarized !!}</td>
                         </tr>
                     </table>
                 </td>
-
             </tr>
             <tr>
-                <x-documents.single-detail-card-tiny-text
-                    title="ADDITIONAL CLAUSES"
-                    :text="$document->additional_clause"
-                />
+                <td>
+                    <x-documents.single-detail-card-tiny-text
+                        title="ADDITIONAL CLAUSES"
+                        :text="$document->additional_clause"
+                    />
+                </td>
             </tr>
         </table>
     </div>

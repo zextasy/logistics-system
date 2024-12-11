@@ -2,9 +2,9 @@
     <div class="invoice-box">
         <table cellpadding="0" cellspacing="0">
             <tr class="top">
-                <td colspan="2">
+                <td >
                     <table>
-                        <tr>
+                        <tr class="mb-10">
                             <td class="text-lg"><strong>{{$shipment->container_size == \App\Enums\ContainerSizeEnum::LCL ? 'HOUSE ' : '' }}BILL OF LADEN</strong></td>
                             <td> <img class="document-logo" src="{{request()->route()->named('bvdh.documents.preview') ? asset('logo.jpeg') :public_path('logo.jpeg')}}" alt="logo"></td>
                         </tr>
@@ -107,26 +107,29 @@
                     </table>
                 </td>
             </tr>
-            <tr class="w-full">
-                <table class="w-full">
-                    <tr class="heading">
-                        <td class="cell-width-half">DESCRIPTION OF PACKAGES</td>
-                        <td>GROSS CARGO WEIGHT</td>
-                        <td>MEASUREMENT</td>
-                    </tr>
-
-                    <tr class="details">
-                        <td class="cell-width-half">{{$shipment->description}}</td>
-                        <td>{{$shipment->weight}} {{$shipment->weight_unit}}</td>
-                        <td>{!! $shipment->dimensions_in_html !!}</td>
-                    </tr>
-                </table>
+            <tr>
+                <td>
+                    <table>
+                        <tr class="heading">
+                            <td class="cell-width-half">DESCRIPTION OF PACKAGES</td>
+                            <td>GROSS CARGO WEIGHT</td>
+                            <td>MEASUREMENT</td>
+                        </tr>
+                        <tr class="details">
+                            <td class="cell-width-half">{{$shipment->description}} &nbsp;</td>
+                            <td>{{$shipment->weight}} {{$shipment->weight_unit}}</td>
+                            <td>{!! $shipment->dimensions_summarized !!}</td>
+                        </tr>
+                    </table>
+                </td>
             </tr>
             <tr>
-                <x-documents.single-detail-card-tiny-text
-                    title="ADDITIONAL CLAUSES"
-                    :text="$document->additional_clause"
-                />
+                <td>
+                    <x-documents.single-detail-card-tiny-text
+                        title="ADDITIONAL CLAUSES"
+                        :text="$document->additional_clause"
+                    />
+                </td>
             </tr>
         </table>
     </div>
