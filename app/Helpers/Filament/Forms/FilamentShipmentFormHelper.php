@@ -123,7 +123,7 @@ class FilamentShipmentFormHelper
                     TextInput::make('final_place_for_delivery'),
                 ]),
             Repeater::make('routes')
-                ->schema($helper->getFields())
+                ->schema($helper->getCreateFormSchema())
                 ->columns(2)
                 ->defaultItems(0)
                 ->visible($creating)

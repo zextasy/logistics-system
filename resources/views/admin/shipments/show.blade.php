@@ -25,7 +25,7 @@
     </x-slot>
     <div class="py-12 px-14">
         <x-shipment-details-card :shipment="$shipment"></x-shipment-details-card>
-        {{-- Shipment Route Timeline --}}
-        <x-shipment-route-timeline-card :shipment="$shipment"/>
+        {{-- Shipment Route Table --}}
+        <livewire:tables.shipment-route-index :shipment="$shipment"/>
     </div>
 </x-app-layout>

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use App\Enums\ShipmentRouteStatusEnum;
 use App\Models\ShipmentRoute;
 use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -36,11 +37,9 @@ class CreateShipmentRoute extends Component implements HasForms
                 Forms\Components\DateTimePicker::make('departure_date'),
                 Forms\Components\DateTimePicker::make('actual_arrival_date'),
                 Forms\Components\DateTimePicker::make('actual_departure_date'),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Select::make('status')
+                    ->options(ShipmentRouteStatusEnum::class)
                     ->required(),
-                Forms\Components\TextInput::make('carrier'),
-                Forms\Components\TextInput::make('vessel_number'),
-                Forms\Components\TextInput::make('container_number'),
                 Forms\Components\Textarea::make('notes')
                     ->columnSpanFull(),
             ])
