@@ -8,7 +8,6 @@
         /* Add your PDF styling here */
         body {
             font-family: "Courier New", monospace;
-            line-height: 0.3;
         }
         .header {
             text-align: center;
@@ -28,8 +27,8 @@
             padding: 3px;
             border: 1px solid #eee;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-            font-size: 12px;
-            line-height: 16px;
+            font-size: 15px;
+            line-height: 18px;
             color: #555;
         }
 
@@ -152,10 +151,10 @@
             background: #eee;
         }
         .text-lg{
-            font-size: 18px;
+            font-size: 19px;
         }
         .text-sm{
-            font-size: 12px;
+            font-size: 13px;
         }
         .text-xs{
             font-size: 9px;
