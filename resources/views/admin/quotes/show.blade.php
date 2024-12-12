@@ -3,7 +3,8 @@
         <!-- Header -->
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-2xl font-bold text-gray-900">Quote Request Details</h2>
-            <span class="px-4 py-2 rounded-full text-sm
+            <div class="flex space-x-3">
+                <span class="px-4 py-2 rounded-full text-sm
                             @if($quote->status->value === 'quoted')
                                 bg-green-100 text-green-800
                             @elseif($quote->status->value === 'processing')
@@ -18,6 +19,8 @@
                         ">
                             {{ ucfirst($quote->status->getLabel()) }}
                         </span>
+                <livewire:actions.quote-management-actions :record="$quote" />
+            </div>
         </div>
     </x-slot>
     <div class="py-12 px-14">
