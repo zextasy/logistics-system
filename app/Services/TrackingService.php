@@ -31,6 +31,8 @@ class TrackingService
      */
     public function getCurrentStatus(Shipment $shipment)
     {
+        $shipment->touch();
+        $shipment->routes->each->touch();
         $currentRoute = $shipment->routes()
             ->where('arrival_date', '<=', now())
             ->orderBy('order', 'desc')

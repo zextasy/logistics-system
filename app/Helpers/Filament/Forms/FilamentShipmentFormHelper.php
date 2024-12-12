@@ -80,9 +80,9 @@ class FilamentShipmentFormHelper
                 ->columns(4),
             Fieldset::make('Dates')
                 ->schema([
+                    DateTimePicker::make('date_of_shipment'),
                     DateTimePicker::make('estimated_delivery')
                         ->required(),
-                    DateTimePicker::make('date_of_shipment'),
                     DateTimePicker::make('actual_delivery'),
                 ])
                 ->columns(3),

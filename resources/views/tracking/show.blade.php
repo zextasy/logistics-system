@@ -16,7 +16,7 @@
                                 bg-gray-100 text-gray-800
                             @endif
                         ">
-                            {{ ucfirst($shipment->status->value) }}
+                            {{ strtoupper($shipment->status->getLabel()) }}
                         </span>
                     </div>
 
@@ -31,36 +31,36 @@
                                 </div>
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Service Type</dt>
-                                    <dd class="mt-1 text-sm text-gray-900">{{ ucfirst($shipment->service_type->value) }}</dd>
+                                    <dd class="mt-1 text-sm text-gray-900">{{ strtoupper($shipment->service_type->getLabel()) }}</dd>
                                 </div>
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Current Location</dt>
-                                    <dd class="mt-1 text-sm text-gray-900">{{ $shipment->current_location }}</dd>
+                                    <dd class="mt-1 text-sm text-gray-900">{{ strtoupper($shipment->current_location) }}</dd>
                                 </div>
                             </dl>
                         </div>
 
                         <div>
-                            <h3 class="text-lg font-medium mb-4">Estimated Delivery</h3>
+                            <h3 class="text-lg font-medium mb-4">Delivery</h3>
                             <dl class="grid grid-cols-1 gap-x-4 gap-y-4">
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Expected Date</dt>
                                     <dd class="mt-1 text-sm text-gray-900">
-                                        {{ $shipment->estimated_delivery }}{{-- ->format('M d, Y H:i')--}}
+                                        {{ $shipment->estimated_delivery->toFormattedDateString() }}
                                     </dd>
                                 </div>
                                 @if($shipment->actual_delivery)
                                     <div>
                                         <dt class="text-sm font-medium text-gray-500">Actual Delivery</dt>
                                         <dd class="mt-1 text-sm text-gray-900">
-                                            {{ $shipment->actual_delivery}}{{-- ->format('M d, Y H:i')--}}
+                                            {{ $shipment->actual_delivery->toFormattedDateString()}}
                                         </dd>
                                     </div>
                                 @endif
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Description of Goods</dt>
                                     <dd class="mt-1 text-sm text-gray-900">
-                                        {{ $shipment->description }}{{-- ->format('M d, Y H:i')--}}
+                                        {{ strtoupper($shipment->description) }}
                                     </dd>
                                 </div>
                             </dl>
