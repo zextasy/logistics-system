@@ -5,7 +5,7 @@
             <h2 class="text-2xl font-bold text-gray-900">Country</h2>
         </div>
     </x-slot>
-    <div class="py-12 px-14">
+    <div class=" ">
 
     </div>
 </x-app-layout>

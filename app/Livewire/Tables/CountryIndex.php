@@ -3,7 +3,10 @@
 namespace App\Livewire\Tables;
 
 use App\Enums\CountryStatusEnum;
+use App\Enums\QuoteServiceTypeEnum;
+use App\Enums\QuoteStatusEnum;
 use App\Models\Country;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -13,6 +16,9 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Livewire\Component;
 use Illuminate\Contracts\View\View;
@@ -45,14 +51,18 @@ class CountryIndex extends Component implements HasForms, HasTable
                     ->searchable(),
                 TextColumn::make('states_count')
                     ->label('States')
-                    ->counts('states'),
+                    ->counts('states')
+                    ->sortable(),
                 TextColumn::make('cities_count')
                     ->label('Cities')
-                    ->counts('cities'),
+                    ->counts('cities')
+                    ->sortable(),
             ])
             ->filters([
-                //
-            ])
+                SelectFilter::make('status')
+                    ->options(CountryStatusEnum::class),
+            ], layout: FiltersLayout::AboveContent)
+            ->filtersFormColumns(3)
             ->actions([
                 EditAction::make()
                     ->form([

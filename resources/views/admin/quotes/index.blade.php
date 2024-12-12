@@ -9,31 +9,28 @@
             </div>
         </div>
     </x-slot>
-    <div class="py-12 px-14">
-
-        <!-- Status Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
-            @foreach([
-                ['Pending', $stats['pending'], 'clock', 'bg-yellow-600'],
-                ['Processing', $stats['processing'], 'refresh', 'bg-blue-600'],
-                ['Quoted', $stats['quoted'], 'check', 'bg-green-600'],
-                ['Rejected', $stats['rejected'], 'x', 'bg-red-600']
-            ] as [$label, $count, $icon, $color])
-                <div class="bg-white rounded-lg shadow p-6">
-                    <div class="flex items-center">
-                        <div class="{{ $color }} rounded-full p-3">
-                            {{--                                <x-icon :name="$icon" class="w-6 h-6 text-white" />--}}
-                        </div>
-                        <div class="ml-5">
-                            <p class="text-gray-500">{{ $label }}</p>
-                            <p class="text-2xl font-bold">{{ number_format($count) }}</p>
-                        </div>
+    <!-- Status Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+        @foreach([
+            ['Pending', $stats['pending'], 'clock', 'bg-yellow-600'],
+            ['Processing', $stats['processing'], 'refresh', 'bg-blue-600'],
+            ['Quoted', $stats['quoted'], 'check', 'bg-green-600'],
+            ['Rejected', $stats['rejected'], 'x', 'bg-red-600']
+        ] as [$label, $count, $icon, $color])
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <div class="{{ $color }} rounded-full p-3">
+                        {{--                                <x-icon :name="$icon" class="w-6 h-6 text-white" />--}}
+                    </div>
+                    <div class="ml-5">
+                        <p class="text-gray-500">{{ $label }}</p>
+                        <p class="text-2xl font-bold">{{ number_format($count) }}</p>
                     </div>
                 </div>
-            @endforeach
-        </div>
-
-        <!-- Quotes Table -->
-        <livewire:tables.quote-index></livewire:tables.quote-index>
+            </div>
+        @endforeach
     </div>
+
+    <!-- Quotes Table -->
+    <livewire:tables.quote-index></livewire:tables.quote-index>
 </x-app-layout>

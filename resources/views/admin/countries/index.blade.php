@@ -5,7 +5,5 @@
             <h2 class="text-2xl font-bold text-gray-900">Countries</h2>
         </div>
     </x-slot>
-    <div class="py-12 px-14">
-        <livewire:tables.country-index></livewire:tables.country-index>
-    </div>
+    <livewire:tables.country-index></livewire:tables.country-index>
 </x-app-layout>

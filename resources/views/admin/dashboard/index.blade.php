@@ -102,9 +102,9 @@
                                     <p class="text-sm text-gray-500">{{ $quote->service_type }}</p>
                                 </div>
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                                    {{ $quote->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
-                                    {{ $quote->status === 'processed' ? 'bg-green-100 text-green-800' : '' }}">
-                                    {{ Str::title($quote->status) }}
+                                    {{ $quote->status->value === 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
+                                    {{ $quote->status->value === 'processed' ? 'bg-green-100 text-green-800' : '' }}">
+                                    {{ Str::title($quote->status->value) }}
                                 </span>
                             </div>
                         @empty

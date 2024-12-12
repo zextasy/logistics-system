@@ -34,7 +34,9 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+                <div class="max-w-7xl mx-auto py-3">
+                    {{ $slot }}
+                </div>
                 @livewire('notifications')
             </main>
         </div>

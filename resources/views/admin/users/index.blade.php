@@ -5,7 +5,5 @@
             <h2 class="text-2xl font-bold text-gray-900">Users</h2>
         </div>
     </x-slot>
-    <div class="py-12 px-14">
-        <livewire:tables.user-index></livewire:tables.user-index>
-    </div>
+    <livewire:tables.user-index></livewire:tables.user-index>
 </x-app-layout>

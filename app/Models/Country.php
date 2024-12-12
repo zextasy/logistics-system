@@ -31,4 +31,9 @@ class Country extends Model
     {
         return $this->hasManyThrough(City::class, State::class);
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', CountryStatusEnum::ACTIVE);
+    }
 }

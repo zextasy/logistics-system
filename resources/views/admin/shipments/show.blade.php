@@ -23,9 +23,8 @@
             </div>
         </div>
     </x-slot>
-    <div class="py-12 px-14">
-        <x-shipment-details-card :shipment="$shipment"></x-shipment-details-card>
-        {{-- Shipment Route Table --}}
-        <livewire:tables.shipment-route-index :shipment="$shipment"/>
-    </div>
+    {{-- Shipment Details --}}
+    <x-shipment-details-card :shipment="$shipment"></x-shipment-details-card>
+    {{-- Shipment Route Table --}}
+    <livewire:tables.shipment-route-index :shipment="$shipment"/>
 </x-app-layout>

@@ -97,7 +97,7 @@ class FilamentShipmentFormHelper
                 ->schema([
                     Select::make('origin_country_id')
                         ->label('Origin Country')
-                        ->options(Country::all()->pluck('name','id'))
+                        ->options(Country::query()->active()->pluck('name','id'))
                         ->searchable()
                         ->required()
                         ->live(),
@@ -116,7 +116,7 @@ class FilamentShipmentFormHelper
                 ->schema([
                     Select::make('destination_country_id')
                         ->label('Destination Country')
-                        ->options(Country::all()->pluck('name','id'))
+                        ->options(Country::query()->active()->pluck('name','id'))
                         ->searchable()
                         ->required()
                         ->live(),

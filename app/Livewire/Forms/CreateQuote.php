@@ -75,7 +75,7 @@ class CreateQuote extends Component implements HasForms
                             ->required(),
                         Select::make('origin_country_id')
                             ->label('Origin Country')
-                            ->options(Country::all()->pluck('name','id'))
+                            ->options(Country::query()->active()->pluck('name','id'))
                             ->searchable()
                             ->required()
                             ->live(),
@@ -87,7 +87,7 @@ class CreateQuote extends Component implements HasForms
                             ->searchable(),
                         Select::make('destination_country_id')
                             ->label('Destination Country')
-                            ->options(Country::all()->pluck('name','id'))
+                            ->options(Country::query()->active()->pluck('name','id'))
                             ->searchable()
                             ->required()
                             ->live(),
