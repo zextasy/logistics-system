@@ -52,10 +52,7 @@
                                     </tr>
                                 </table>
                                 <div>
-                                    <x-documents.detail-card-with-image
-                                        title='EXPORT REFERENCES'
-                                        :text="$document->export_reference"
-                                    />
+                                    <x-documents.company-address-details/>
                                 </div>
                             </td>
                         </tr>
@@ -75,7 +72,7 @@
                             <td>
                                 <x-documents.single-detail-card
                                     title="DATE OF DEPARTURE"
-                                    :text="$shipment->date_of_shipment"
+                                    :text="$shipment->date_of_shipment->toFormattedDateString()"
                                 />
                             </td>
                             <td>
@@ -87,7 +84,7 @@
                             <td>
                                 <x-documents.single-detail-card
                                     title="ESTIMATED TIME OF ARRIVAL"
-                                    :text="$shipment->estimated_delivery"
+                                    :text="$shipment->estimated_delivery->toFormattedDateString()"
                                 />
                             </td>
                         </tr>
@@ -96,14 +93,14 @@
             </tr>
             <tr class="">
                 <td>
-                    <table class="">
-                        <tr class="heading">
-                            <td class="cell-width-half">DESCRIPTION OF PACKAGES</td>
+                    <table class="height-xl">
+                        <tr class="heading text-sm">
+                            <td class="width-half">DESCRIPTION OF PACKAGES</td>
                             <td>GROSS CARGO WEIGHT</td>
                             <td>MEASUREMENT</td>
                         </tr>
-                        <tr class="details">
-                            <td class="cell-width-half">{{$shipment->description}}</td>
+                        <tr class="details text-sm">
+                            <td class="width-half">{{strtoupper($shipment->description)}} &nbsp;</td>
                             <td>{{$shipment->weight}} {{$shipment->weight_unit}}</td>
                             <td>{!! $shipment->dimensions_summarized !!}</td>
                         </tr>

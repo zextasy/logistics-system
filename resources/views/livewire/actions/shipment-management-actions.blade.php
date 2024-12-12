@@ -2,7 +2,7 @@
     <x-filament-actions::group
         :actions="[
             $this->confirmShipmentDateAction,
-            $this->previewInitialDocumentAction,
+//            $this->previewInitialDocumentAction,
             $this->previewInitialPdfAction,
             $this->downloadInitialDocumentAction,
             $this->editShipmentDetailsAction,

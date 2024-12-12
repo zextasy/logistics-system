@@ -12,7 +12,7 @@
 </div>
 <div class="px-4 py-0.5">
     <div class="flex flex-col">
-        <span class="text-xs font-medium text-gray-800">{{ $text }}</span>
+        <span class="text-xxs font-medium text-gray-800">{{ $text }}</span>
     </div>
 </div>
 </div>
