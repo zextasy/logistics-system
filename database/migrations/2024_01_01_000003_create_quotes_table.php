@@ -66,13 +66,10 @@ return new class extends Migration
 
             // Quote Status and Administrative
             $table->enum('status', [
-                'draft',
                 'pending',
-                'under_review',
-                'processed',
-                'accepted',
+                'processing',
+                'quoted',
                 'rejected',
-                'expired'
             ])->default('pending');
             $table->foreignId('assigned_to')
                 ->nullable()

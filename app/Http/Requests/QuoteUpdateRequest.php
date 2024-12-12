@@ -19,7 +19,7 @@ class QuoteUpdateRequest extends FormRequest
                 'pending',
                 'under_review',
                 'processed',
-                'accepted',
+                'quoted',
                 'rejected',
                 'expired'
             ])],

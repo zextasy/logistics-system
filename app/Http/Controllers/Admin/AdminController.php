@@ -38,7 +38,7 @@ class AdminController extends Controller
             'total_shipments' => Shipment::count(),
             'active_shipments' => Shipment::whereNotIn('status', ['delivered', 'cancelled'])->count(),
             'pending_quotes' => Quote::where('status', 'pending')->count(),
-            'monthly_revenue' => $this->calculateMonthlyRevenue(),
+            'total_quotes' => Quote::count(),
         ];
 
         $recentActivity = [
@@ -47,10 +47,6 @@ class AdminController extends Controller
                 ->take(5)
                 ->get(),
             'quotes' => Quote::with('user')
-                ->latest()
-                ->take(5)
-                ->get(),
-            'documents' => Document::with(['shipment', 'shipment.user'])
                 ->latest()
                 ->take(5)
                 ->get(),

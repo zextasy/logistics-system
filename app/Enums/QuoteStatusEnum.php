@@ -6,13 +6,12 @@ use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 use Illuminate\Support\Str;
 
-enum QuoteServiceTypeEnum: string implements HasLabel, HasColor
+enum QuoteStatusEnum: string implements HasLabel, HasColor
 {
-case AIR = 'air_freight';
-case SEA='sea_freight';
-//case ROAD ='road_freight';
-//case RAIL = 'rail_freight';
-//case MULTI = 'multimodal';
+case PENDING = 'pending';
+case PROCESSING='processing';
+case QUOTED = 'quoted';
+case REJECTED = 'rejected';
 
     public function getLabel(): ?string
     {
@@ -22,9 +21,10 @@ case SEA='sea_freight';
     public function getColor(): string | array | null
     {
         return match ($this) {
-            self::SEA => 'success',
-            self::AIR => 'info',
-            default => 'gray',
+            self::PENDING => 'warning',
+            self::QUOTED=> 'success',
+            self::REJECTED => 'danger',
+            self::PROCESSING => 'info',
         };
     }
 }

@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\CargoTypeEnum;
+use App\Enums\QuoteServiceTypeEnum;
+use App\Enums\QuoteStatusEnum;
 use App\Observers\QuoteObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -63,7 +66,10 @@ class Quote extends Model
         'packing_required' => 'boolean',
         'expected_ship_date' => 'date',
         'processed_at' => 'datetime',
-        'valid_until' => 'datetime'
+        'valid_until' => 'datetime',
+        'status' => QuoteStatusEnum::class,
+        'service_type' => QuoteServiceTypeEnum::class,
+        'cargo_type' => CargoTypeEnum::class,
     ];
 
     public function user()

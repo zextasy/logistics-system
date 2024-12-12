@@ -46,10 +46,7 @@ class QuoteFactory extends Factory
 
             'service_type' => $this->faker->randomElement([
                 'air_freight',
-                'sea_freight',
-                'road_freight',
-                'rail_freight',
-                'multimodal'
+                'sea_freight'
             ]),
             'container_size' => $this->faker->optional()->randomElement(['20ft', '40ft', '40ft HC']),
             'incoterm' => $this->faker->randomElement(['EXW', 'FOB', 'CIF', 'DDP']),
@@ -61,7 +58,7 @@ class QuoteFactory extends Factory
             'packing_required' => $this->faker->boolean(),
             'special_requirements' => $this->faker->optional()->paragraph(),
 
-            'status' => $this->faker->randomElement(['pending', 'under_review', 'processed', 'accepted', 'rejected']),
+            'status' => $this->faker->randomElement(['pending', 'processing', 'quoted', 'rejected']),
             'quoted_price' => $this->faker->optional()->randomFloat(2, 1000, 50000),
             'currency' => 'USD',
             'admin_notes' => $this->faker->optional()->sentence(),
@@ -81,13 +78,34 @@ class QuoteFactory extends Factory
         });
     }
 
-    public function processed()
+    public function processing()
     {
         return $this->state(function (array $attributes) {
             return [
-                'status' => 'processed',
+                'status' => 'processing',
+                'processed_at' => null,
+                'quoted_price' => null
+            ];
+        });
+    }
+    public function quoted()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'status' => 'quoted',
                 'processed_at' => now(),
                 'quoted_price' => $this->faker->randomFloat(2, 1000, 50000)
+            ];
+        });
+    }
+
+    public function rejected()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'status' => 'rejected',
+                'processed_at' => now(),
+                'quoted_price' => null
             ];
         });
     }

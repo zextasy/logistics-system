@@ -76,14 +76,16 @@ class FilamentShipmentFormHelper
                         ->numeric(),
                     Select::make('dimensions.unit')
                         ->options(DistanceUnitEnum::class),
-                ]),
+                ])
+                ->columns(4),
             Fieldset::make('Dates')
                 ->schema([
                     DateTimePicker::make('estimated_delivery')
                         ->required(),
                     DateTimePicker::make('date_of_shipment'),
                     DateTimePicker::make('actual_delivery'),
-                ])->columns(3),
+                ])
+                ->columns(3),
         ];
     }
 

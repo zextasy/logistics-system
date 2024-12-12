@@ -23,31 +23,15 @@ class QuoteController extends Controller
 
     public function index(Request $request)
     {
-        $quotes = Quote::with(['user','country','originCountry','originCity','destinationCountry','destinationCity'])
-            ->when($request->status, function ($query, $status) {
-                $query->where('status', $status);
-            })
-            ->when($request->service_type, function ($query, $type) {
-                $query->where('service_type', $type);
-            })
-            ->when($request->date_range, function ($query, $range) {
-                if ($range === 'today') {
-                    $query->whereDate('created_at', today());
-                } elseif ($range === 'week') {
-                    $query->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()]);
-                }
-            })
-            ->latest()
-            ->paginate(15);
 
         $stats = [
             'pending' => Quote::where('status', 'pending')->count(),
             'processing' => Quote::where('status', 'processing')->count(),
-            'approved' => Quote::where('status', 'approved')->count(),
+            'quoted' => Quote::where('status', 'quoted')->count(),
             'rejected' => Quote::where('status', 'rejected')->count()
         ];
 
-        return view('admin.quotes.index', compact('quotes', 'stats'));
+        return view('admin.quotes.index', compact('stats'));
     }
 
     public function show(Quote $quote)

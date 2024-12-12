@@ -4,17 +4,19 @@
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-2xl font-bold text-gray-900">Quote Request Details</h2>
             <span class="px-4 py-2 rounded-full text-sm
-                            @if($quote->status === 'delivered')
+                            @if($quote->status->value === 'quoted')
                                 bg-green-100 text-green-800
-                            @elseif($quote->status === 'in_transit')
+                            @elseif($quote->status->value === 'processing')
                                 bg-blue-100 text-blue-800
-                            @elseif($quote->status === 'pending')
+                            @elseif($quote->status->value === 'pending')
                                 bg-yellow-100 text-yellow-800
+                            @elseif($quote->status->value === 'rejected')
+                                bg-red-100 text-red-800
                             @else
                                 bg-gray-100 text-gray-800
                             @endif
                         ">
-                            {{ ucfirst($quote->status) }}
+                            {{ ucfirst($quote->status->getLabel()) }}
                         </span>
         </div>
     </x-slot>

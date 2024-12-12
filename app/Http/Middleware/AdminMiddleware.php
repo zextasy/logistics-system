@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Enums\UserRoleEnum;
 use Closure;
+use Filament\Notifications\Notification;
 use Illuminate\Http\Request;
 
 class AdminMiddleware
@@ -15,8 +16,11 @@ class AdminMiddleware
                 return response()->json(['message' => 'Unauthorized'], 403);
             }
 
-            return redirect()->route('dashboard')
-                ->with('error', 'You do not have permission to access this area.');
+            Notification::make()
+                ->title('You do not have permission to access this area.')
+                ->warning()
+                ->send();
+            return redirect()->route('dashboard');
         }
 
         return $next($request);

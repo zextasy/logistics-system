@@ -14,11 +14,18 @@ class QuoteSeeder extends Seeder
             ->pending()
             ->count(15)
             ->create();
-
-        // Create processed quotes
+        // Create processing quotes
+        Quote::factory()->processing()
+            ->count(20)
+            ->create();
+        // Create quoted quotes
         Quote::factory()
-            ->processed()
+            ->quoted()
             ->count(10)
+            ->create();
+        // Create rejected quotes
+        Quote::factory()->rejected()
+            ->count(5)
             ->create();
     }
 }

@@ -17,7 +17,7 @@ class QuoteUpdateRequest extends FormRequest
         return [
             'status' => [
                 'required',
-                Rule::in(['pending', 'under_review', 'processed', 'accepted', 'rejected'])
+                Rule::in(['pending', 'under_review', 'processed', 'quoted', 'rejected'])
             ],
             'quoted_price' => 'required_if:status,processed|nullable|numeric|min:0',
             'currency' => 'required_with:quoted_price|string|size:3',
