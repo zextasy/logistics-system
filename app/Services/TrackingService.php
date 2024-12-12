@@ -199,7 +199,7 @@ class TrackingService
     private function determineShipmentStage(Shipment $shipment)
     {
         // Implementation for determining current shipping stage
-        return 'in_transit'; // Example return
+        return 'on_transit'; // Example return
     }
 
     private function getMilestoneStatus($route)

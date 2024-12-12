@@ -38,7 +38,7 @@
                 </div>
                 <div class="ml-5">
                     <h3 class="text-sm font-medium text-gray-500">In Transit</h3>
-                    <p class="text-2xl font-semibold text-gray-900">{{ number_format($stats['in_transit']) }}</p>
+                    <p class="text-2xl font-semibold text-gray-900">{{ number_format($stats['on_transit']) }}</p>
                 </div>
             </div>
         </div>

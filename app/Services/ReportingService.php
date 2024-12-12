@@ -61,7 +61,7 @@ class ReportingService
             DB::raw('DATE(created_at) as date'),
             DB::raw('COUNT(*) as total'),
             DB::raw('COUNT(CASE WHEN status = "delivered" THEN 1 END) as delivered'),
-            DB::raw('COUNT(CASE WHEN status = "in_transit" THEN 1 END) as in_transit'),
+            DB::raw('COUNT(CASE WHEN status = "on_transit" THEN 1 END) as on_transit'),
             DB::raw('AVG(CASE WHEN actual_delivery IS NOT NULL
                 THEN TIMESTAMPDIFF(HOUR, created_at, actual_delivery)
                 END) as avg_delivery_time')

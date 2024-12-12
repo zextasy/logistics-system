@@ -8,7 +8,7 @@
                         <span class="px-4 py-2 rounded-full text-sm
                             @if($shipment->status->value === 'delivered')
                                 bg-green-100 text-green-800
-                            @elseif($shipment->status->value === 'in_transit')
+                            @elseif($shipment->status->value === 'on_transit')
                                 bg-blue-100 text-blue-800
                             @elseif($shipment->status->value === 'pending')
                                 bg-yellow-100 text-yellow-800

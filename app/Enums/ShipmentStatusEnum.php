@@ -10,7 +10,7 @@ enum ShipmentStatusEnum : string implements HasLabel, HasColor
 {
     case PENDING = 'pending';
     case PICKED_UP = 'picked_up';
-    case IN_TRANSIT = 'in_transit';
+    case ON_TRANSIT = 'on_transit';
     case CUSTOMS = 'customs';
     case OUT_FOR_DELIVERY = 'out_for_delivery';
     case DELIVERED = 'delivered';
@@ -19,7 +19,7 @@ enum ShipmentStatusEnum : string implements HasLabel, HasColor
 
     public function getLabel(): ?string
     {
-        return Str::of($this->value)->replace('_',' ');
+        return Str::of($this->name)->replace('_',' ');
     }
 
     public function getColor(): string | array | null
@@ -27,7 +27,7 @@ enum ShipmentStatusEnum : string implements HasLabel, HasColor
         return match ($this) {
             self::PENDING => 'warning',
             self::DELIVERED => 'success',
-            self::IN_TRANSIT => 'info',
+            self::ON_TRANSIT => 'info',
             self::CANCELLED, self::ON_HOLD => 'danger',
             default => 'gray',
         };
@@ -35,7 +35,7 @@ enum ShipmentStatusEnum : string implements HasLabel, HasColor
     public function hasDeparted(): bool
     {
         return match ($this){
-            self::IN_TRANSIT, self::CUSTOMS, self::DELIVERED, self::OUT_FOR_DELIVERY, self::PICKED_UP => true,
+            self::ON_TRANSIT, self::CUSTOMS, self::DELIVERED, self::OUT_FOR_DELIVERY, self::PICKED_UP => true,
             default => false
         };
     }
@@ -51,7 +51,7 @@ enum ShipmentStatusEnum : string implements HasLabel, HasColor
     public function isOptionDisabled(): bool
     {
         return match ($this){
-            self::DELIVERED, self::IN_TRANSIT, self::PENDING => false,
+            self::DELIVERED, self::ON_TRANSIT, self::PENDING => false,
             default => true
         };
     }

@@ -77,7 +77,7 @@
                                 </div>
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
                                     {{ $shipment->status->value === 'delivered' ? 'bg-green-100 text-green-800' : '' }}
-                                    {{ $shipment->status->value === 'in_transit' ? 'bg-blue-100 text-blue-800' : '' }}
+                                    {{ $shipment->status->value === 'on_transit' ? 'bg-blue-100 text-blue-800' : '' }}
                                     {{ $shipment->status->value === 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}">
                                     {{ Str::title($shipment->status->value) }}
                                 </span>

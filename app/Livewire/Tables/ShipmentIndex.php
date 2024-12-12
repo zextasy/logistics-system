@@ -76,7 +76,7 @@ class ShipmentIndex extends Component implements HasForms, HasTable
                 SelectFilter::make('status')
                     ->options([
                         ShipmentStatusEnum::PENDING->value => ShipmentStatusEnum::PENDING->getLabel(),
-                        ShipmentStatusEnum::IN_TRANSIT->value => ShipmentStatusEnum::IN_TRANSIT->getLabel(),
+                        ShipmentStatusEnum::ON_TRANSIT->value => ShipmentStatusEnum::ON_TRANSIT->getLabel(),
                         ShipmentStatusEnum::DELIVERED->value => ShipmentStatusEnum::DELIVERED->getLabel(),
                     ]),
                 SelectFilter::make('type')

@@ -85,7 +85,7 @@ class AdminController extends Controller
 
         $stats = [
             'total' => Shipment::count(),
-            'in_transit' => Shipment::where('status', 'in_transit')->count(),
+            'on_transit' => Shipment::where('status', 'on_transit')->count(),
             'delivered' => Shipment::where('status', 'delivered')->count(),
             'pending' => Shipment::where('status', 'pending')->count(),
         ];

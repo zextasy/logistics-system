@@ -106,8 +106,8 @@ class ShipmentService
         }
 
         $status = match ($latestRoute->status) {
-            ShipmentRouteStatusEnum::ARRIVED => ShipmentStatusEnum::IN_TRANSIT,
-            ShipmentRouteStatusEnum::DEPARTED => $latestRoute->order === $shipment->routes()->count() ? ShipmentStatusEnum::DELIVERED : ShipmentStatusEnum::IN_TRANSIT,
+            ShipmentRouteStatusEnum::ARRIVED => ShipmentStatusEnum::ON_TRANSIT,
+            ShipmentRouteStatusEnum::DEPARTED => $latestRoute->order === $shipment->routes()->count() ? ShipmentStatusEnum::DELIVERED : ShipmentStatusEnum::ON_TRANSIT,
             default => $shipment->status
         };
 

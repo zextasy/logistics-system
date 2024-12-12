@@ -6,7 +6,7 @@
                             <span class="px-4 py-2 mx-3 rounded-full text-sm
                             @if($shipment->status->value === 'delivered')
                                 bg-green-100 text-green-800
-                            @elseif($shipment->status->value === 'in_transit')
+                            @elseif($shipment->status->value === 'on_transit')
                                 bg-blue-100 text-blue-800
                             @elseif($shipment->status->value === 'pending')
                                 bg-yellow-100 text-yellow-800
@@ -14,7 +14,7 @@
                                 bg-gray-100 text-gray-800
                             @endif
                         ">
-                            {{ ucfirst($shipment->status->value) }}
+                            {{ $shipment->status->getLabel() }}
                         </span>
                 @if($shipment->initialDocument()->doesntExist())
                     <livewire:actions.shipment-document-generator :shipment="$shipment" />

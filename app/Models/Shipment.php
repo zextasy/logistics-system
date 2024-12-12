@@ -214,7 +214,7 @@ class Shipment extends Model
         $status = ShipmentStatusEnum::PENDING;
 
         if (isset($this->date_of_shipment) && $this->date_of_shipment->isPast()){
-            $status = ShipmentStatusEnum::IN_TRANSIT;
+            $status = ShipmentStatusEnum::ON_TRANSIT;
         }
 
         if ($this->hasBeenDelivered()){

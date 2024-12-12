@@ -16,7 +16,7 @@ class ShipmentFactory extends Factory
         $status = $this->faker->randomElement([
             'pending',
             'picked_up',
-            'in_transit',
+            'on_transit',
             'customs',
             'out_for_delivery',
             'delivered',
@@ -105,7 +105,7 @@ class ShipmentFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'date_of_shipment' => $this->faker->dateTimeBetween('-1 month', '-1 week'),
-                'status' => 'in_transit',
+                'status' => 'on_transit',
                 'actual_delivery' => null
             ];
         });
