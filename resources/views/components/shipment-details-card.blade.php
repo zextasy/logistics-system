@@ -13,9 +13,16 @@
     <div class="border-t border-gray-200">
         <dl>
             <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt class="text-sm font-medium text-gray-500">Status</dt>
+                <dt class="text-sm font-medium text-gray-500">Package Details</dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <x-status-badge :status="$shipment->status->value" />
+                    Weight: {{ $shipment->weight }} {{ $shipment->weight_unit }}<br>
+                    @if($shipment->dimensions)
+                        Dimensions: {{ $shipment->dimensions_summarized }}<br>
+                    @endif
+                    @if($shipment->container_size)
+                        Container Size: {{ $shipment->container_size }}<br>
+                    @endif
+                    Description of Goods: {{ $shipment->description }}
                 </dd>
             </div>
             <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -72,19 +79,6 @@
                 </dd>
             </div>
             <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt class="text-sm font-medium text-gray-500">Package Details</dt>
-                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    Weight: {{ $shipment->weight }} {{ $shipment->weight_unit }}<br>
-                    @if($shipment->dimensions)
-                        Dimensions: {{ $shipment->dimensions_summarized }}<br>
-                    @endif
-                    @if($shipment->container_size)
-                        Container Size: {{ $shipment->container_size }}<br>
-                    @endif
-                    Description of Goods: {{ $shipment->description }}
-                </dd>
-            </div>
-            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">Schedule</dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                     @if($shipment->date_of_shipment)
@@ -96,7 +90,7 @@
                     @endif
                 </dd>
             </div>
-            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">Extra Information</dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                     Type: {{ $shipment->type->value}}<br>

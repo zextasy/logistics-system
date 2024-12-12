@@ -1,6 +1,6 @@
-<div class="mt-3">
-    <h3 class="text-lg leading-6 font-medium text-gray-900">
+<div class="bg-white px-4 py-5 sm:px-6">
+    <h2 class="text-2xl font-bold mb-3">
         Route Details
-    </h3>
+    </h2>
     {{ $this->table }}
 </div>

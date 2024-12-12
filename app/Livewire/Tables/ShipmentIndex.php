@@ -2,12 +2,24 @@
 
 namespace App\Livewire\Tables;
 
+use App\Enums\QuoteServiceTypeEnum;
+use App\Enums\QuoteStatusEnum;
+use App\Enums\ShipmentServiceTypeEnum;
+use App\Enums\ShipmentStatusEnum;
+use App\Enums\ShipmentTypeEnum;
+use App\Models\Quote;
 use App\Models\Shipment;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Livewire\Component;
 use Illuminate\Contracts\View\View;
@@ -21,121 +33,75 @@ class ShipmentIndex extends Component implements HasForms, HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(Shipment::query())
+            ->query(Shipment::query()
+            ->with(['user', 'routes', 'documents','originCountry','originCity','destinationCountry','destinationCity'])
+            ->latest()
+            )
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('tracking_number')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('type')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('status')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('originCountry.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('originCity.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('loading_port')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('origin_address')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('origin_postal_code')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('destinationCountry.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('destinationCity.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('discharge_port')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('destination_address')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('destination_postal_code')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('final_place_for_delivery')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('weight')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('weight_unit')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('container_size')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('service_type')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('shipper_name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('shipper_phone')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('shipper_email')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('shipper_address')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('receiver_name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('receiver_phone')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('receiver_email')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('receiver_address')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('consignee_name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('consignee_phone')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('consignee_email')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('consignee_address')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('vessel')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('current_location')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('estimated_delivery')
-                    ->dateTime()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('actual_delivery')
-                    ->dateTime()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('date_of_shipment')
-                    ->dateTime()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('customs_status')
-                    ->searchable(),
-                Tables\Columns\IconColumn::make('customs_cleared')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('declared_value')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('currency')
-                    ->searchable(),
-                Tables\Columns\IconColumn::make('insurance_required')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('insurance_amount')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                TextColumn::make('tracking_number')
+                    ->searchable()
+                    ->description(fn (Shipment $record): string => $record->type->getLabel()),
+                TextColumn::make('origin_country_name')
+                    ->label('Route')
+                    ->description(fn (Shipment $record): string => '-> '.$record->destination_country_name),
+                TextColumn::make('shipper_name')
+                    ->label('Customer')
+                    ->searchable()
+                    ->description(fn (Shipment $record): string => $record->receiver_name),
+                TextColumn::make('status')
+                    ->badge(),
+                TextColumn::make('loading_port')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('discharge_port')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('estimated_delivery')
+                    ->date()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                TextColumn::make('actual_delivery')
+                    ->date()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
+                TextColumn::make('date_of_shipment')
+                    ->date()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('created_at')
+                    ->date()
+                    ->sortable(),
             ])
             ->filters([
-                //
-            ])
+                SelectFilter::make('status')
+                    ->options([
+                        ShipmentStatusEnum::PENDING->value => ShipmentStatusEnum::PENDING->getLabel(),
+                        ShipmentStatusEnum::IN_TRANSIT->value => ShipmentStatusEnum::IN_TRANSIT->getLabel(),
+                        ShipmentStatusEnum::DELIVERED->value => ShipmentStatusEnum::DELIVERED->getLabel(),
+                    ]),
+                SelectFilter::make('type')
+                    ->options(ShipmentTypeEnum::class),
+                Filter::make('created_at')
+                    ->form([
+                        DatePicker::make('created_from'),
+                        DatePicker::make('created_until'),
+                    ])->columns(2)
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['created_from'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                            )
+                            ->when(
+                                $data['created_until'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                            );
+                    })
+            ], layout: FiltersLayout::AboveContent)
+            ->filtersFormColumns(3)
             ->actions([
-                //
+                Action::make('view')
+                    ->url(fn (Shipment $record): string => route('admin.shipments.show', $record))
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
