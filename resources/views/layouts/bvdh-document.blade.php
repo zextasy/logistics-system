@@ -134,6 +134,12 @@
         .image-container {
             text-align: center;
         }
+        .text-red{
+            color: red;
+        }
+        .text-blue{
+            color: blue;
+        }
         /** Debug **/
         div{
             /*border: 1px solid saddlebrown;*/
