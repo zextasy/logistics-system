@@ -16,7 +16,7 @@ case SEA='sea_freight';
 
     public function getLabel(): ?string
     {
-        return Str::replace('_',' ',$this->value);
+        return Str::of($this->value)->replace('_',' ')->upper();
     }
 
     public function getColor(): string | array | null

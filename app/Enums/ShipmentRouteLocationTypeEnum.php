@@ -3,6 +3,7 @@
 namespace App\Enums;
 
 use Filament\Support\Contracts\HasLabel;
+use Illuminate\Support\Str;
 
 enum ShipmentRouteLocationTypeEnum : string implements HasLabel
 {
@@ -13,6 +14,6 @@ enum ShipmentRouteLocationTypeEnum : string implements HasLabel
     case DISTRIBUTION_CENTER = 'distribution_center';
     public function getLabel(): ?string
     {
-        return $this->value;
+        return Str::of($this->name)->replace('_',' ');
     }
 }

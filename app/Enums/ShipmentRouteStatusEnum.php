@@ -3,6 +3,7 @@
 namespace App\Enums;
 
 use Filament\Support\Contracts\HasLabel;
+use Illuminate\Support\Str;
 
 enum ShipmentRouteStatusEnum : string implements HasLabel
 {
@@ -13,7 +14,7 @@ enum ShipmentRouteStatusEnum : string implements HasLabel
 
     public function getLabel(): ?string
     {
-        return $this->value;
+        return Str::of($this->name)->replace('_',' ');
     }
 
     public function hasDeparted(): bool

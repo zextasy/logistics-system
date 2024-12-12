@@ -3,6 +3,7 @@
 namespace App\Enums;
 
 use Filament\Support\Contracts\HasLabel;
+use Illuminate\Support\Str;
 
 enum ShipmentServiceTypeEnum : string implements HasLabel
 {
@@ -12,6 +13,6 @@ enum ShipmentServiceTypeEnum : string implements HasLabel
 
     public function getLabel(): ?string
     {
-        return $this->value;
+        return Str::of($this->name)->replace('_',' ');
     }
 }

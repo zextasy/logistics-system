@@ -15,7 +15,7 @@ case REJECTED = 'rejected';
 
     public function getLabel(): ?string
     {
-        return Str::replace('_',' ',$this->value);
+        return Str::of($this->name)->replace('_',' ');
     }
 
     public function getColor(): string | array | null

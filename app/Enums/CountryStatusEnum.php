@@ -12,6 +12,6 @@ enum CountryStatusEnum : int implements HasLabel
 
     public function getLabel(): ?string
     {
-        return Str::title($this->name);
+        return $this->name;
     }
 }
