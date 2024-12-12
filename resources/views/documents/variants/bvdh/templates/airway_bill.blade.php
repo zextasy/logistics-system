@@ -1,4 +1,5 @@
 <x-bvdh-document-layout>
+    <x-documents.watermark/>
     <div class="invoice-box">
         <div class="logo-div"><img class="document-logo" src="{{request()->route()->named('bvdh.documents.preview') ? asset('logo.jpeg') :public_path('logo.jpeg')}}" alt="logo"></div>
         <table cellpadding="0" cellspacing="0">

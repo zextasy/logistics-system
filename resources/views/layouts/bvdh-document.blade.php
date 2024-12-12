@@ -108,6 +108,18 @@
             text-align: left;
         }
         /** Zee **/
+        #watermark {
+            position: fixed;
+            top: 65%;
+            width: 100%;
+            text-align: center;
+            opacity: .25;
+            transform: rotate(10deg);
+            transform-origin: 50% 50%;
+            z-index: -1000;
+            font-family: sans-serif;
+            font-size: 50px;
+        }
         .document-logo{
             display: inline-block;
             vertical-align: top;
