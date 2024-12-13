@@ -13,7 +13,7 @@ class TrackingService
      */
     public function calculateEstimatedDelivery(Shipment $shipment)
     {
-        $baseDeliveryTime = $shipment->routes->last()->estimated_arrival;
+        $baseDeliveryTime = $shipment->routes->last()?->estimated_arrival;
 
         // Check for delays and adjust estimated time
         $delays = $this->calculateTotalDelays($shipment);

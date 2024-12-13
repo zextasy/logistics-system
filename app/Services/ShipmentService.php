@@ -54,7 +54,7 @@ class ShipmentService
     protected function generateTrackingNumber()
     {
         do {
-            $number = 'CNL-TRK-'.now()->year.strtoupper(Str::random(4)).'-'.rand(1000, 9999);
+            $number = 'CNL-TRK-'.strtoupper(Str::random(4)).'-'.rand(1000, 9999);
         } while (Shipment::where('tracking_number', $number)->exists());
 
         return $number;

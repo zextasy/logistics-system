@@ -91,7 +91,7 @@ class QuoteService
     protected function generateReferenceNumber(): string
     {
         do {
-            $reference = 'CNL-QT-'.now()->year. strtoupper(Str::random(8));
+            $reference = 'CNL-QT-'. strtoupper(Str::random(8));
         } while (Quote::where('reference_number', $reference)->exists());
 
         return $reference;
