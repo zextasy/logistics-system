@@ -17,20 +17,8 @@ Route::get('/', function () {
 Route::get('/track', [TrackingController::class, 'showForm'])->name('tracking.form');
 Route::post('/track', [TrackingController::class, 'track'])->name('tracking.track');
 Route::get('/track/{trackingNumber}', [TrackingController::class, 'show'])->name('tracking.show');
-//TODO add other methods from controller
+//quotes
 Route::get('/quote', [QuoteController::class, 'create'])->name('quote.create');
-Route::post('/quote', [QuoteController::class, 'store'])->name('quote.store');
-
-Route::prefix('spatie')->name('spatie.')->group(function () {
-    Route::get('/documents/{document}/preview', [SpatieDocumentController::class, 'preview'])->name('documents.preview');
-    Route::get('/documents/{document}/preview-pdf', [SpatieDocumentController::class, 'previewPdf'])->name('documents.preview-pdf');
-    Route::get('/documents/{document}/download', [SpatieDocumentController::class, 'download'])->name('documents.download');
-});
-Route::prefix('bvdh')->name('bvdh.')->group(function () {
-    Route::get('/documents/{document}/preview', [BvdhDocumentController::class, 'preview'])->name('documents.preview');
-    Route::get('/documents/{document}/preview-pdf', [BvdhDocumentController::class, 'previewPdf'])->name('documents.preview-pdf');
-    Route::get('/documents/{document}/download', [BvdhDocumentController::class, 'download'])->name('documents.download');
-});
 /*
 |--------------------------------------------------------------------------
 | Authenticated Routes
@@ -48,6 +36,17 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{document}/preview', [DocumentController::class, 'preview'])->name('preview');
         Route::get('/{document}/preview-pdf', [DocumentController::class, 'previewPdf'])->name('preview-pdf');
         Route::get('/{document}/download', [DocumentController::class, 'download'])->name('download');
+    });
+    //TODO cleanup doc routes
+    Route::prefix('spatie')->name('spatie.')->group(function () {
+        Route::get('/documents/{document}/preview', [SpatieDocumentController::class, 'preview'])->name('documents.preview');
+        Route::get('/documents/{document}/preview-pdf', [SpatieDocumentController::class, 'previewPdf'])->name('documents.preview-pdf');
+        Route::get('/documents/{document}/download', [SpatieDocumentController::class, 'download'])->name('documents.download');
+    });
+    Route::prefix('bvdh')->name('bvdh.')->group(function () {
+        Route::get('/documents/{document}/preview', [BvdhDocumentController::class, 'preview'])->name('documents.preview');
+        Route::get('/documents/{document}/preview-pdf', [BvdhDocumentController::class, 'previewPdf'])->name('documents.preview-pdf');
+        Route::get('/documents/{document}/download', [BvdhDocumentController::class, 'download'])->name('documents.download');
     });
 });
 

@@ -6,10 +6,7 @@ use App\Http\Controllers\Admin\{AdminController,
     DashboardController as AdminDashboardController,
     ShipmentController as AdminShipmentController,
     QuoteController as AdminQuoteController,
-    DocumentController as AdminDocumentController,
-    UserController as AdminUserController,
-    ReportController,
-    SettingController};
+    UserController as AdminUserController};
 
 /*
 |--------------------------------------------------------------------------
@@ -28,32 +25,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::get('/create', [AdminShipmentController::class, 'create'])->name('shipments.create');
         Route::post('/', [AdminShipmentController::class, 'store'])->name('shipments.store');
         Route::get('/{shipment}', [AdminShipmentController::class, 'show'])->name('shipments.show');
-        Route::get('/{shipment}/edit', [AdminShipmentController::class, 'edit'])->name('shipments.edit');
-        Route::put('/{shipment}', [AdminShipmentController::class, 'update'])->name('shipments.update');
-        Route::delete('/{shipment}', [AdminShipmentController::class, 'destroy'])->name('shipments.destroy');
-        Route::put('/{shipment}/routes/{route}', [AdminShipmentController::class, 'updateRoute'])
-            ->name('shipments.routes.update');
     });
 
     // Quotes Management
     Route::prefix('quotes')->group(function () {
         Route::get('/', [AdminQuoteController::class, 'index'])->name('quotes.index');
         Route::get('/{quote}', [AdminQuoteController::class, 'show'])->name('quotes.show');
-        Route::post('/{quote}/process', [AdminQuoteController::class, 'process'])->name('quotes.process');
-        Route::post('/{quote}/reject', [AdminQuoteController::class, 'reject'])->name('quotes.reject');
-        Route::get('/export', [AdminQuoteController::class, 'export'])->name('quotes.export');
-        Route::delete('/{quote}', [AdminQuoteController::class, 'destroy'])->name('quotes.destroy');
-    });
-
-    // Documents Management
-    Route::prefix('documents')->group(function () {
-        Route::get('/', [AdminDocumentController::class, 'index'])->name('documents.index');
-        Route::get('/create', [AdminDocumentController::class, 'create'])->name('documents.create');
-        Route::post('/', [AdminDocumentController::class, 'store'])->name('documents.store');
-        Route::get('/{document}', [AdminDocumentController::class, 'show'])->name('documents.show');
-        Route::post('/{document}/revoke', [AdminDocumentController::class, 'revoke'])->name('documents.revoke');
-        Route::post('/{document}/regenerate', [AdminDocumentController::class, 'regenerate'])
-            ->name('documents.regenerate');
     });
 
     // Users Management
@@ -64,27 +41,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::put('/{user}', [AdminUserController::class, 'create'])->name('users.create');
     });
 
-    // Reports
-    Route::prefix('reports')->group(function () {
-        Route::get('/', [ReportController::class, 'index'])->name('reports.index');
-        Route::get('/export', [ReportController::class, 'export'])->name('reports.export');
-        Route::post('/custom', [ReportController::class, 'customReport'])->name('reports.custom');
-    });
-
     //Countries
     Route::prefix('countries')->group(function () {
         Route::get('/', [CountryController::class, 'index'])->name('countries.index');
         Route::get('/{country}', [CountryController::class, 'show'])->name('countries.show');
     });
 
-
-    // Settings
-    Route::prefix('settings')->group(function () {
-        Route::get('/', [SettingController::class, 'index'])->name('settings.index');
-        Route::put('/', [SettingController::class, 'update'])->name('settings.update');
-        Route::get('/notifications', [SettingController::class, 'notifications'])
-            ->name('settings.notifications');
-        Route::put('/notifications', [SettingController::class, 'updateNotifications'])
-            ->name('settings.notifications.update');
-    });
 });
