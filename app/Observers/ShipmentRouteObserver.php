@@ -4,7 +4,6 @@ namespace App\Observers;
 
 use App\Models\ShipmentRoute;
 use App\Services\DocumentGenerationService;
-use App\Services\NotificationService;
 use App\Services\ShipmentService;
 
 class ShipmentRouteObserver
@@ -16,8 +15,7 @@ class ShipmentRouteObserver
 
     public function saved(ShipmentRoute $shipmentRoute): void
     {
-        $documentService = new DocumentGenerationService();
-        (new ShipmentService($documentService))->updateShipmentStatusViaRoutes($shipmentRoute->shipment);
+        $shipmentRoute->shipment->touch();
     }
     /**
      * Handle the ShipmentRoute "created" event.

@@ -91,7 +91,7 @@ class QuoteService
     protected function generateReferenceNumber(): string
     {
         do {
-            $reference = 'QT-' . strtoupper(Str::random(8));
+            $reference = 'CNL-QT-'.now()->year. strtoupper(Str::random(8));
         } while (Quote::where('reference_number', $reference)->exists());
 
         return $reference;
@@ -106,8 +106,4 @@ class QuoteService
         return $distances[$key] ?? 5000; // Default distance if not found
     }
 
-    public function getCountries(): array
-    {
-        return $this->shipmentService->getCountries();
-    }
 }

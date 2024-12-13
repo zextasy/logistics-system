@@ -2,7 +2,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ShipmentRequest;
 use App\Models\Shipment;
 use App\Services\{ShipmentService, DocumentGenerationService};
 use Illuminate\Http\Request;
@@ -52,32 +51,16 @@ class ShipmentController extends Controller
 
     public function create()
     {
-        $countries = $this->shipmentService->getCountries();
-        return view('admin.shipments.create', compact('countries'));
+        return view('admin.shipments.create');
     }
 
     public function show(Shipment $shipment)
     {
         $shipment->load(['routes', 'documents']);
-        $countries = $this->shipmentService->getCountries();
 
-        return view('admin.shipments.show', compact('shipment', 'countries'));
+        return view('admin.shipments.show', compact('shipment'));
     }
 
-
-    public function updateRoute(Request $request, Shipment $shipment, $routeId)
-    {
-        $request->validate([
-            'status' => 'required|in:pending,arrived,departed,skipped',
-            'actual_arrival_date' => 'nullable|date',
-            'actual_departure_date' => 'nullable|date|after:actual_arrival_date',
-            'notes' => 'nullable|string'
-        ]);
-
-        $this->shipmentService->updateRoute($shipment, $routeId, $request->all());
-
-        return back()->with('success', 'Route updated successfully');
-    }
 
     public function destroy(Shipment $shipment)
     {
