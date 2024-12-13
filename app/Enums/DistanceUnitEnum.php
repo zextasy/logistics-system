@@ -10,8 +10,8 @@ enum DistanceUnitEnum : string implements HasLabel
     case CM = 'cm';
     case INCHES = 'inches';
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
-        return Str::of($this->name)->replace('_',' ');
+        return Str::of($this->name)->replace('_',' ')->toString();
     }
 }

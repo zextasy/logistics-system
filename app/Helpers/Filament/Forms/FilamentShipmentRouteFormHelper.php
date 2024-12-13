@@ -24,6 +24,7 @@ class FilamentShipmentRouteFormHelper
     public function getEditFormSchema(): array
     {
         return [
+            ...$this->getStatusFields(),
             ...$this->getRequiredFields(),
             ...$this->getActualDateFields(),
             ...$this->getOptionalFields(),
@@ -31,13 +32,10 @@ class FilamentShipmentRouteFormHelper
 
     }
 
-    private function getRequiredFields()
+    private function getRequiredFields(): array
     {
         return [
             TextInput::make('location')
-                ->required(),
-            Select::make('status')
-                ->options(ShipmentRouteStatusEnum::class)
                 ->required(),
             Fieldset::make('Expected Dates')->schema([
                 DateTimePicker::make('arrival_date')
@@ -55,13 +53,22 @@ class FilamentShipmentRouteFormHelper
         ];
     }
 
-    private function getActualDateFields()
+    private function getActualDateFields(): array
     {
         return [
             Fieldset::make('Actual Dates')->schema([
                 DateTimePicker::make('actual_arrival_date'),
                 DateTimePicker::make('actual_departure_date'),
             ]),
+        ];
+    }
+
+    private function getStatusFields(): array
+    {
+        return [
+            Select::make('status')
+                ->options(ShipmentRouteStatusEnum::class)
+                ->required(),
         ];
     }
 }

@@ -13,8 +13,8 @@ enum CargoTypeEnum : string implements HasLabel
     case FRAGILE = 'fragile';
     case VALUABLE = 'valuable';
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
-        return Str::of($this->name)->replace('_',' ');
+        return Str::of($this->name)->replace('_',' ')->toString();
     }
 }

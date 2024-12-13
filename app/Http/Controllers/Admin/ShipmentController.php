@@ -2,25 +2,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ShipmentRequest;
 use App\Models\Shipment;
-use App\Services\{ShipmentService, DocumentGenerationService, NotificationService};
+use App\Services\{ShipmentService, DocumentGenerationService};
 use Illuminate\Http\Request;
 
 class ShipmentController extends Controller
 {
     protected $shipmentService;
     protected $documentService;
-    protected $notificationService;
 
     public function __construct(
         ShipmentService $shipmentService,
-        DocumentGenerationService $documentService,
-        NotificationService $notificationService
+        DocumentGenerationService $documentService
     ) {
         $this->shipmentService = $shipmentService;
         $this->documentService = $documentService;
-        $this->notificationService = $notificationService;
     }
 
     public function index(Request $request)
@@ -55,68 +51,16 @@ class ShipmentController extends Controller
 
     public function create()
     {
-        $countries = $this->shipmentService->getCountries();
-        return view('admin.shipments.create', compact('countries'));
-    }
-
-    public function store(ShipmentRequest $request)
-    {
-        $shipment = $this->shipmentService->createShipment($request->validated());
-
-        if ($request->generate_documents) {
-            $this->documentService->generateInitialDocuments($shipment);
-        }
-
-//        $this->notificationService->sendShipmentCreatedNotification($shipment);
-
-        return redirect()
-            ->route('admin.shipments.show', $shipment)
-            ->with('success', 'Shipment created successfully');
+        return view('admin.shipments.create');
     }
 
     public function show(Shipment $shipment)
     {
         $shipment->load(['routes', 'documents']);
-        $countries = $this->shipmentService->getCountries();
 
-        return view('admin.shipments.show', compact('shipment', 'countries'));
+        return view('admin.shipments.show', compact('shipment'));
     }
 
-    public function edit(Shipment $shipment)
-    {
-        $shipment->load(['routes', 'documents']);
-        $countries = $this->shipmentService->getCountries();
-
-        return view('admin.shipments.edit', compact('shipment', 'countries'));
-    }
-    public function update(ShipmentRequest $request, Shipment $shipment)
-    {
-        $oldStatus = $shipment->status;
-
-        $this->shipmentService->updateShipment($shipment, $request->validated());
-
-        if ($oldStatus !== $shipment->status) {
-//            $this->notificationService->sendShipmentStatusNotification($shipment, $oldStatus);
-        }
-
-        return redirect()
-            ->route('admin.shipments.show', $shipment)
-            ->with('success', 'Shipment updated successfully');
-    }
-
-    public function updateRoute(Request $request, Shipment $shipment, $routeId)
-    {
-        $request->validate([
-            'status' => 'required|in:pending,arrived,departed,skipped',
-            'actual_arrival_date' => 'nullable|date',
-            'actual_departure_date' => 'nullable|date|after:actual_arrival_date',
-            'notes' => 'nullable|string'
-        ]);
-
-        $this->shipmentService->updateRoute($shipment, $routeId, $request->all());
-
-        return back()->with('success', 'Route updated successfully');
-    }
 
     public function destroy(Shipment $shipment)
     {

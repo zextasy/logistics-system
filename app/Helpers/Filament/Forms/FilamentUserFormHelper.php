@@ -35,7 +35,7 @@ class FilamentUserFormHelper
                 ->schema([
                     Select::make('role')
                         ->options(UserRoleEnum::class)
-                        ->disableOptionWhen(fn (string $value): bool => $value === UserRoleEnum::CLIENT)
+                        ->disableOptionWhen(fn (string $value): bool => $value === UserRoleEnum::CLIENT->value)
                         ->required(),
                     TextInput::make('name')
                         ->required(),

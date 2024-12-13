@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
+use Illuminate\Support\Stringable;
 
 #[ObservedBy([ShipmentObserver::class])]
 class Shipment extends Model
@@ -184,7 +185,7 @@ class Shipment extends Model
         );
     }
 
-    private function getArrayText(array $array)
+    private function getArrayText(array $array): Stringable
     {
         $text = json_encode($array);
 
@@ -209,11 +210,18 @@ class Shipment extends Model
         return $this->estimated_delivery->isPast();
     }
 
+    public function hasBeenShipped(): bool{
+        if (isset($this->date_of_shipment)){
+            return $this->date_of_shipment->isPast();
+        }
+        return false;
+    }
+
     public function calculateStatus(): void
     {
         $status = ShipmentStatusEnum::PENDING;
 
-        if (isset($this->date_of_shipment) && $this->date_of_shipment->isPast()){
+        if ($this->hasBeenShipped()){
             $status = ShipmentStatusEnum::ON_TRANSIT;
         }
 

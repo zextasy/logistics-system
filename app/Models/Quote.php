@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[ObservedBy([QuoteObserver::class])]
@@ -72,41 +74,41 @@ class Quote extends Model
         'cargo_type' => CargoTypeEnum::class,
     ];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function assignedTo()
+    public function assignedTo(): BelongsTo
     {
         return $this->belongsTo(User::class, 'assigned_to');
     }
 
-    public function attachments()
+    public function attachments(): HasMany
     {
         return $this->hasMany(QuoteAttachment::class);
     }
 
-    public function country()
+    public function country(): BelongsTo
     {
         return $this->belongsTo(Country::class, 'country_id');
     }
-    public function originCountry()
+    public function originCountry(): BelongsTo
     {
         return $this->belongsTo(Country::class, 'origin_country_id');
     }
 
-    public function originCity()
+    public function originCity(): BelongsTo
     {
         return $this->belongsTo(City::class, 'origin_city_id');
     }
 
-    public function destinationCountry()
+    public function destinationCountry(): BelongsTo
     {
         return $this->belongsTo(Country::class, 'destination_country_id');
     }
 
-    public function destinationCity()
+    public function destinationCity(): BelongsTo
     {
         return $this->belongsTo(City::class, 'destination_city_id');
     }

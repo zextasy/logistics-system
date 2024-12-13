@@ -9,7 +9,7 @@ enum WeightUnitEnum : string implements HasLabel
     case KG = 'kg';
     case LBS = 'lbs';
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
         return $this->name;
     }

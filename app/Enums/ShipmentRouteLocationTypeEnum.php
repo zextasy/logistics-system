@@ -12,8 +12,8 @@ enum ShipmentRouteLocationTypeEnum : string implements HasLabel
     case WAREHOUSE = 'warehouse';
     case CUSTOMS = 'customs';
     case DISTRIBUTION_CENTER = 'distribution_center';
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
-        return Str::of($this->name)->replace('_',' ');
+        return Str::of($this->name)->replace('_',' ')->toString();
     }
 }

@@ -13,14 +13,11 @@ use Carbon\Carbon;
 
 class ShipmentService
 {
-    protected $notificationService;
     protected $documentService;
 
     public function __construct(
-        NotificationService $notificationService,
         DocumentGenerationService $documentService
     ) {
-        $this->notificationService = $notificationService;
         $this->documentService = $documentService;
     }
 
@@ -44,76 +41,23 @@ class ShipmentService
         return $shipment;
     }
 
-    public function updateShipment(Shipment $shipment, array $data)
-    {
-        $oldStatus = $shipment->status;
-
-        $shipment->update($data);
-
-        if (isset($data['routes']) && is_array($data['routes'])) {
-            $shipment->routes()->delete();
-            foreach ($data['routes'] as $index => $route) {
-                $shipment->routes()->create([
-                    ...$route,
-                ]);
-            }
-        }
-
-        if ($oldStatus !== $shipment->status) {
-            $this->notificationService->sendStatusUpdateNotification($shipment, $oldStatus->value);
-        }
-
-        return $shipment;
-    }
-
-    public function updateRoute(Shipment $shipment, $routeId, array $data)
-    {
-        $route = $shipment->routes()->findOrFail($routeId);
-        $route->update($data);
-
-        $this->updateShipmentStatusViaRoutes($shipment);
-
-        return $route;
-    }
 
     public function deleteShipment(Shipment $shipment)
     {
         foreach ($shipment->documents as $document) {
             $this->documentService->revoke($document, 'Shipment deleted');
         }
-
+        $shipment->routes()->delete();
         $shipment->delete();
     }
 
     protected function generateTrackingNumber()
     {
         do {
-            $number = strtoupper(Str::random(4)).'-'.rand(1000, 9999);
+            $number = 'CNL-TRK-'.strtoupper(Str::random(4)).'-'.rand(1000, 9999);
         } while (Shipment::where('tracking_number', $number)->exists());
 
         return $number;
-    }
-
-    public function updateShipmentStatusViaRoutes(Shipment $shipment)
-    {
-        $latestRoute = $shipment->routes()
-            ->where('arrival_date', '<=', now())
-            ->orderBy('arrival_date', 'desc')
-            ->first();
-
-        if (!$latestRoute) {
-            return;
-        }
-
-        $status = match ($latestRoute->status) {
-            ShipmentRouteStatusEnum::ARRIVED => ShipmentStatusEnum::ON_TRANSIT,
-            ShipmentRouteStatusEnum::DEPARTED => $latestRoute->order === $shipment->routes()->count() ? ShipmentStatusEnum::DELIVERED : ShipmentStatusEnum::ON_TRANSIT,
-            default => $shipment->status
-        };
-
-        if ($status !== $shipment->status) {
-            $shipment->update(['status' => $status]);
-        }
     }
 
     public function getCountries()

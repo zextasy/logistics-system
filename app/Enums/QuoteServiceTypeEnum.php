@@ -14,17 +14,16 @@ case SEA='sea_freight';
 //case RAIL = 'rail_freight';
 //case MULTI = 'multimodal';
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
-        return Str::of($this->value)->replace('_',' ')->upper();
+        return Str::of($this->value)->replace('_',' ')->upper()->toString();
     }
 
-    public function getColor(): string | array | null
+    public function getColor(): string
     {
         return match ($this) {
             self::SEA => 'success',
             self::AIR => 'info',
-            default => 'gray',
         };
     }
 }

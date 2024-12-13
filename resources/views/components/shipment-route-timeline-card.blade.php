@@ -26,7 +26,9 @@
                     <div class="min-w-0 flex-1 ml-4">
                         <div>
                             <p class="font-medium text-gray-900">{{ strtoupper($shipment->loading_port) }}</p>
-                            <p class="text-sm text-gray-500">{{ $shipment->date_of_shipment->toFormattedDateString()}}</p>{{-- ->format('M d, Y H:i')--}}
+                            @if($shipment->date_of_shipment)
+                                <p class="text-sm text-gray-500">{{ $shipment->date_of_shipment->toFormattedDateString()}}</p>
+                            @endif
                         </div>
                     </div>
                 </div>

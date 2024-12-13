@@ -13,7 +13,7 @@ class TrackingService
      */
     public function calculateEstimatedDelivery(Shipment $shipment)
     {
-        $baseDeliveryTime = $shipment->routes->last()->estimated_arrival;
+        $baseDeliveryTime = $shipment->routes->last()?->estimated_arrival;
 
         // Check for delays and adjust estimated time
         $delays = $this->calculateTotalDelays($shipment);
@@ -126,11 +126,7 @@ class TrackingService
      */
     public function subscribeToUpdates(Shipment $shipment, string $email, array $notificationTypes)
     {
-        return $shipment->subscriptions()->create([
-            'email' => $email,
-            'notification_types' => $notificationTypes,
-            'status' => 'active'
-        ]);
+        return null;
     }
 
     /**
@@ -138,13 +134,7 @@ class TrackingService
      */
     public function reportIssue(Shipment $shipment, string $issueType, string $description, string $contactEmail, ?string $contactPhone)
     {
-        return $shipment->issues()->create([
-            'type' => $issueType,
-            'description' => $description,
-            'contact_email' => $contactEmail,
-            'contact_phone' => $contactPhone,
-            'status' => 'pending'
-        ]);
+        return null;
     }
 
     /**
@@ -155,24 +145,23 @@ class TrackingService
         $routePoints = $shipment->routes->map(function ($route) {
             return [
                 'location' => $route->location,
-                'coordinates' => $this->getCoordinates($route->location),
+//                'coordinates' => $this->getCoordinates($route->location),
                 'status' => $route->status,
                 'arrival_date' => $route->arrival_date->format('Y-m-d H:i:s')
             ];
         });
 
         return [
-            'origin' => $this->getCoordinates($shipment->origin),
-            'destination' => $this->getCoordinates($shipment->destination),
+//            'origin' => $this->getCoordinates($shipment->origin),
+//            'destination' => $this->getCoordinates($shipment->destination),
             'route_points' => $routePoints,
-            'current_location' => $this->getCoordinates($shipment->current_location)
+//            'current_location' => $this->getCoordinates($shipment->current_location)
         ];
     }
 
     // Private helper methods...
     private function calculateTotalDelays(Shipment $shipment)
     {
-        return rand(0,100);
         return $shipment->routes
             ->sum(function ($route) {
                 if (!$route->actual_arrival_date) {
@@ -208,5 +197,15 @@ class TrackingService
             return 'pending';
         }
         return $route->actual_arrival_date ? 'completed' : 'in_progress';
+    }
+
+    private function getDelayReasons(Shipment $shipment)
+    {
+        return 'Reasons';
+    }
+
+    private function getRecoveryPlan(Shipment $shipment)
+    {
+        return 'Plans';
     }
 }

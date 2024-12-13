@@ -13,12 +13,12 @@ case PROCESSING='processing';
 case QUOTED = 'quoted';
 case REJECTED = 'rejected';
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
-        return Str::of($this->name)->replace('_',' ');
+        return Str::of($this->name)->replace('_',' ')->toString();
     }
 
-    public function getColor(): string | array | null
+    public function getColor(): string
     {
         return match ($this) {
             self::PENDING => 'warning',

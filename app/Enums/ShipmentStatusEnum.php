@@ -17,12 +17,12 @@ enum ShipmentStatusEnum : string implements HasLabel, HasColor
     case CANCELLED = 'cancelled';
     case ON_HOLD = 'on_hold';
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
-        return Str::of($this->name)->replace('_',' ');
+        return Str::of($this->name)->replace('_',' ')->toString();
     }
 
-    public function getColor(): string | array | null
+    public function getColor(): string
     {
         return match ($this) {
             self::PENDING => 'warning',

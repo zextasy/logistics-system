@@ -63,29 +63,9 @@ class TrackingController extends Controller
             ->where('tracking_number', $trackingNumber)
             ->firstOrFail();
 
-        // Get estimated delivery information
-        $estimatedDelivery = $this->trackingService->calculateEstimatedDelivery($shipment);
-
         // Get current location and status
         $currentStatus = $this->trackingService->getCurrentStatus($shipment);
-
-        // Get milestone progress
-        $milestones = $this->trackingService->getMilestones($shipment);
-
-        // Get any delay information
-        $delayInfo = $this->trackingService->getDelayInformation($shipment);
-
-        // Get weather conditions at current location (if applicable)
-        $weatherInfo = $this->trackingService->getWeatherInfo($shipment->current_location);
-
-        return view('tracking.show', compact(
-            'shipment',
-            'estimatedDelivery',
-            'currentStatus',
-            'milestones',
-            'delayInfo',
-            'weatherInfo'
-        ));
+        return view('tracking.show', compact('shipment','currentStatus'));
     }
 
     /**
@@ -95,13 +75,10 @@ class TrackingController extends Controller
     {
         $shipment = Shipment::where('tracking_number', $trackingNumber)->firstOrFail();
 
-        $updates = $this->trackingService->getRealtimeUpdates($shipment);
-
         return response()->json([
             'current_location' => $shipment->current_location,
             'status' => $shipment->status,
             'last_updated' => $shipment->updated_at->diffForHumans(),
-            'updates' => $updates
         ]);
     }
 
@@ -125,22 +102,6 @@ class TrackingController extends Controller
         );
 
         return back()->with('success', 'You have been subscribed to shipment updates successfully.');
-    }
-
-    /**
-     * Download shipping documents
-     */
-    public function downloadDocuments($trackingNumber)
-    {
-        $shipment = Shipment::where('tracking_number', $trackingNumber)
-            ->with('documents')
-            ->firstOrFail();
-
-        if (!$shipment->documents->count()) {
-            return back()->with('error', 'No documents available for this shipment.');
-        }
-
-        return view('tracking.documents', compact('shipment'));
     }
 
     /**
@@ -182,27 +143,5 @@ class TrackingController extends Controller
         return response()->json($mapData);
     }
 
-    /**
-     * Get estimated cost breakdown
-     */
-    public function getCostBreakdown($trackingNumber)
-    {
-        $shipment = Shipment::where('tracking_number', $trackingNumber)->firstOrFail();
 
-        $breakdown = $this->trackingService->calculateCostBreakdown($shipment);
-
-        return response()->json($breakdown);
-    }
-
-    /**
-     * Get customs clearance status
-     */
-    public function getCustomsStatus($trackingNumber)
-    {
-        $shipment = Shipment::where('tracking_number', $trackingNumber)->firstOrFail();
-
-        $customsStatus = $this->trackingService->getCustomsStatus($shipment);
-
-        return response()->json($customsStatus);
-    }
 }

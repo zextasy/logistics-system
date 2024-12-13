@@ -9,14 +9,11 @@ use Storage;
 
 class QuoteService
 {
-    protected $notificationService;
     protected $shipmentService;
 
     public function __construct(
-        NotificationService $notificationService,
         ShipmentService $shipmentService
     ) {
-        $this->notificationService = $notificationService;
         $this->shipmentService = $shipmentService;
     }
 
@@ -25,7 +22,6 @@ class QuoteService
         $data['reference_number'] = $this->generateReferenceNumber();
         $quote = Quote::create($data);
 
-//        $this->notificationService->sendQuoteReceivedNotification($quote);
         //TODO - send emial notification
         return $quote;
     }
@@ -42,8 +38,6 @@ class QuoteService
             'assigned_to' => auth()->id()
         ]);
 
-        $this->notificationService->sendQuoteProcessedNotification($quote);
-
         return $quote;
     }
 
@@ -54,8 +48,6 @@ class QuoteService
             'admin_notes' => $reason,
             'processed_at' => now()
         ]);
-
-        $this->notificationService->sendQuoteRejectedNotification($quote, $reason);
 
         return $quote;
     }
@@ -99,7 +91,7 @@ class QuoteService
     protected function generateReferenceNumber(): string
     {
         do {
-            $reference = 'QT-' . strtoupper(Str::random(8));
+            $reference = 'CNL-QT-'. strtoupper(Str::random(8));
         } while (Quote::where('reference_number', $reference)->exists());
 
         return $reference;
@@ -114,8 +106,4 @@ class QuoteService
         return $distances[$key] ?? 5000; // Default distance if not found
     }
 
-    public function getCountries(): array
-    {
-        return $this->shipmentService->getCountries();
-    }
 }
