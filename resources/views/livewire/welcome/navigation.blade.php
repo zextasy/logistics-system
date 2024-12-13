@@ -18,7 +18,6 @@
                 <a href="{{ route('dashboard') }}" class="inline-block bg-indigo-600 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-indigo-700">Dashboard</a>
             @else
                 <a href="{{ route('login') }}" class="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-indigo-600 hover:bg-gray-50">Sign in</a>
-                <a href="{{ route('register') }}" class="inline-block bg-indigo-600 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-indigo-700">Register</a>
             @endauth
         </div>
     </div>
