@@ -10,7 +10,7 @@ enum CountryStatusEnum : int implements HasLabel
     case ACTIVE = 1;
     case INACTIVE = 99;
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
         return $this->name;
     }

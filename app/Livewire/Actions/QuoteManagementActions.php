@@ -48,19 +48,4 @@ class QuoteManagementActions extends Component implements HasForms, HasActions
         return view('livewire.actions.quote-management-actions');
     }
 
-    private function notifySuccess()
-    {
-        Notification::make()
-            ->title('Success!')
-            ->success()
-            ->send();
-    }
-
-    private function notifyFailure()
-    {
-        Notification::make()
-            ->title('Something went wrong')
-            ->danger()
-            ->send();
-    }
 }

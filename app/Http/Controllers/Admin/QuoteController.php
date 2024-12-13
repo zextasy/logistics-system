@@ -5,20 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\QuoteUpdateRequest;
 use App\Models\Quote;
-use App\Services\{QuoteService, NotificationService};
+use App\Services\{QuoteService};
 use Illuminate\Http\Request;
 
 class QuoteController extends Controller
 {
     protected $quoteService;
-    protected $notificationService;
 
-    public function __construct(
-        QuoteService $quoteService,
-        NotificationService $notificationService
-    ) {
+    public function __construct(QuoteService $quoteService) {
         $this->quoteService = $quoteService;
-        $this->notificationService = $notificationService;
     }
 
     public function index(Request $request)
@@ -40,22 +35,11 @@ class QuoteController extends Controller
         return view('admin.quotes.show', compact('quote'));
     }
 
-    public function process(QuoteUpdateRequest $request, Quote $quote)
-    {
-        $this->quoteService->processQuote($quote, $request->validated());
-        $this->notificationService->sendQuoteProcessedNotification($quote);
-
-        return redirect()
-            ->route('admin.quotes.index')
-            ->with('success', 'Quote processed successfully');
-    }
-
     public function reject(Request $request, Quote $quote)
     {
         $request->validate(['reason' => 'required|string']);
 
         $this->quoteService->rejectQuote($quote, $request->reason);
-        $this->notificationService->sendQuoteRejectedNotification($quote, $request->reason);
 
         return redirect()
             ->route('admin.quotes.index')
@@ -71,6 +55,5 @@ class QuoteController extends Controller
     public function destroy(Quote $quote)
     {
         $quote->delete();
-        return $this->reject('admin.quotes.index');
     }
 }

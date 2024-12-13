@@ -12,8 +12,8 @@ enum ContainerSizeEnum : string implements HasLabel
     case FORTY_FT = '40ft';
     case FORTY_FT_HC = '40ft_HC';
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
-        return Str::of($this->value)->replace('_',' ');
+        return Str::of($this->value)->replace('_',' ')->toString();
     }
 }

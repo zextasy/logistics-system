@@ -138,11 +138,10 @@ class CreateQuote extends Component implements HasForms
     {
         $data = $this->form->getState();
 
-        $notificationService = new NotificationService();
         $documentService = new DocumentGenerationService();
-        $shipmentService = new ShipmentService($notificationService, $documentService);
+        $shipmentService = new ShipmentService($documentService);
 
-        $record = (new QuoteService($notificationService, $shipmentService))->createQuote($data);
+        $record = (new QuoteService($shipmentService))->createQuote($data);
 
         $this->form->model($record)->saveRelationships();
         Notification::make()

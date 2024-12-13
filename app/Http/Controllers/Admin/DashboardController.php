@@ -5,17 +5,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\{Shipment, Quote, Document};
-use App\Services\ReportingService;
 use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
-    protected $reportingService;
 
-    public function __construct(ReportingService $reportingService)
-    {
-        $this->reportingService = $reportingService;
-    }
 
     public function index()
     {
@@ -23,7 +17,6 @@ class DashboardController extends Controller
             'total_shipments' => Shipment::count(),
             'active_shipments' => Shipment::whereNotIn('status', ['delivered', 'cancelled'])->count(),
             'pending_quotes' => Quote::where('status', 'pending')->count(),
-            'monthly_revenue' => $this->reportingService->calculateMonthlyRevenue(),
         ];
 
         $recentActivity = [
@@ -31,7 +24,7 @@ class DashboardController extends Controller
                 ->latest()
                 ->take(5)
                 ->get(),
-            'quotes' => Quote::with('user')
+            'quotes' => Quote::with('assignedTo')
                 ->latest()
                 ->take(5)
                 ->get(),
@@ -41,11 +34,7 @@ class DashboardController extends Controller
                 ->get(),
         ];
 
-        $chartData = [
-            'shipments' => $this->reportingService->getShipmentChartData(),
-            'revenue' => $this->reportingService->getRevenueChartData(),
-        ];
 
-        return view('admin.dashboard', compact('metrics', 'recentActivity', 'chartData'));
+        return view('admin.dashboard', compact('metrics', 'recentActivity'));
     }
 }

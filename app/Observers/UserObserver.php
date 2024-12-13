@@ -13,7 +13,7 @@ class UserObserver
     public function creating(User $user): void
     {
         if (empty($user->role)){
-            $user->role = UserRoleEnum::CLIENT;
+            $user->role = UserRoleEnum::CLIENT->value;
         }
     }
 

@@ -9,14 +9,11 @@ use Storage;
 
 class QuoteService
 {
-    protected $notificationService;
     protected $shipmentService;
 
     public function __construct(
-        NotificationService $notificationService,
         ShipmentService $shipmentService
     ) {
-        $this->notificationService = $notificationService;
         $this->shipmentService = $shipmentService;
     }
 
@@ -25,7 +22,6 @@ class QuoteService
         $data['reference_number'] = $this->generateReferenceNumber();
         $quote = Quote::create($data);
 
-//        $this->notificationService->sendQuoteReceivedNotification($quote);
         //TODO - send emial notification
         return $quote;
     }
@@ -42,8 +38,6 @@ class QuoteService
             'assigned_to' => auth()->id()
         ]);
 
-        $this->notificationService->sendQuoteProcessedNotification($quote);
-
         return $quote;
     }
 
@@ -54,8 +48,6 @@ class QuoteService
             'admin_notes' => $reason,
             'processed_at' => now()
         ]);
-
-        $this->notificationService->sendQuoteRejectedNotification($quote, $reason);
 
         return $quote;
     }

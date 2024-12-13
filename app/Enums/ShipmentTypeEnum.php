@@ -12,8 +12,8 @@ case SEA='sea';
 //case ROAD ='road';
 //case RAIL = 'rail';
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
-        return Str::of($this->name)->replace('_',' ');
+        return Str::of($this->name)->replace('_',' ')->toString();
     }
 }

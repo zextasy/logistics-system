@@ -8,6 +8,7 @@ use App\Observers\ShipmentRouteObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[ObservedBy([ShipmentRouteObserver::class])]
 class ShipmentRoute extends Model
@@ -37,7 +38,7 @@ class ShipmentRoute extends Model
         'location_type' => ShipmentRouteLocationTypeEnum::class
     ];
 
-    public function shipment()
+    public function shipment(): BelongsTo
     {
         return $this->belongsTo(Shipment::class);
     }
@@ -59,7 +60,7 @@ class ShipmentRoute extends Model
     }
 
 
-    public function calculateStatus()
+    public function calculateStatus(): void
     {
         $status = ShipmentRouteStatusEnum::PENDING;
 

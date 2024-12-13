@@ -70,9 +70,8 @@ class CreateShipment extends Component implements HasForms
     {
         $data = $this->form->getState();
         $data['user_id'] = auth()->id();
-        $notificationService = new NotificationService();
         $documentService = new DocumentGenerationService();
-         $record = (new ShipmentService($notificationService, $documentService))->createShipment($data);
+         $record = (new ShipmentService($documentService))->createShipment($data);
 
         $this->form->model($record)->saveRelationships();
         Notification::make()

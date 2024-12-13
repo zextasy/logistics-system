@@ -128,22 +128,6 @@ class TrackingController extends Controller
     }
 
     /**
-     * Download shipping documents
-     */
-    public function downloadDocuments($trackingNumber)
-    {
-        $shipment = Shipment::where('tracking_number', $trackingNumber)
-            ->with('documents')
-            ->firstOrFail();
-
-        if (!$shipment->documents->count()) {
-            return back()->with('error', 'No documents available for this shipment.');
-        }
-
-        return view('tracking.documents', compact('shipment'));
-    }
-
-    /**
      * Report an issue with a shipment
      */
     public function reportIssue(Request $request, $trackingNumber)

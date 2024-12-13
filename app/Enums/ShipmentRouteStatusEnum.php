@@ -12,9 +12,9 @@ enum ShipmentRouteStatusEnum : string implements HasLabel
     case DEPARTED = 'departed';
     case SKIPPED = 'skipped';
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
-        return Str::of($this->name)->replace('_',' ');
+        return Str::of($this->name)->replace('_',' ')->toString();
     }
 
     public function hasDeparted(): bool

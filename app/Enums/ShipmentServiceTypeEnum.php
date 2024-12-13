@@ -11,8 +11,8 @@ enum ShipmentServiceTypeEnum : string implements HasLabel
     case EXPRESS = 'express';
     case ECONOMY = 'economy';
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
-        return Str::of($this->name)->replace('_',' ');
+        return Str::of($this->name)->replace('_',' ')->toString();
     }
 }

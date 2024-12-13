@@ -13,14 +13,11 @@ use Carbon\Carbon;
 
 class ShipmentService
 {
-    protected $notificationService;
     protected $documentService;
 
     public function __construct(
-        NotificationService $notificationService,
         DocumentGenerationService $documentService
     ) {
-        $this->notificationService = $notificationService;
         $this->documentService = $documentService;
     }
 
@@ -60,7 +57,7 @@ class ShipmentService
         }
 
         if ($oldStatus !== $shipment->status) {
-            $this->notificationService->sendStatusUpdateNotification($shipment, $oldStatus->value);
+            //TODO notify user?
         }
 
         return $shipment;
@@ -105,9 +102,12 @@ class ShipmentService
             return;
         }
 
+        $finalRoute = $shipment->routes()
+            ->orderBy('arrival_date', 'desc')
+            ->first();
         $status = match ($latestRoute->status) {
             ShipmentRouteStatusEnum::ARRIVED => ShipmentStatusEnum::ON_TRANSIT,
-            ShipmentRouteStatusEnum::DEPARTED => $latestRoute->order === $shipment->routes()->count() ? ShipmentStatusEnum::DELIVERED : ShipmentStatusEnum::ON_TRANSIT,
+            ShipmentRouteStatusEnum::DEPARTED => $latestRoute->id === $finalRoute->id ? ShipmentStatusEnum::DELIVERED : ShipmentStatusEnum::ON_TRANSIT,
             default => $shipment->status
         };
 

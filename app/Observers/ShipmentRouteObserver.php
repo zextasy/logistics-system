@@ -16,9 +16,8 @@ class ShipmentRouteObserver
 
     public function saved(ShipmentRoute $shipmentRoute): void
     {
-        $notificationService = new NotificationService();
         $documentService = new DocumentGenerationService();
-        (new ShipmentService($notificationService, $documentService))->updateShipmentStatusViaRoutes($shipmentRoute->shipment);
+        (new ShipmentService($documentService))->updateShipmentStatusViaRoutes($shipmentRoute->shipment);
     }
     /**
      * Handle the ShipmentRoute "created" event.
