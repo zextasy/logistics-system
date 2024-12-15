@@ -23,7 +23,6 @@ return new class extends Migration
             $table->timestamps();
 
             // Indexes
-            $table->index(['shipment_id', 'order']);
             $table->index('status');
         });
     }
