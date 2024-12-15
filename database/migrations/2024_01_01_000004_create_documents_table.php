@@ -11,19 +11,10 @@ return new class extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->foreignId('shipment_id')->constrained()->cascadeOnDelete();
-            $table->enum('type', [
-                'airway_bill',
-                'bill_of_lading',
-                'commercial_invoice',
-                'packing_list',
-                'certificate_of_origin',
-                'customs_declaration',
-                'insurance_certificate',
-                'delivery_order'
-            ]);
+            $table->string('type');
             $table->string('reference_number')->unique();
             $table->string('file_path');
-            $table->enum('status', ['draft', 'active', 'revoked', 'expired']);
+            $table->string('status');
             $table->timestamp('generated_at');
             $table->timestamp('expires_at')->nullable();
             $table->text('notes')->nullable();

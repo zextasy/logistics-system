@@ -12,17 +12,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->string('tracking_number')->unique();
-            $table->enum('type', ['air', 'sea', 'road', 'rail']);
-            $table->enum('status', [
-                'pending',
-                'picked_up',
-                'on_transit',
-                'customs',
-                'out_for_delivery',
-                'delivered',
-                'cancelled',
-                'on_hold'
-            ]);
+            $table->string('type');
+            $table->string('status');
 
             // Origin and Destination
             $table->unsignedInteger('origin_country_id');
@@ -89,7 +80,6 @@ return new class extends Migration
             $table->index('status');
             $table->index('current_location');
             $table->index('estimated_delivery');
-            $table->index(['origin_country', 'destination_country']);
         });
     }
 

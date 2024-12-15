@@ -30,33 +30,16 @@ return new class extends Migration
 
             // Cargo Information
             $table->text('description');
-            $table->enum('cargo_type', [
-                'general',
-                'hazardous',
-                'perishable',
-                'fragile',
-                'valuable'
-            ])->default('general');
+            $table->string('cargo_type')->default('general');
             $table->decimal('estimated_weight', 10, 2)->nullable();
-            $table->enum('weight_unit', ['kg', 'lbs'])->default('kg');
+            $table->string('weight_unit')->default('kg');
             $table->json('dimensions')->nullable();
             $table->integer('pieces_count')->nullable();
 
             // Service Requirements
-            $table->enum('service_type', [
-                'air_freight',
-                'sea_freight',
-                'road_freight',
-                'rail_freight',
-                'multimodal',
-                'roll_on_roll_off'
-            ]);
+            $table->string('service_type');
             $table->string('container_size')->nullable();
-            $table->enum('incoterm', [
-                'EXW', 'FCA', 'CPT', 'CIP',
-                'DAP', 'DPU', 'DDP', 'FAS',
-                'FOB', 'CFR', 'CIF'
-            ])->nullable();
+            $table->string('incoterm')->nullable();
             $table->date('expected_ship_date')->nullable();
             $table->boolean('insurance_required')->default(false);
             $table->boolean('customs_clearance_required')->default(false);
@@ -65,12 +48,7 @@ return new class extends Migration
             $table->text('special_requirements')->nullable();
 
             // Quote Status and Administrative
-            $table->enum('status', [
-                'pending',
-                'processing',
-                'quoted',
-                'rejected',
-            ])->default('pending');
+            $table->string('status')->default('pending');
             $table->foreignId('assigned_to')
                 ->nullable()
                 ->references('id')
@@ -90,7 +68,6 @@ return new class extends Migration
             $table->index('status');
             $table->index('service_type');
             $table->index('expected_ship_date');
-            $table->index(['origin_country', 'destination_country']);
             $table->index('assigned_to');
         });
     }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->dateTime('departure_date')->nullable();
             $table->dateTime('actual_arrival_date')->nullable();
             $table->dateTime('actual_departure_date')->nullable();
-            $table->enum('status', ['pending', 'arrived', 'departed', 'skipped']);
+            $table->string('status');
             $table->text('notes')->nullable();
             $table->json('metadata')->nullable();
             $table->timestamps();
