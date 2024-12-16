@@ -1,59 +1,211 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name', 'Logistics System') }}</title>
-    <meta name="description" content="Professional logistics and shipping solutions for businesses and individuals">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logistics Solutions</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
-        <style>
-            [x-cloak] {
-                display: none !important;
-            }
-        </style>
-    <!-- Scripts -->
-        @filamentStyles
+        body {
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Navbar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .buttons a {
+            text-decoration: none;
+            margin-left: 10px;
+            padding: 5px 10px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            color: #333;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #f3f3f3;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .hero p {
+            margin: 20px 0;
+            color: #555;
+        }
+
+        .hero .btn {
+            margin: 10px;
+            padding: 10px 20px;
+            background: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .placeholder {
+            width: 100%;
+            height: 300px;
+            background: #d3d3d3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #777;
+        }
+
+        /* Section Style */
+        .section {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .section h2 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .section p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .card-wrapper {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            flex: 1 1 calc(33.333% - 20px);
+            background: #fff;
+            border: 1px solid #e6e6e6;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        /* Process Section */
+        .process {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .process-step {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+
+        /* CTA */
+        .cta {
+            background: #f3f3f3;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .cta a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        /* Filament */
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+    @filamentStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-    <body class="antialiased">
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-        <!-- Header/Navigation -->
-        <header class="relative bg-white">
-            <livewire:welcome.navigation />
-        </header>
-        <!-- Page Content -->
-            {{ $slot }}
-        @livewire('notifications')
-    </div>
-        <!-- Footer -->
-        <footer class="bg-gray-50 dark:bg-gray-950" aria-labelledby="footer-heading">
-    <h2 id="footer-heading" class="sr-only">Footer</h2>
-    <div class="mx-auto max-w-7xl px-4 pt-16 pb-8 sm:px-6 lg:px-8 lg:pt-24">
-        <div class="xl:grid xl:grid-cols-3 xl:gap-8">
-            <div class="grid grid-cols-2 gap-8 xl:col-span-2">
-                <div class="md:grid md:grid-cols-2 md:gap-8">
-                    <div>
-                        <h3 class="text-base font-medium text-gray-900">Solutions</h3>
-                        <ul role="list" class="mt-4 space-y-4">
-                            <li>
-                                <a href="#" class="text-base text-gray-500 hover:text-gray-900">Air Freight</a>
-                            </li>
-                            <li>
-                                <a href="#" class="text-base text-gray-500 hover:text-gray-900">Sea Freight</a>
-                            </li>
-                            <li>
-                                <a href="#" class="text-base text-gray-500 hover:text-gray-900">Customs Clearance</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+<body class="antialiased">
+<div class="min-h-screen">
+    <!-- Navbar -->
+    <header>
+        <div class="logo">
+            <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
         </div>
-    </div>
-</footer>
+        <nav>
+            <a href="{{route('home')}}#">Home Page</a>
+            <a href="{{route('home')}}#">Services Offered</a>
+            <a href="{{route('home')}}#">Contact Us</a>
+            <a href="{{route('home')}}#">More Info</a>
+            <a href="{{route('quote.create')}}#">Get a Quote</a>
+            <a href="{{route('tracking.form')}}#">Track a Shipment</a>
+        </nav>
+        <div class="buttons">
+            <a href="{{route('register')}}">Join</a>
+            <a href="{{route('login')}}">Login</a>
+        </div>
+    </header>
+    {{$slot}}
+    @livewire('notifications')
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Logistics Solutions | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
     @filamentScripts
+</div>
 </body>
 </html>
