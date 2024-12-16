@@ -201,11 +201,11 @@
     </header>
     {{$slot}}
     @livewire('notifications')
+</div>
     <!-- Footer -->
     <footer>
         <p>&copy; 2024 Logistics Solutions | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
     </footer>
     @filamentScripts
-</div>
 </body>
 </html>
