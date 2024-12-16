@@ -110,13 +110,13 @@
         /** Zee **/
         #watermark {
             position: fixed;
-            top: 65%;
+            top: 35%;
             width: 100%;
             text-align: center;
-            opacity: .25;
+            opacity: .10;
             transform: rotate(10deg);
             transform-origin: 50% 50%;
-            z-index: -1000;
+            /*z-index: -1000;*/
             font-family: sans-serif;
             font-size: 50px;
         }

@@ -9,8 +9,7 @@ class DocumentTextHelper
     public function getTextForDocumentAdditionalClause(Document $document): string
     {
         return match ($document->type) {
-            'airway_bill' => $this->getTextForAirWayBillAdditionalClause(),
-            'bill_of_lading' => $this->getTextForBillOfLadenAdditionalClause(),
+            'airway_bill','bill_of_lading' => $this->getTextForBillOfLadenAdditionalClause(),
             default => throw new \InvalidArgumentException("Invalid document type: {$document->type}")
         };
     }
