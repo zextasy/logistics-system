@@ -38,7 +38,7 @@ class TrackingController extends Controller
 
 
         $shipment = Shipment::with(['routes' => function ($query) {
-            $query->orderBy('order', 'asc');
+            $query->orderBy('arrival_date', 'desc');
         }])
             ->where('tracking_number', $trackingNumber)
             ->first();
@@ -58,7 +58,7 @@ class TrackingController extends Controller
     public function show($trackingNumber)
     {
         $shipment = Shipment::with(['routes' => function ($query) {
-            $query->orderBy('order', 'asc');
+            $query->orderBy('arrival_date', 'desc');
         }])
             ->where('tracking_number', $trackingNumber)
             ->firstOrFail();

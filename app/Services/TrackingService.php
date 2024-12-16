@@ -35,7 +35,7 @@ class TrackingService
         $shipment->routes->each->touch();
         $currentRoute = $shipment->routes()
             ->where('arrival_date', '<=', now())
-            ->orderBy('order', 'desc')
+            ->orderBy('arrival_date', 'desc')
             ->first();
 
         return [
@@ -181,7 +181,7 @@ class TrackingService
     {
         return $shipment->routes()
             ->where('arrival_date', '>', now())
-            ->orderBy('order', 'asc')
+            ->orderBy('arrival_date', 'desc')
             ->first();
     }
 

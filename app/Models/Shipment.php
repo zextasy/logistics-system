@@ -133,7 +133,7 @@ class Shipment extends Model
     {
         return $this->routes()
             ->where('arrival_date', '<=', now())
-            ->orderBy('order', 'desc')
+            ->orderBy('arrival_date', 'desc')
             ->first();
     }
 
