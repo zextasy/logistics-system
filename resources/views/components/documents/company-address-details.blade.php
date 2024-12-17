@@ -7,4 +7,5 @@
 <div class="image-container">
     <p class="text-red">CANARY LOGISTICS LLC</p>
     <p class="text-blue">HEAD OFFICE: NO 202, HUSSAIN NASSERLOOTHA & SAUD HUMAIDAM BLDG, AL NAKHEEL ROAD, DEIRA, DUBAI, U.A.E.</p>
+    <p>www.canarylogisticsllc.com</p>
 </div>
