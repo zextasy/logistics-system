@@ -3,7 +3,7 @@
 namespace App\Helpers\Filament\Forms;
 
 use App\Enums\ShipmentRouteStatusEnum;
-use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -38,9 +38,9 @@ class FilamentShipmentRouteFormHelper
             TextInput::make('location')
                 ->required(),
             Fieldset::make('Expected Dates')->schema([
-                DateTimePicker::make('arrival_date')
+                DatePicker::make('arrival_date')
                     ->required(),
-                DateTimePicker::make('departure_date'),
+                DatePicker::make('departure_date'),
             ]),
         ];
     }
@@ -57,8 +57,8 @@ class FilamentShipmentRouteFormHelper
     {
         return [
             Fieldset::make('Actual Dates')->schema([
-                DateTimePicker::make('actual_arrival_date'),
-                DateTimePicker::make('actual_departure_date'),
+                DatePicker::make('actual_arrival_date'),
+                DatePicker::make('actual_departure_date'),
             ]),
         ];
     }

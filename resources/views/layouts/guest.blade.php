@@ -30,30 +30,8 @@
     </div>
         <!-- Footer -->
         <footer class="bg-gray-50 dark:bg-gray-950" aria-labelledby="footer-heading">
-    <h2 id="footer-heading" class="sr-only">Footer</h2>
-    <div class="mx-auto max-w-7xl px-4 pt-16 pb-8 sm:px-6 lg:px-8 lg:pt-24">
-        <div class="xl:grid xl:grid-cols-3 xl:gap-8">
-            <div class="grid grid-cols-2 gap-8 xl:col-span-2">
-                <div class="md:grid md:grid-cols-2 md:gap-8">
-                    <div>
-                        <h3 class="text-base font-medium text-gray-900">Solutions</h3>
-                        <ul role="list" class="mt-4 space-y-4">
-                            <li>
-                                <a href="#" class="text-base text-gray-500 hover:text-gray-900">Air Freight</a>
-                            </li>
-                            <li>
-                                <a href="#" class="text-base text-gray-500 hover:text-gray-900">Sea Freight</a>
-                            </li>
-                            <li>
-                                <a href="#" class="text-base text-gray-500 hover:text-gray-900">Customs Clearance</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+            <p class="mt-2 py-5 text-center text-indigo-600 bg-white">© {{now()->year}} Logistics Solutions | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </footer>
     @filamentScripts
 </body>
 </html>

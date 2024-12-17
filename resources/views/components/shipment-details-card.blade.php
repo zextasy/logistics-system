@@ -55,14 +55,14 @@
                 </dd>
             </div>
             <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt class="text-sm font-medium text-gray-500">Receiver</dt>
+                <dt class="text-sm font-medium text-gray-500">Notify Party</dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    {{ $shipment->receiver_name }}<br>
-                    @if($shipment->receiver_phone)
-                        Phone: {{ $shipment->receiver_phone }}<br>
+                    {{ $shipment->notify_party_name }}<br>
+                    @if($shipment->notify_party_phone)
+                        Phone: {{ $shipment->notify_party_phone }}<br>
                     @endif
-                    @if($shipment->receiver_email)
-                        Email: {{ $shipment->receiver_email }}
+                    @if($shipment->notify_party_email)
+                        Email: {{ $shipment->notify_party_email }}
                     @endif
                 </dd>
             </div>
@@ -82,11 +82,11 @@
                 <dt class="text-sm font-medium text-gray-500">Schedule</dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                     @if($shipment->date_of_shipment)
-                        Date of Shipment: {{ $shipment->date_of_shipment }}<br>
+                        Date of Shipment: {{ $shipment->date_of_shipment->toFormattedDateString() }}<br>
                     @endif
-                        Estimated Delivery: {{ $shipment->estimated_delivery }}<br>
+                        Estimated Delivery: {{ $shipment->estimated_delivery->toFormattedDateString() }}<br>
                     @if($shipment->actual_delivery)
-                        Actual Delivery: {{ $shipment->actual_delivery }}<br>
+                        Actual Delivery: {{ $shipment->actual_delivery->toFormattedDateString() }}<br>
                     @endif
                 </dd>
             </div>

@@ -41,10 +41,10 @@ return new class extends Migration
             $table->string('shipper_phone')->nullable();
             $table->string('shipper_email')->nullable();
             $table->string('shipper_address',1000)->nullable();
-            $table->string('receiver_name');
-            $table->string('receiver_phone')->nullable();
-            $table->string('receiver_email')->nullable();
-            $table->string('receiver_address',1000)->nullable();
+            $table->string('notify_party_name');
+            $table->string('notify_party_phone')->nullable();
+            $table->string('notify_party_email')->nullable();
+            $table->string('notify_party_address',1000)->nullable();
             $table->string('consignee_name');
             $table->string('consignee_phone')->nullable();
             $table->string('consignee_email')->nullable();

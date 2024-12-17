@@ -47,7 +47,7 @@ class ShipmentIndex extends Component implements HasForms, HasTable
                 TextColumn::make('shipper_name')
                     ->label('Customer')
                     ->searchable()
-                    ->description(fn (Shipment $record): string => $record->receiver_name),
+                    ->description(fn (Shipment $record): string => $record->consignee_name),
                 TextColumn::make('status')
                     ->badge(),
                 TextColumn::make('loading_port')

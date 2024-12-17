@@ -29,10 +29,10 @@
                                 <x-documents.person-details-card
                                     title='NOTIFY PARTY'
                                     title-hint="Carrier not to be responsible for failure to notify"
-                                    :name="$shipment->receiver_name"
-                                    :address="$shipment->receiver_address"
-                                    :phone="$shipment->receiver_phone"
-                                    :email="$shipment->receiver_email"
+                                    :name="$shipment->notify_party_name"
+                                    :address="$shipment->notify_party_address"
+                                    :phone="$shipment->notify_party_phone"
+                                    :email="$shipment->notify_party_email"
                                 />
                             </td>
                             <td>

@@ -24,8 +24,8 @@
             <span>{{ $shipment->shipper_name }}</span>
         </div>
         <div class="row">
-            <span class="label">Receiver:</span>
-            <span>{{ $shipment->receiver_name }}</span>
+            <span class="label">Notify Party:</span>
+            <span>{{ $shipment->notify_party_name }}</span>
         </div>
         <div class="row">
             <span class="label">Origin:</span>

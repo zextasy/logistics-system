@@ -10,7 +10,7 @@ use App\Enums\UserRoleEnum;
 use App\Enums\WeightUnitEnum;
 use App\Models\City;
 use App\Models\Country;
-use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
@@ -80,10 +80,10 @@ class FilamentShipmentFormHelper
                 ->columns(4),
             Fieldset::make('Dates')
                 ->schema([
-                    DateTimePicker::make('date_of_shipment'),
-                    DateTimePicker::make('estimated_delivery')
+                    DatePicker::make('date_of_shipment'),
+                    DatePicker::make('estimated_delivery')
                         ->required(),
-                    DateTimePicker::make('actual_delivery'),
+                    DatePicker::make('actual_delivery'),
                 ])
                 ->columns(3),
         ];
@@ -154,15 +154,15 @@ class FilamentShipmentFormHelper
                         ->email(),
                     TextArea::make('shipper_address'),
                 ]),
-            Fieldset::make('Receiver')
+            Fieldset::make('Notify Party')
                 ->schema([
-                    TextInput::make('receiver_name')
+                    TextInput::make('notify_party_name')
                         ->required(),
-                    TextInput::make('receiver_phone')
+                    TextInput::make('notify_party_phone')
                         ->tel(),
-                    TextInput::make('receiver_email')
+                    TextInput::make('notify_party_email')
                         ->email(),
-                    TextArea::make('receiver_address'),
+                    TextArea::make('notify_party_address'),
                 ]),
             Fieldset::make('Consignee')
                 ->schema([

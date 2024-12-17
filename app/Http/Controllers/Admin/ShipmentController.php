@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Shipment;
-use App\Services\{ShipmentService, DocumentGenerationService};
+use App\Services\{ShipmentService, DocumentGenerationService, TrackingService};
 use Illuminate\Http\Request;
 
 class ShipmentController extends Controller
@@ -25,7 +25,7 @@ class ShipmentController extends Controller
             ->when($request->search, function($query, $search) {
                 $query->where('tracking_number', 'like', "%{$search}%")
                     ->orWhere('shipper_name', 'like', "%{$search}%")
-                    ->orWhere('receiver_name', 'like', "%{$search}%");
+                    ->orWhere('consignee_name', 'like', "%{$search}%");
             })
             ->when($request->status, function($query, $status) {
                 $query->where('status', $status);
@@ -57,6 +57,7 @@ class ShipmentController extends Controller
     public function show(Shipment $shipment)
     {
         $shipment->load(['routes', 'documents']);
+        (new TrackingService())->getCurrentStatus($shipment);
 
         return view('admin.shipments.show', compact('shipment'));
     }

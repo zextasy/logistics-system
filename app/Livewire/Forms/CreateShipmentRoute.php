@@ -8,8 +8,8 @@ use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
-use Livewire\Component;
 use Illuminate\Contracts\View\View;
+use Livewire\Component;
 
 class CreateShipmentRoute extends Component implements HasForms
 {
@@ -32,11 +32,11 @@ class CreateShipmentRoute extends Component implements HasForms
                 Forms\Components\TextInput::make('location')
                     ->required(),
                 Forms\Components\TextInput::make('location_type'),
-                Forms\Components\DateTimePicker::make('arrival_date')
+                Forms\Components\DatePicker::make('arrival_date')
                     ->required(),
-                Forms\Components\DateTimePicker::make('departure_date'),
-                Forms\Components\DateTimePicker::make('actual_arrival_date'),
-                Forms\Components\DateTimePicker::make('actual_departure_date'),
+                Forms\Components\DatePicker::make('departure_date'),
+                Forms\Components\DatePicker::make('actual_arrival_date'),
+                Forms\Components\DatePicker::make('actual_departure_date'),
                 Forms\Components\Select::make('status')
                     ->options(ShipmentRouteStatusEnum::class)
                     ->required(),

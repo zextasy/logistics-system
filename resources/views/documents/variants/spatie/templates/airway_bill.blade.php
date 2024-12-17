@@ -12,10 +12,10 @@
     </div>
 
     <div class="section">
-        <h3>Consignee</h3>
-        <p>{{ $shipment->receiver_name }}</p>
-        <p>Phone: {{ $shipment->receiver_phone }}</p>
-        <p>Email: {{ $shipment->receiver_email }}</p>
+        <h3>Notify Party</h3>
+        <p>{{ $shipment->notify_party_name }}</p>
+        <p>Phone: {{ $shipment->notify_party_phone }}</p>
+        <p>Email: {{ $shipment->notify_party_email }}</p>
     </div>
 
     {{--<div class="section">--}}

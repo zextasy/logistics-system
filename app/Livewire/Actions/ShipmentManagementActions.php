@@ -6,7 +6,7 @@ use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Actions\EditAction;
-use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
@@ -31,7 +31,7 @@ class ShipmentManagementActions extends Component implements HasForms, HasAction
     {
         return Action::make('confirmShipmentDate')
             ->form([
-                DateTimePicker::make('date_of_shipment')
+                DatePicker::make('date_of_shipment')
                     ->default(now()),
             ])
             ->icon('heroicon-m-calendar-date-range')
