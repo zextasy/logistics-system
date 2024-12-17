@@ -73,7 +73,7 @@
                             <td>
                                 <x-documents.single-detail-card
                                     title="DATE OF DEPARTURE"
-                                    :text="$shipment->date_of_shipment->toFormattedDateString()"
+                                    :text="$shipment->date_of_shipment?->toFormattedDateString()"
                                 />
                             </td>
                             <td>

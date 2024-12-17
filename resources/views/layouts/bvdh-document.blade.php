@@ -141,7 +141,7 @@
             height: 300px;
         }
         .height-xl{
-            height: 400px;
+            height: 350px;
         }
         .image-container {
             text-align: center;
