@@ -223,5 +223,8 @@
 </head>
 <body>
 {{$slot}}
+<div class="image-container">
+    www.canarylogisticsllc.com
+</div>
 </body>
 </html>

@@ -144,6 +144,30 @@ class Shipment extends Model
         );
     }
 
+    protected function shipperEmail(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => strtolower($value),
+            set: fn ($value) => strtolower($value)
+        );
+    }
+
+    protected function consigneeEmail(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => strtolower($value),
+            set: fn ($value) => strtolower($value)
+        );
+    }
+
+protected function notifyPartyEmail(): Attribute
+{
+    return Attribute::make(
+        get: fn ($value) => strtolower($value),
+        set: fn ($value) => strtolower($value)
+    );
+}
+
     protected function originCityName(): Attribute
     {
         return Attribute::make(
