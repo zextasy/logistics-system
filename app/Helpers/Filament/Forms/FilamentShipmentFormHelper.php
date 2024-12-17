@@ -154,16 +154,6 @@ class FilamentShipmentFormHelper
                         ->email(),
                     TextArea::make('shipper_address'),
                 ]),
-            Fieldset::make('Notify Party')
-                ->schema([
-                    TextInput::make('notify_party_name')
-                        ->required(),
-                    TextInput::make('notify_party_phone')
-                        ->tel(),
-                    TextInput::make('notify_party_email')
-                        ->email(),
-                    TextArea::make('notify_party_address'),
-                ]),
             Fieldset::make('Consignee')
                 ->schema([
                     TextInput::make('consignee_name')
@@ -173,6 +163,16 @@ class FilamentShipmentFormHelper
                     TextInput::make('consignee_email')
                         ->email(),
                     TextArea::make('consignee_address'),
+                ]),
+            Fieldset::make('Notify Party')
+                ->schema([
+                    TextInput::make('notify_party_name')
+                        ->required(),
+                    TextInput::make('notify_party_phone')
+                        ->tel(),
+                    TextInput::make('notify_party_email')
+                        ->email(),
+                    TextArea::make('notify_party_address'),
                 ]),
         ];
     }
