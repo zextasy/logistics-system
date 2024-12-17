@@ -138,10 +138,10 @@
             width: 50%;
         }
         .height-lg{
-            height: 300px;
+            height: 275px;
         }
         .height-xl{
-            height: 350px;
+            height: 325px;
         }
         .image-container {
             text-align: center;
