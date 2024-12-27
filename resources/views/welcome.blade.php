@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="relative h-64 w-full sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2 p-2">
-                <div id="default-carousel" class="relative rounded-lg overflow-hidden shadow-lg" data-carousel="static">
+                <div id="default-carousel" class="relative rounded-lg overflow-hidden shadow-lg" data-carousel="slide">
                     <!-- Carousel wrapper -->
                     <div class="relative h-80 md:h-96 my-auto" data-carousel-inner>
                         <!-- Item 1 -->
