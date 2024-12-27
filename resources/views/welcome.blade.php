@@ -2,9 +2,9 @@
 <x-guest-layout>
     <!-- Hero Section -->
     <div class="relative bg-gray-50">
-        <main class="lg:relative">
-            <div class="mx-auto w-full max-w-7xl pt-4 pb-5 text-center lg:py-12 lg:text-left">
-                <div class="px-4 sm:px-8 lg:w-1/2 xl:pr-16">
+        <div class="flex flex-col lg:flex-row  mx-auto max-w-7xl" >
+            <div class="w-full pt-4 pb-5 text-center lg:py-12 lg:text-left lg:w-1/2">
+                <div class="px-4 sm:px-8 xl:pr-16">
                     <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
                         <span class="block xl:inline">Global Logistics</span>
                         <span class="block text-indigo-600 xl:inline">Made Simple</span>
@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div>
-            <div class="relative h-64 w-full sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2 p-2">
+            <div class="h-64 w-full xs:h-48 sm:h-72 md:h-96 lg:h-full lg:w-1/2 p-2">
                 <div id="default-carousel" class="relative rounded-lg overflow-hidden shadow-lg" data-carousel="slide">
                     <!-- Carousel wrapper -->
                     <div class="relative h-80 md:h-96 my-auto" data-carousel-inner>
@@ -75,11 +75,11 @@
                     </button>
                 </div>
             </div>
-        </main>
+        </div>
     </div>
 
     <!-- Quick Track Section -->
-    <div class="bg-white py-16">
+    <div class="bg-white py-16 mt-5">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="lg:text-center">
                 <h2 class="text-base font-semibold uppercase tracking-wide text-indigo-600">Track Your Shipment</h2>
