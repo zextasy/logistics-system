@@ -3,7 +3,7 @@
     <!-- Hero Section -->
     <div class="relative bg-gray-50">
         <main class="lg:relative">
-            <div class="mx-auto w-full max-w-7xl pt-16 pb-20 text-center lg:py-48 lg:text-left">
+            <div class="mx-auto w-full max-w-7xl pt-4 pb-5 text-center lg:py-12 lg:text-left">
                 <div class="px-4 sm:px-8 lg:w-1/2 xl:pr-16">
                     <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
                         <span class="block xl:inline">Global Logistics</span>
@@ -28,10 +28,52 @@
                     </div>
                 </div>
             </div>
-            <div class="relative h-64 w-full sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2">
-                <img class="absolute inset-0 h-full w-full object-cover"
-                     src="{{ asset('images/hero-image.jpg') }}"
-                     alt="Global Logistics">
+            <div class="relative h-64 w-full sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2 p-2">
+                <div id="default-carousel" class="relative rounded-lg overflow-hidden shadow-lg" data-carousel="static">
+                    <!-- Carousel wrapper -->
+                    <div class="relative h-80 md:h-96 my-auto" data-carousel-inner>
+                        <!-- Item 1 -->
+                        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                            <img src="{{ asset('images/carousel-1.jpg') }}"
+                                 class="object-cover w-full h-full" alt="Slide 1">
+                            <span class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xl font-semibold text-white md:text-2xl dark:text-gray-800">Warehousing</span>
+                        </div>
+                        <!-- Item 2 -->
+                        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                            <img src="{{ asset('images/carouseel-2.jpg') }}"
+                                 class="object-cover w-full h-full" alt="Slide 2">
+                            <span class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xl font-semibold text-white md:text-2xl dark:text-gray-800">Drop Shipping</span>
+                        </div>
+                        <!-- Item 3 -->
+                        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                            <img src="{{ asset('images/carousel-3.jpg') }}"
+                                 class="object-cover w-full h-full" alt="Slide 3">
+                        </div>
+                    </div>
+                    <!-- Slider indicators -->
+                    <div class="flex absolute bottom-5 left-1/2 z-30 -translate-x-1/2 space-x-2" data-carousel-indicators>
+                        <button type="button" class="w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 focus:outline-none focus:bg-gray-400 transition"></button>
+                        <button type="button" class="w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 focus:outline-none focus:bg-gray-400 transition"></button>
+                        <button type="button" class="w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 focus:outline-none focus:bg-gray-400 transition"></button>
+                    </div>
+                    <!-- Slider controls -->
+                    <button type="button"
+                            class="flex absolute top-1/2 left-3 z-40 items-center justify-center w-10 h-10 bg-gray-200/50 rounded-full hover:bg-gray-300 focus:outline-none transition"
+                            data-carousel-prev>
+                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <button type="button"
+                            class="flex absolute top-1/2 right-3 z-40 items-center justify-center w-10 h-10 bg-gray-200/50 rounded-full hover:bg-gray-300 focus:outline-none transition"
+                            data-carousel-next>
+                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </main>
     </div>
@@ -129,6 +171,40 @@
                                 <h3 class="mt-8 text-lg font-medium tracking-tight text-gray-900">Customs Clearance</h3>
                                 <p class="mt-5 text-base text-gray-500">
                                     Expert handling of customs documentation and clearance procedures.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drop Shipping -->
+                    <div class="pt-6">
+                        <div class="flow-root rounded-lg bg-white px-6 pb-8">
+                            <div class="-mt-6">
+                                <div class="inline-flex items-center justify-center rounded-md bg-indigo-600 p-3 shadow-lg">
+                                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="mt-8 text-lg font-medium tracking-tight text-gray-900">Drop Shipping</h3>
+                                <p class="mt-5 text-base text-gray-500">
+                                    Drop Shipping.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Warehousing -->
+                    <div class="pt-6">
+                        <div class="flow-root rounded-lg bg-white px-6 pb-8">
+                            <div class="-mt-6">
+                                <div class="inline-flex items-center justify-center rounded-md bg-indigo-600 p-3 shadow-lg">
+                                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="mt-8 text-lg font-medium tracking-tight text-gray-900">Warehousing</h3>
+                                <p class="mt-5 text-base text-gray-500">
+                                    Warehousing services.
                                 </p>
                             </div>
                         </div>
