@@ -34,19 +34,32 @@
                     <div class="relative h-80 md:h-96 my-auto" data-carousel-inner>
                         <!-- Item 1 -->
                         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                            <img src="{{ asset('images/carousel-1.jpg') }}"
+                            <img src="{{ asset('images/carousel/custom-clearance.jpg') }}"
                                  class="object-cover w-full h-full" alt="Slide 1">
-                            <span class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xl font-semibold text-white md:text-2xl dark:text-gray-800">Warehousing</span>
                         </div>
                         <!-- Item 2 -->
                         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                            <img src="{{ asset('images/carouseel-2.jpg') }}"
+                            <img src="{{ asset('images/carousel/dropshipping.jpg') }}"
                                  class="object-cover w-full h-full" alt="Slide 2">
-                            <span class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xl font-semibold text-white md:text-2xl dark:text-gray-800">Drop Shipping</span>
                         </div>
                         <!-- Item 3 -->
                         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                            <img src="{{ asset('images/carousel-3.jpg') }}"
+                            <img src="{{ asset('images/carousel/ship-frieght.jpg') }}"
+                                 class="object-cover w-full h-full" alt="Slide 3">
+                        </div>
+                        <!-- Item 4 -->
+                        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                            <img src="{{ asset('images/carousel/specailized-cargo.jpg') }}"
+                                 class="object-cover w-full h-full" alt="Slide 3">
+                        </div>
+                        <!-- Item 5 -->
+                        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                            <img src="{{ asset('images/carousel/supply-chain.jpg') }}"
+                                 class="object-cover w-full h-full" alt="Slide 3">
+                        </div>
+                        <!-- Item 6 -->
+                        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                            <img src="{{ asset('images/carousel/warehouse.jpg') }}"
                                  class="object-cover w-full h-full" alt="Slide 3">
                         </div>
                     </div>
@@ -77,6 +90,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Leslie's Section -->
 
     <!-- Quick Track Section -->
     <div class="bg-white py-16 mt-5">
