@@ -16,7 +16,7 @@
         </style>
     <!-- Scripts -->
         @filamentStyles
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/guest.css'])
 </head>
     <body class="antialiased">
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -30,7 +30,7 @@
     </div>
         <!-- Footer -->
         <footer class="bg-gray-50 dark:bg-gray-950" aria-labelledby="footer-heading">
-            <p class="mt-2 py-5 text-center text-indigo-600 bg-white">© {{now()->year}} Logistics Solutions | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            <p class="mt-2 py-5 text-center text-indigo-600 bg-white">© {{now()->year}} Logistics Solutions | <a href="{{route('privacy-policy')}}">Privacy Policy</a> | <a href="{{route('terms')}}">Terms of Service</a></p>
         </footer>
     @filamentScripts
 </body>

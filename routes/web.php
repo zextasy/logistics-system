@@ -14,6 +14,18 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+Route::get('/about-us', function () {
+    return view('about-us');
+})->name('about-us');
+
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy');
+})->name('privacy-policy');
+
+Route::get('/terms', function () {
+    return view('terms');
+})->name('terms');
+
 Route::get('/track', [TrackingController::class, 'showForm'])->name('tracking.form');
 Route::post('/track', [TrackingController::class, 'track'])->name('tracking.track');
 Route::get('/track/{trackingNumber}', [TrackingController::class, 'show'])->name('tracking.show');

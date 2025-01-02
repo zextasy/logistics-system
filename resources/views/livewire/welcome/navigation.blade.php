@@ -7,8 +7,8 @@
             </a>
             <div class="ml-10 hidden space-x-8 lg:block">
                 <a href="{{route('home')}}#services" class="text-base font-medium text-gray-700 hover:text-indigo-600">Services</a>
-                <a href="{{route('home')}}#about" class="text-base font-medium text-gray-700 hover:text-indigo-600">About Us</a>
-                <a href="{{route('home')}}#contact" class="text-base font-medium text-gray-700 hover:text-indigo-600">Contact</a>
+                <a href="{{route('about-us')}}" class="text-base font-medium text-gray-700 hover:text-indigo-600">About Us</a>
+                <a href="{{route('about-us')}}#contact" class="text-base font-medium text-gray-700 hover:text-indigo-600">Contact</a>
                 <a href="{{ route('tracking.form') }}" class="text-base font-medium text-gray-700 hover:text-indigo-600">Track Shipment</a>
                 <a href="{{ route('quote.create') }}" class="text-base font-medium text-gray-700 hover:text-indigo-600">Get a quote</a>
             </div>
