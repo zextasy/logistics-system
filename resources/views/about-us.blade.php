@@ -1,6 +1,6 @@
 {{-- resources/views/welcome.blade.php --}}
 <x-guest-layout>
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-gray-500 bg-white my-4 py-2">
         <h3 style="padding-top: 2pt;padding-left: 5pt;text-indent: 0;text-align: left;">Welcome to CANARY LOGISTICS</h3>
         <p style="padding-top: 9pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">Your Trusted Partner in Global
             Cargo and Freight Logistics</p>

@@ -1,6 +1,6 @@
 {{-- resources/views/welcome.blade.php --}}
 <x-guest-layout>
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-gray-500 bg-white my-4 py-2">
         <h1 style="padding-top: 1pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">TERMS OF SERVICE</h1>
         <p style="padding-top: 9pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">LAST UPDATED; 01/05/2023</p>
         <h2 style="padding-top: 9pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">STANDARD TRADING
