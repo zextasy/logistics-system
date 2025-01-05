@@ -50,17 +50,22 @@
                         <!-- Item 4 -->
                         <div class="hidden duration-700 ease-in-out" data-carousel-item>
                             <img src="{{ asset('images/carousel/specailized-cargo.jpg') }}"
-                                 class="object-cover w-full h-full" alt="Slide 3">
+                                 class="object-cover w-full h-full" alt="Slide 4">
                         </div>
                         <!-- Item 5 -->
                         <div class="hidden duration-700 ease-in-out" data-carousel-item>
                             <img src="{{ asset('images/carousel/supply-chain.jpg') }}"
-                                 class="object-cover w-full h-full" alt="Slide 3">
+                                 class="object-cover w-full h-full" alt="Slide 5">
                         </div>
                         <!-- Item 6 -->
                         <div class="hidden duration-700 ease-in-out" data-carousel-item>
                             <img src="{{ asset('images/carousel/warehouse.jpg') }}"
-                                 class="object-cover w-full h-full" alt="Slide 3">
+                                 class="object-cover w-full h-full" alt="Slide 6">
+                        </div>
+                        <!-- Item 7 -->
+                        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                            <img src="{{ asset('images/carousel/air-cargo.jpg') }}"
+                                 class="object-cover w-full h-full" alt="Slide 7">
                         </div>
                     </div>
                     <!-- Slider indicators -->
