@@ -5,6 +5,7 @@ use App\Http\Controllers\BvdhDocumentController;
 use App\Http\Controllers\SpatieDocumentController;
 use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\DocumentController;
+use App\Http\Controllers\Web\FeedbackController;
 use App\Http\Controllers\Web\QuoteController;
 use App\Http\Controllers\Web\TrackingController;
 use Illuminate\Support\Facades\Route;
@@ -14,9 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/about-us', function () {
+Route::get('/about', function () {
     return view('about-us');
-})->name('about-us');
+})->name('about');
+
+Route::get('/contact', function () {
+    return view('contact-us');
+})->name('contact');
 
 Route::get('/privacy-policy', function () {
     return view('privacy-policy');
@@ -31,6 +36,8 @@ Route::post('/track', [TrackingController::class, 'track'])->name('tracking.trac
 Route::get('/track/{trackingNumber}', [TrackingController::class, 'show'])->name('tracking.show');
 //quotes
 Route::get('/quote', [QuoteController::class, 'create'])->name('quote.create');
+//feedback
+Route::post('/feedback', [FeedbackController::class, 'submit'])->name('feedback.submit');
 /*
 |--------------------------------------------------------------------------
 | Authenticated Routes

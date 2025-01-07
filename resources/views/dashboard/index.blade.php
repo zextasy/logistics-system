@@ -27,7 +27,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-gray-50 px-5 py-3">
+                    <div class="bg-gray-100 px-5 py-3">
                         <div class="text-sm">
                             <a href="{{ route('shipments.index', ['status' => 'active']) }}" class="font-medium text-indigo-600 hover:text-indigo-500">
                                 View all active shipments
@@ -59,7 +59,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-gray-50 px-5 py-3">
+                    <div class="bg-gray-100 px-5 py-3">
                         <div class="text-sm">
                             <a href="{{ route('quotes.index', ['status' => 'pending']) }}" class="font-medium text-indigo-600 hover:text-indigo-500">
                                 View pending quotes
@@ -91,7 +91,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-gray-50 px-5 py-3">
+                    <div class="bg-gray-100 px-5 py-3">
                         <div class="text-sm">
                             <a href="{{ route('shipments.index', ['delivery_date' => today()]) }}" class="font-medium text-indigo-600 hover:text-indigo-500">
                                 View today's deliveries
@@ -123,7 +123,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-gray-50 px-5 py-3">
+                    <div class="bg-gray-100 px-5 py-3">
                         <div class="text-sm">
                             <a href="{{ route('documents.index') }}" class="font-medium text-indigo-600 hover:text-indigo-500">
                                 View all documents

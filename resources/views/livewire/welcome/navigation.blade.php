@@ -7,8 +7,8 @@
             </a>
             <div class="ml-10 hidden space-x-8 lg:block">
                 <a href="{{route('home')}}#services" class="text-base font-medium text-gray-700 hover:text-indigo-600">Services</a>
-                <a href="{{route('about-us')}}" class="text-base font-medium text-gray-700 hover:text-indigo-600">About Us</a>
-                <a href="{{route('about-us')}}#contact" class="text-base font-medium text-gray-700 hover:text-indigo-600">Contact</a>
+                <a href="{{route('about')}}" class="text-base font-medium text-gray-700 hover:text-indigo-600">About Us</a>
+                <a href="{{route('contact')}}" class="text-base font-medium text-gray-700 hover:text-indigo-600">Contact</a>
                 <a href="{{ route('tracking.form') }}" class="text-base font-medium text-gray-700 hover:text-indigo-600">Track Shipment</a>
                 <a href="{{ route('quote.create') }}" class="text-base font-medium text-gray-700 hover:text-indigo-600">Get a quote</a>
             </div>
@@ -17,15 +17,15 @@
             @auth
                 <a href="{{ route('dashboard') }}" class="inline-block bg-indigo-600 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-indigo-700">Dashboard</a>
             @else
-                <a href="{{ route('login') }}" class="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-indigo-600 hover:bg-gray-50">Sign in</a>
+                <a href="{{ route('login') }}" class="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-indigo-600 hover:bg-gray-100">Sign in</a>
             @endauth
         </div>
     </div>
     <div class="flex flex-wrap justify-center gap-x-6 py-4 lg:hidden">
         <a href="{{route('home')}}#services" class="text-base font-medium text-gray-700 hover:text-indigo-600">Services</a>
-        <a href="{{route('home')}}#about" class="text-base font-medium text-gray-700 hover:text-indigo-600">About Us</a>
-        <a href="{{route('home')}}#contact" class="text-base font-medium text-gray-700 hover:text-indigo-600">Contact</a>
-        <a href="{{route('tracking.form')}}#contact" class="text-base font-medium text-gray-700 hover:text-indigo-600">Track Shipment</a>
-        <a href="{{route('quote.create')}}#contact" class="text-base font-medium text-gray-700 hover:text-indigo-600">Get a Quote</a>
+        <a href="{{route('about')}}" class="text-base font-medium text-gray-700 hover:text-indigo-600">About Us</a>
+        <a href="{{route('contact')}}" class="text-base font-medium text-gray-700 hover:text-indigo-600">Contact</a>
+        <a href="{{route('tracking.form')}}" class="text-base font-medium text-gray-700 hover:text-indigo-600">Track Shipment</a>
+        <a href="{{route('quote.create')}}" class="text-base font-medium text-gray-700 hover:text-indigo-600">Get a Quote</a>
     </div>
 </nav>

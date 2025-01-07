@@ -15,11 +15,11 @@
     </div>
     <div class="p-4">
         <dl class="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <div class="bg-gray-50 px-4 py-5 rounded-lg">
+            <div class="bg-gray-100 px-4 py-5 rounded-lg">
                 <dt class="text-sm font-medium text-gray-500 truncate">Current Location</dt>
                 <dd class="mt-1 text-lg font-semibold text-gray-900" x-text="currentLocation"></dd>
             </div>
-            <div class="bg-gray-50 px-4 py-5 rounded-lg">
+            <div class="bg-gray-100 px-4 py-5 rounded-lg">
                 <dt class="text-sm font-medium text-gray-500 truncate">Status</dt>
                 <dd class="mt-1">
                     <span x-text="status"

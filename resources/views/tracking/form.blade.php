@@ -42,7 +42,7 @@
                         <h3 class="text-lg font-medium mb-4">Recent Searches</h3>
                         <div class="space-y-4">
                             @forelse(session('recent_searches', []) as $search)
-                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div class="flex items-center justify-between p-4 bg-gray-100 rounded-lg">
                                     <div>
                                         <p class="font-medium">{{ $search['tracking_number'] }}</p>
                                         <p class="text-sm text-gray-500">Last checked: {{ $search['timestamp'] }}</p>

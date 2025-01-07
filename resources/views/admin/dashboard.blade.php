@@ -91,7 +91,7 @@
                         </div>
                         <div class="space-y-4">
                             @forelse($recentActivity['shipments'] as $shipment)
-                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div class="flex items-center justify-between p-4 bg-gray-100 rounded-lg">
                                     <div>
                                         <p class="font-medium text-gray-900">{{ $shipment->tracking_number }}</p>
                                         <p class="text-sm text-gray-500">{{ $shipment->origin }} → {{ $shipment->destination }}</p>
@@ -114,7 +114,7 @@
                         </div>
                         <div class="space-y-4">
                             @forelse($recentActivity['quotes'] as $quote)
-                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div class="flex items-center justify-between p-4 bg-gray-100 rounded-lg">
                                     <div>
                                         <p class="font-medium text-gray-900">{{ $quote->company }}</p>
                                         <p class="text-sm text-gray-500">{{ $quote->service_type }}</p>

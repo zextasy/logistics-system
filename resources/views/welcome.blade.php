@@ -1,8 +1,8 @@
 {{-- resources/views/welcome.blade.php --}}
 <x-guest-layout>
     <!-- Hero Section -->
-    <div class="relative bg-gray-50">
-        <div class="flex flex-col lg:flex-row  mx-auto max-w-7xl" >
+    <div class="relative bg-gray-100">
+        <div class="flex flex-col lg:flex-row mx-auto max-w-7xl" >
             <div class="w-full pt-4 pb-5 text-center lg:py-12 lg:text-left lg:w-1/2">
                 <div class="px-4 sm:px-8 xl:pr-16">
                     <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
@@ -21,7 +21,7 @@
                         </div>
                         <div class="mt-3 sm:mt-0 sm:ml-3">
                             <a href="{{ route('quote.create') }}"
-                               class="flex w-full items-center justify-center rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-indigo-600 hover:bg-gray-50 md:py-4 md:px-10 md:text-lg">
+                               class="flex w-full items-center justify-center rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-indigo-600 hover:bg-gray-100 md:py-4 md:px-10 md:text-lg">
                                 Get a Quote
                             </a>
                         </div>
@@ -99,8 +99,8 @@
     <!-- Leslie's Section -->
 
     <!-- Quick Track Section -->
-    <div class="bg-white py-16 mt-5">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="bg-white py-16 mt-5 mx-auto max-w-7xl">
+        <div class="px-4 sm:px-6 lg:px-8">
             <div class="lg:text-center">
                 <h2 class="text-base font-semibold uppercase tracking-wide text-indigo-600">Track Your Shipment</h2>
                 <p class="mt-2 text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">Quick Tracking</p>
@@ -131,7 +131,7 @@
     </div>
 
     <!-- Services Section -->
-    <div id="services" class="bg-gray-50 py-24">
+    <div id="services" class="bg-gray-100 py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="lg:text-center">
                 <h2 class="text-base font-semibold uppercase tracking-wide text-indigo-600">Our Services</h2>

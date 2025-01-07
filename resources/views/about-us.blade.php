@@ -1,4 +1,4 @@
-{{-- resources/views/welcome.blade.php --}}
+{{-- resources/views/about-us.blade.php --}}
 <x-guest-layout>
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-gray-500 bg-white my-4 py-2">
         <h3 style="padding-top: 2pt;padding-left: 5pt;text-indent: 0;text-align: left;">Welcome to CANARY LOGISTICS</h3>

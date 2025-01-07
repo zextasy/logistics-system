@@ -29,7 +29,7 @@
         @livewire('notifications')
     </div>
         <!-- Footer -->
-        <footer class="bg-gray-50 dark:bg-gray-950" aria-labelledby="footer-heading">
+        <footer class="bg-gray-100 dark:bg-gray-900" aria-labelledby="footer-heading">
             <p class="mt-2 py-5 text-center text-indigo-600 bg-white">© {{now()->year}} Logistics Solutions | <a href="{{route('privacy-policy')}}">Privacy Policy</a> | <a href="{{route('terms')}}">Terms of Service</a></p>
         </footer>
     @filamentScripts
