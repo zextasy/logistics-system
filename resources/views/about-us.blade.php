@@ -81,13 +81,16 @@
                 <ul id="l7">
                     <li data-list-text="●"><p
                             style="padding-top: 9pt;padding-left: 40pt;text-indent: -17pt;text-align: left;">Simplified
-                            logistics for e-commerce businesses.</p></li>
+                            logistics for e-commerce businesses.</p>
+                    </li>
                     <li data-list-text="●"><p
                             style="padding-top: 9pt;padding-left: 40pt;text-indent: -17pt;text-align: left;">Direct
-                            delivery from suppliers to customers, minimizing handling and storage costs.</p></li>
+                            delivery from suppliers to customers, minimizing handling and storage costs.</p>
+                    </li>
                     <li data-list-text="●"><p
                             style="padding-top: 9pt;padding-left: 40pt;text-indent: -17pt;text-align: left;">
-                            Comprehensive inventory management and tracking solutions.</p></li>
+                            Comprehensive inventory management and tracking solutions.</p>
+                    </li>
                     <li data-list-text="●"><p
                             style="padding-top: 9pt;padding-left: 40pt;text-indent: -17pt;text-align: left;">Fast and
                             reliable shipping to meet customer expectations globally.</p>
@@ -109,20 +112,10 @@
                         <h3 style="padding-top: 9pt;padding-left: 5pt;text-indent: 0pt;line-height: 108%;text-align: left;">
                             Sustainability: <span class="p">Committed to eco-friendly practices, we continuously work to reduce our carbon footprint.</span>
                         </h3>
-                        <p style="text-indent: 0pt;text-align: left;"><br/></p>
-                        <h3 style="padding-left: 5pt;text-indent: 0pt;text-align: left;">Track Your Shipment</h3>
-                        <p style="padding-top: 9pt;padding-left: 5pt;text-indent: 0pt;line-height: 108%;text-align: left;">
-                            Stay updated on the status of your cargo with our advanced tracking system. Enter your
-                            tracking ID to get real-time updates.</p>
-                        <h3 style="padding-top: 8pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">Track Now</h3>
-                        <p style="text-indent: 0pt;text-align: left;"><br/></p>
-                        <h3 id="contact" style="padding-left: 5pt;text-indent: 0pt;text-align: left;">Contact Us</h3>
-                        <p style="padding-top: 9pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">Ready to
-                            streamline your logistics? Let’s connect!</p></li>
+                    </li>
                 </ul>
             </li>
         </ol>
-        <livewire:forms.contact-us></livewire:forms.contact-us>
         <p style="text-indent: 0pt;text-align: left;"><br/></p>
         <h3 style="padding-left: 5pt;text-indent: 0pt;text-align: left;">Your journey starts here. Experience logistics
             made simple with Canary Logistics.</h3>
