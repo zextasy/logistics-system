@@ -138,10 +138,12 @@
             width: 50%;
         }
         .height-lg{
-            height: 275px;
+            min-height: 250px;
+            max-height: 275px;
         }
         .height-xl{
-            height: 325px;
+            min-height: 300px;
+            max-height: 325px;
         }
         .image-container {
             text-align: center;
