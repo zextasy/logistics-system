@@ -45,7 +45,7 @@
         }
 
         .invoice-box table tr.top table td {
-            padding-bottom: 10px;
+            padding-bottom: 5px;
         }
 
         .invoice-box table tr.top table td.title {
@@ -55,7 +55,7 @@
         }
 
         .invoice-box table tr.information table td {
-            padding-bottom: 15px;
+            padding-bottom: 10px;
         }
 
         .invoice-box table tr.heading td {
@@ -65,7 +65,7 @@
         }
 
         .invoice-box table tr.details td {
-            padding-bottom: 10px;
+            padding-bottom: 5px;
         }
 
         .invoice-box table tr.item td {
@@ -148,6 +148,12 @@
         .image-container {
             text-align: center;
         }
+        .bottom-element {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 100%; /* Adjust width as needed */
+        }
         .text-red{
             color: red;
         }
@@ -225,7 +231,7 @@
 </head>
 <body>
 {{$slot}}
-<div class="image-container">
+<div class="image-container bottom-element">
     www.canarylogisticsllc.com
 </div>
 </body>
