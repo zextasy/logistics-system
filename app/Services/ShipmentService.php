@@ -23,7 +23,9 @@ class ShipmentService
 
     public function createShipment(array $data)
     {
-        $data['tracking_number'] = $this->generateTrackingNumber();
+        if (empty($data['tracking_number'])) {
+            $data['tracking_number'] = $this->generateTrackingNumber();
+        }
 
         $shipment = Shipment::create($data);
 

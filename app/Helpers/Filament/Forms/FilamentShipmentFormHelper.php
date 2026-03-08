@@ -45,6 +45,9 @@ class FilamentShipmentFormHelper
         return [
             Fieldset::make('Shipment')
                 ->schema([
+                    TextInput::make('tracking_number')
+                        ->helperText('Unique tracking number for the shipment. Leave blank to auto-generate.')
+                        ->unique(),
                     Select::make('type')
                         ->options(ShipmentTypeEnum::class)
                         ->required()->visible($creating),
