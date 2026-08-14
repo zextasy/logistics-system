@@ -8,7 +8,7 @@
                     <table>
                         <tr class="mb-10">
                             <td>&nbsp;</td>
-                            <td class="text-lg"><strong>{{$shipment->container_size == \App\Enums\ContainerSizeEnum::LCL ? 'HOUSE ' : '' }}BILL OF LADEN</strong></td>
+                            <td class="text-lg"><strong>{{$shipment->container_size == \App\Enums\ContainerSizeEnum::LCL ? 'HOUSE ' : '' }}BILL OF LADING</strong></td>
                         </tr>
                         <tr>
                             <td>
